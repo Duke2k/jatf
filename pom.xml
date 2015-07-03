@@ -20,20 +20,20 @@
     <artifactId>jatf-base</artifactId>
 
     <name>Java Architecture Test Framework</name>
-	<version>1.01</version>
+	<version>1.0.2</version>
 
     <properties>
         <root.folder>${jatf.root}</root.folder>
         <scopes>${jatf.scopes}</scopes>
-        <instability.strict>0.4</instability.strict>
-        <instability.loose>0.8</instability.loose>
-        <cyclomatic-complexity.maximum>20</cyclomatic-complexity.maximum>
-        <halstead-delivered-bugs.maximum>7.3</halstead-delivered-bugs.maximum>
-        <methods-per-class.maximum>20</methods-per-class.maximum>
-        <statements-per-method.maximum>20</statements-per-method.maximum>
-        <depth-for-dfs.maximum>10</depth-for-dfs.maximum>
-        <degree-of-purity.minimum>0.5</degree-of-purity.minimum>
-        <chained-method-calls.maximum>5</chained-method-calls.maximum>
+        <instability.strict>${jatf.instability.strict}</instability.strict>
+        <instability.loose>${jatf.instability.loose}</instability.loose>
+        <cyclomatic-complexity.maximum>${jatf.cyclomatic-complexity.maximum}</cyclomatic-complexity.maximum>
+        <halstead-delivered-bugs.maximum>${jatf.halstead-delivered-bugs.maximum}</halstead-delivered-bugs.maximum>
+        <methods-per-class.maximum>${jatf.methods-per-class.maximum}</methods-per-class.maximum>
+        <statements-per-method.maximum>${jatf.statements-per-method.maximum}</statements-per-method.maximum>
+        <depth-for-dfs.maximum>${jatf.depth-for-dfs.maximum}</depth-for-dfs.maximum>
+        <degree-of-purity.minimum>${jatf.degree-of-purity.minimum}</degree-of-purity.minimum>
+        <chained-method-calls.maximum>${jatf.chained-method-calls.maximum}</chained-method-calls.maximum>
         <runSuites>**/All*Tests.class</runSuites>
     </properties>
 
@@ -98,13 +98,6 @@
                     <includes>
                         <include>${runSuites}</include>
                     </includes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
                 </configuration>
             </plugin>
             <plugin>
