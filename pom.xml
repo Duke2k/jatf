@@ -17,116 +17,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.duke2k.jatf</groupId>
-    <artifactId>jatf-base</artifactId>
+    <artifactId>jatf-project</artifactId>
+
+    <packaging>pom</packaging>
 
     <name>Java Architecture Test Framework</name>
 	<version>1.0.2</version>
 
+	<modules>
+        <module>jatf-core</module>
+        <module>jatf-tests</module>
+    </modules>
+
     <properties>
-        <root.folder>${jatf.root}</root.folder>
-        <scopes>${jatf.scopes}</scopes>
-        <instability.strict>${jatf.instability.strict}</instability.strict>
-        <instability.loose>${jatf.instability.loose}</instability.loose>
-        <cyclomatic-complexity.maximum>${jatf.cyclomatic-complexity.maximum}</cyclomatic-complexity.maximum>
-        <halstead-delivered-bugs.maximum>${jatf.halstead-delivered-bugs.maximum}</halstead-delivered-bugs.maximum>
-        <methods-per-class.maximum>${jatf.methods-per-class.maximum}</methods-per-class.maximum>
-        <statements-per-method.maximum>${jatf.statements-per-method.maximum}</statements-per-method.maximum>
-        <depth-for-dfs.maximum>${jatf.depth-for-dfs.maximum}</depth-for-dfs.maximum>
-        <degree-of-purity.minimum>${jatf.degree-of-purity.minimum}</degree-of-purity.minimum>
-        <chained-method-calls.maximum>${jatf.chained-method-calls.maximum}</chained-method-calls.maximum>
-        <runSuites>**/All*Tests.class</runSuites>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>com.tngtech.java</groupId>
-            <artifactId>junit-dataprovider</artifactId>
-            <version>1.9.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.10</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.javaparser</groupId>
-            <artifactId>javaparser</artifactId>
-            <version>1.0.11</version>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit4</artifactId>
-                        <version>2.18.1</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <skipTests>false</skipTests>
-                    <includes>
-                        <include>${runSuites}</include>
-                    </includes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>test-jar</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                            <goal>test-jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>
