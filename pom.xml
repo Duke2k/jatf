@@ -24,6 +24,13 @@
     <name>Java Architecture Test Framework</name>
 	<version>1.0.2</version>
 
+    <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the root project, POM only.</description>
+    <url>https://github.com/Duke2k/jatf</url>
+    <licenses>GPLv3</licenses>
+    <developers>Samuel Eickelberg</developers>
+    <contributors />
+    <organization>Freie Universität Berlin and Anybet GmbH, Berlin, Germany</organization>
+
 	<modules>
         <module>jatf-core</module>
         <module>jatf-tests</module>
