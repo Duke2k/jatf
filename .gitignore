@@ -1,0 +1,6 @@
+*.iml
+/jatf-tests/*.iml
+/jatf-tests/target
+/jatf-core/*.iml
+/jatf-core/target
+/.idea
