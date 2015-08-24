@@ -14,7 +14,8 @@
  You should have received a copy of the GNU General Public License
  along with JATF.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>jatf-core</artifactId>
 
@@ -22,10 +23,20 @@
 
     <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the core project, delivering all required functionality.</description>
     <url>https://github.com/Duke2k/jatf</url>
-    <licenses>GPLv3</licenses>
-    <developers>Samuel Eickelberg</developers>
+    <licenses>
+        <license>
+            <name>GPLv3</name>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Samuel Eickelberg</name>
+        </developer>
+    </developers>
     <contributors />
-    <organization>Freie Universität Berlin and Anybet GmbH, Berlin, Germany</organization>
+    <organization>
+        <name>Freie Universität Berlin and Anybet GmbH, Berlin, Germany</name>
+    </organization>
 
     <parent>
         <groupId>com.github.duke2k.jatf</groupId>
