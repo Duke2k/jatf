@@ -128,6 +128,9 @@ public abstract class ArchitectureTestAbstractEvaluator {
             if (dependency.equals(Dependency.overridesDependency)) {
                 addToSourceMap("OverridesTest", annotatedClass);
             }
+            if (dependency.equals(Dependency.returnsDependency)) {
+                addToSourceMap("ReturnsTest", annotatedClass);
+            }
             if (dependency.equals(Dependency.uncheckedCasts)) {
                 addToSourceMap("UncheckedCastsTest", annotatedClass);
             }
@@ -150,6 +153,7 @@ public abstract class ArchitectureTestAbstractEvaluator {
                 addToSourceMap("ImplementsTest", annotatedClass);
                 addToSourceMap("ThrowsTest", annotatedClass);
                 addToSourceMap("OverridesTest", annotatedClass);
+                addToSourceMap("ReturnsTest", annotatedClass);
                 addToSourceMap("UncheckedCastsTest", annotatedClass);
                 addToSourceMap("DangerousCastsTest", annotatedClass);
                 addToSourceMap("InstabilityTest", annotatedClass);

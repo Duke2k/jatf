@@ -24,6 +24,7 @@ import jatf.dependency.ImplementsTest;
 import jatf.dependency.InstabilityTest;
 import jatf.dependency.MethodPurityTest;
 import jatf.dependency.OverridesTest;
+import jatf.dependency.ReturnsTest;
 import jatf.dependency.ThrowsTest;
 import jatf.dependency.UncheckedCastsTest;
 import jatf.dependency.UsesTest;
@@ -44,7 +45,8 @@ import org.junit.runners.Suite;
         OverridesTest.class,
         ThrowsTest.class,
         UncheckedCastsTest.class,
-        UsesTest.class
+        UsesTest.class,
+        ReturnsTest.class
 })
 public class DependencyTests extends ArchitectureTestSuiteBase {
 

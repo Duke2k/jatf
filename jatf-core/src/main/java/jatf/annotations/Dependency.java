@@ -29,6 +29,7 @@ public enum Dependency {
     throwsDependency,
     usesDependency,
     overridesDependency,
+    returnsDependency,
     acyclicDependenciesPrinciple,
     dangerousCasts,
     instabilityDependency,
