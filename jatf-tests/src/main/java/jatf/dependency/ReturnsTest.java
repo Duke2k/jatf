@@ -17,10 +17,12 @@
 package jatf.dependency;
 
 import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import jatf.annotations.MustNotReturn;
 import jatf.annotations.MustReturn;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -28,6 +30,7 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+@RunWith(DataProviderRunner.class)
 public class ReturnsTest extends DependencyTestBase {
 
     @DataProvider
