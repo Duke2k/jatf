@@ -17,6 +17,12 @@
 package jatf.common.util;
 
 import com.google.common.collect.Multimap;
+import japa.parser.JavaParser;
+import japa.parser.ParseException;
+import japa.parser.ast.CompilationUnit;
+import japa.parser.ast.expr.AssignExpr;
+import japa.parser.ast.stmt.BlockStmt;
+import japa.parser.ast.visitor.VoidVisitorAdapter;
 import jatf.annotations.Dependency;
 import jatf.annotations.Pattern;
 import jatf.common.rules.markers.ArchitectureTestMarker;
@@ -32,12 +38,6 @@ import jatf.common.rules.markers.MustNotUseMarker;
 import jatf.common.rules.markers.MustOverrideMarker;
 import jatf.common.rules.markers.MustUseMarker;
 import jatf.common.rules.markers.RuleBasedMarker;
-import japa.parser.JavaParser;
-import japa.parser.ParseException;
-import japa.parser.ast.CompilationUnit;
-import japa.parser.ast.expr.AssignExpr;
-import japa.parser.ast.stmt.BlockStmt;
-import japa.parser.ast.visitor.VoidVisitorAdapter;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
 
@@ -55,6 +55,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -132,6 +133,7 @@ public class ArchitectureTestUtil {
         return path == null ? null : new File(path);
     }
 
+    @SuppressWarnings("unused")
     @Nonnull
     public static <T> Set<Class<?>> getSubTypesOf(@Nonnull Class<T> superclass) {
         Set<Class<?>> entities = newHashSet();
@@ -335,8 +337,8 @@ public class ArchitectureTestUtil {
             Dependency[] dependencies
     ) {
         Map<String, List<?>> fields = newHashMap();
-        fields.put("omitMetrics", Arrays.asList(omitMetrics));
-        fields.put("omitConventions", Arrays.asList(omitConventions));
+        fields.put("omitMetrics", Collections.singletonList(omitMetrics));
+        fields.put("omitConventions", Collections.singletonList(omitConventions));
         fields.put("patterns", Arrays.asList(patterns));
         fields.put("dependencies", Arrays.asList(dependencies));
         return fields;

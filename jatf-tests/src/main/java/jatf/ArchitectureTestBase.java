@@ -17,7 +17,6 @@
 package jatf;
 
 import jatf.common.ArchitectureTestDataProvider;
-import org.junit.BeforeClass;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -34,7 +33,6 @@ public abstract class ArchitectureTestBase {
     /**
      * This method initializes the dataProvider field, if necessary.
      */
-    @BeforeClass
     public static void initializeDataProvider() {
         if (dataProvider == null) {
             dataProvider = new ArchitectureTestDataProvider();
@@ -47,6 +45,7 @@ public abstract class ArchitectureTestBase {
      */
     @Nonnull
     protected static Set<Class<?>> provideClassesFor(@Nonnull Class<? extends ArchitectureTestBase> test) {
+        initializeDataProvider();
         Set<Class<?>> result = dataProvider.getClassesFor(test.getSimpleName());
         if (result == null) {
             result = newHashSet();
