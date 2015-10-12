@@ -34,8 +34,10 @@ import jatf.common.rules.markers.MustNotExtendMarker;
 import jatf.common.rules.markers.MustNotHaveAnnotationMarker;
 import jatf.common.rules.markers.MustNotImplementMarker;
 import jatf.common.rules.markers.MustNotOverrideMarker;
+import jatf.common.rules.markers.MustNotReturnMarker;
 import jatf.common.rules.markers.MustNotUseMarker;
 import jatf.common.rules.markers.MustOverrideMarker;
+import jatf.common.rules.markers.MustReturnMarker;
 import jatf.common.rules.markers.MustUseMarker;
 import jatf.common.rules.markers.RuleBasedMarker;
 import org.reflections.Reflections;
@@ -267,6 +269,10 @@ public class ArchitectureTestUtil {
             } else if (marker instanceof MustNotHaveAnnotationMarker) {
                 //noinspection unchecked
                 ((MustNotHaveAnnotationMarker) marker).annotation = (Class<? extends Annotation>) fields.get("annotation").get(0);
+            } else if (marker instanceof MustReturnMarker) {
+                ((MustReturnMarker) marker).type = (Class<?>) fields.get("type").get(0);
+            } else if (marker instanceof MustNotReturnMarker) {
+                ((MustNotReturnMarker) marker).type = (Class<?>) fields.get("type").get(0);
             }
         } catch (Exception e) {
             report("RuleBasedAnnotation " + markerType + " could not be created:", e);
