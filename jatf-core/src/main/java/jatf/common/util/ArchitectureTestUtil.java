@@ -50,7 +50,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
@@ -162,7 +161,7 @@ public class ArchitectureTestUtil {
         }
     }
 
-    private static void traverseForTargetFolderUrlsIn(String path, Set<URL> urls) throws MalformedURLException {
+    private static void traverseForTargetFolderUrlsIn(@Nonnull String path, @Nonnull Set<URL> urls) throws MalformedURLException {
         File root = new File(path);
         File[] list = root.listFiles();
         if (list != null) {
@@ -171,9 +170,7 @@ public class ArchitectureTestUtil {
                     if (file.getName().equalsIgnoreCase("classes") &&
                             file.getParentFile() != null && file.getParentFile().exists() &&
                             file.getParentFile().getName().equalsIgnoreCase("target")) {
-                        URI uri = file.toURI();
-                        URL url = uri.toURL();
-                        urls.add(url);
+                        urls.add(file.toURI().toURL());
                     } else {
                         traverseForTargetFolderUrlsIn(file.getAbsolutePath(), urls);
                     }
@@ -214,19 +211,23 @@ public class ArchitectureTestUtil {
     private static String getClassNameFor(@Nonnull File file) throws IOException {
         StringBuilder result = new StringBuilder();
         BufferedReader reader = new BufferedReader(new FileReader(file));
-        String sourceLine;
-        String packageKeyword = "package ";
-        while ((sourceLine = reader.readLine()) != null) {
-            int indexOfPackage = sourceLine.indexOf(packageKeyword);
-            int indexOfSemicolon = sourceLine.indexOf(";", indexOfPackage);
-            if (indexOfPackage >= 0 && indexOfSemicolon >= packageKeyword.length()) {
-                result.append(sourceLine.substring(indexOfPackage + packageKeyword.length(), indexOfSemicolon));
-                result.append(".");
-                break;
+        try {
+            String sourceLine;
+            String packageKeyword = "package ";
+            while ((sourceLine = reader.readLine()) != null) {
+                int indexOfPackage = sourceLine.indexOf(packageKeyword);
+                int indexOfSemicolon = sourceLine.indexOf(";", indexOfPackage);
+                if (indexOfPackage >= 0 && indexOfSemicolon >= packageKeyword.length()) {
+                    result.append(sourceLine.substring(indexOfPackage + packageKeyword.length(), indexOfSemicolon));
+                    result.append(".");
+                    break;
+                }
             }
+            String fileName = file.getName();
+            result.append(fileName.substring(0, fileName.indexOf('.')));
+        } finally {
+            reader.close();
         }
-        String fileName = file.getName();
-        result.append(fileName.substring(0, fileName.indexOf('.')));
         return result.toString();
     }
 
