@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jatf-project</artifactId>
+        <groupId>com.github.duke2k.jatf</groupId>
+        <version>1.0.4.2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>jatf-rules</artifactId>
+    <name>Java Architecture Test Framework - Standard Rule Generators</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.duke2k.jatf</groupId>
+            <artifactId>jatf-tests</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
