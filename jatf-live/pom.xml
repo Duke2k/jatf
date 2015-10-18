@@ -1,3 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This file is part of JATF.
+
+ JATF is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, version 3 of the License.
+
+ JATF is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with JATF.  If not, see <http://www.gnu.org/licenses/>.
+-->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
          xmlns="http://maven.apache.org/POM/4.0.0">
@@ -5,6 +21,25 @@
     <artifactId>jatf-live</artifactId>
     <packaging>war</packaging>
     <name>Java Architecture Test Framework - Web Service</name>
+    <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the
+        web service project, which allows to upload any file(s) containing source code, to be tested and reported back
+        via web page.
+    </description>
+    <url>https://github.com/Duke2k/jatf</url>
+    <licenses>
+        <license>
+            <name>GPLv3</name>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Samuel Eickelberg</name>
+        </developer>
+    </developers>
+    <contributors/>
+    <organization>
+        <name>Freie Universität Berlin and Anybet GmbH, Berlin, Germany</name>
+    </organization>
 
     <parent>
         <groupId>com.github.duke2k.jatf</groupId>
