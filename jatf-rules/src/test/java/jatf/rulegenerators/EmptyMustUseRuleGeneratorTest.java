@@ -18,20 +18,23 @@ package jatf.rulegenerators;
 
 import jatf.common.rules.ArchitectureTestRule;
 import jatf.common.rules.MustUseRule;
-import jatf.common.rules.RuleGenerator;
-import jatf.common.rules.markers.ArchitectureTestMarker;
-import jatf.common.rules.markers.MustUseMarker;
+import org.junit.Test;
 
-import javax.annotation.Nonnull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
-public class EmptyMustUseRuleGenerator implements RuleGenerator<MustUseMarker, MustUseRule> {
-    @Nonnull
-    public ArchitectureTestRule generateArchitectureTestRuleFor(@Nonnull Class<?>[] classes) {
-        return new ArchitectureTestRule(classes, new ArchitectureTestMarker());
-    }
+public class EmptyMustUseRuleGeneratorTest {
 
-    @Nonnull
-    public MustUseRule generateRule() {
-        return new MustUseRule(new Class[0], new MustUseMarker());
+    @Test
+    public void emptyMustUseRuleGenerator_Valid() {
+        EmptyMustUseRuleGenerator generator = new EmptyMustUseRuleGenerator();
+        Class<?>[] classes = new Class[0];
+        ArchitectureTestRule rule1 = generator.generateArchitectureTestRuleFor(classes);
+        assertEquals(rule1.patterns().length, 0);
+        assertEquals(rule1.dependencies().length, 0);
+        assertFalse(rule1.omitConventions());
+        assertFalse(rule1.omitMetrics());
+        MustUseRule rule2 = generator.generateRule();
+        assertEquals(rule2.types().length, 0);
     }
 }
