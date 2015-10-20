@@ -76,7 +76,10 @@ public class ArchitectureTestUtil {
     public static Reflections buildReflections() {
         if (reflections == null) {
             initTargetFolderUrlSetIfNecessary();
-            targetFolderUrls.addAll(new Reflections("com.mybet.test").getConfiguration().getUrls());
+            for (String scope : SCOPES) {
+                targetFolderUrls.addAll(new Reflections(scope).getConfiguration().getUrls());
+            }
+            targetFolderUrls.addAll(new Reflections("jatf").getConfiguration().getUrls());
             URLClassLoader urlClassLoader =
                     URLClassLoader.newInstance(targetFolderUrls.toArray(new URL[targetFolderUrls.size()]));
             reflections = new Reflections(new ConfigurationBuilder()
