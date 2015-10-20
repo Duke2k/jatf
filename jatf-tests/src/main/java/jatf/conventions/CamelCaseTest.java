@@ -16,11 +16,11 @@
 
 package jatf.conventions;
 
-import jatf.common.parser.DeclarationVisitor;
-import jatf.common.parser.MethodVisitor;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.common.parser.DeclarationVisitor;
+import jatf.common.parser.MethodVisitor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -33,10 +33,14 @@ import static org.junit.Assert.assertTrue;
 @RunWith(DataProviderRunner.class)
 public class CamelCaseTest extends ConventionsTestBase {
 
-    public static final Pattern CLASS_CAMEL_CASE_PATTERN = Pattern.compile("([A-Z]+[a-z0-9]*)+");
-    public static final Pattern METHOD_CAMEL_CASE_PATTERN = Pattern.compile("[a-z]+([A-Z]*[a-z0-9]*[_]?)*");
-    public static final Pattern FIELD_CAMEL_CASE_PATTERN = Pattern.compile("[a-z]+([A-Z]*[a-z0-9]*)*");
-    public static final Pattern CONST_CAMEL_CASE_PATTERN = Pattern.compile("[A-Z]+([A-Z0-9]*[_]?)*");
+    public static final Pattern CLASS_CAMEL_CASE_PATTERN =
+            Pattern.compile(properties.getProperty("namePattern.for.classes"));
+    public static final Pattern METHOD_CAMEL_CASE_PATTERN =
+            Pattern.compile(properties.getProperty("namePattern.for.methods"));
+    public static final Pattern FIELD_CAMEL_CASE_PATTERN =
+            Pattern.compile(properties.getProperty("namePattern.for.fields"));
+    public static final Pattern CONST_CAMEL_CASE_PATTERN =
+            Pattern.compile(properties.getProperty("namePattern.for.constants"));
 
     @DataProvider
     public static Object[][] provideClassesToTest() {

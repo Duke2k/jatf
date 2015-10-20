@@ -20,15 +20,31 @@ import jatf.common.ArchitectureTestDataProvider;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
+import java.util.Properties;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
+import static jatf.common.ArchitectureTestRunListener.report;
 
 public abstract class ArchitectureTestBase {
 
     protected static final String DATA_PROVIDER_NAME = "provideClassesToTest";
+
+    protected static Properties properties = new Properties();
     private static ArchitectureTestDataProvider dataProvider;
+
+    static {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("jatf-test.properties");
+        try {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            report("Could not load jatf-test.properties:", e);
+        }
+    }
 
     /**
      * This method initializes the dataProvider field, if necessary.

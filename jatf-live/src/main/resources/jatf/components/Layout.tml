@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+ This file is part of JATF.
+
+ JATF is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, version 3 of the License.
+
+ JATF is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with JATF.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!--
+
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Title      : Concrete (modified for Tapestry)
+Version    : 1.0
+Released   : 20080825
+Description: A Web 2.0 design with fluid width suitable for blogs and small websites.
+-->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns="http://www.w3.org/1999/xhtml"
+        >
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>${title}</title>
+</head>
+<body>
+<!-- start header -->
+<div class="header">
+    <div class="logo">
+        <h1>
+            <t:pagelink page="index">jatf:jatf-live</t:pagelink>
+            &nbsp;
+            version ${appVersion}
+        </h1>
+    </div>
+    <div class="menu">
+        <ul>
+            <li t:type="loop" source="pageNames" value="pageName" class="prop:classForPageName">
+                <t:pagelink page="prop:pageName">${pageName}</t:pagelink>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- end header -->
+<!-- start page -->
+<div class="page">
+    <!-- start sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li class="search" style="background: none;">
+            </li>
+            <li>
+                <t:alerts/>
+            </li>
+            <li t:type="if" test="sidebar">
+                <h2>${sidebarTitle}</h2>
+
+                <div class="sidebar-content">
+                    <t:delegate to="sidebar"/>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar -->
+    <!-- start content -->
+    <div class="content">
+        <div class="post">
+            <div class="title">
+                <h2>${title}</h2>
+            </div>
+            <div class="entry">
+                <t:body/>
+            </div>
+        </div>
+    </div>
+    <!-- end content -->
+    <br style="clear: both;"/>
+</div>
+<!-- end page -->
+<!-- start footer -->
+<div class="footer">
+    <p class="legal">
+        &copy;2015 Samuel Eickelberg, . All Rights Reserved.
+        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        Design by
+        <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>
+        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        Icons by
+        <a href="http://famfamfam.com/">FAMFAMFAM</a>.
+    </p>
+</div>
+<!-- end footer -->
+</body>
+</html>
