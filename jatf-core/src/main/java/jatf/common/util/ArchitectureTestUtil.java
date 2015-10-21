@@ -92,6 +92,7 @@ public class ArchitectureTestUtil {
     }
 
     public static void resetReflections() {
+        targetFolderUrls = null;
         reflections = null;
         buildReflections();
     }
