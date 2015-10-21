@@ -44,7 +44,7 @@
     <parent>
         <groupId>com.github.duke2k.jatf</groupId>
         <artifactId>jatf-project</artifactId>
-        <version>1.0.4.4</version>
+        <version>1.0.4.5</version>
     </parent>
 
     <properties>

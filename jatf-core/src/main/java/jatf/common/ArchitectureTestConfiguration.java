@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import java.util.Map;
 
 import static com.google.common.collect.Maps.newHashMap;
+import static jatf.common.ArchitectureTestRunListener.report;
 
 public class ArchitectureTestConfiguration {
 
@@ -17,6 +18,7 @@ public class ArchitectureTestConfiguration {
 
     @SuppressWarnings("unused")
     public void setProperty(@Nonnull String name, @Nonnull String value) {
+        report(String.format("Configuration '%s' = %s", name, value));
         properties.put(name, value);
     }
 }
