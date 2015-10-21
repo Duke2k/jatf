@@ -93,6 +93,11 @@ public class ArchitectureTestUtil {
         return reflections;
     }
 
+    public static void resetReflections() {
+        reflections = null;
+        buildReflections();
+    }
+
     @Nonnull
     public static Set<String> getAllClassesInReflections(Reflections reflections) {
         Set<String> result = newHashSet();

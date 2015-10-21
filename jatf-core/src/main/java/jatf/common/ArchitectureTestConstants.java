@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import static jatf.common.ArchitectureTestRunListener.report;
+import static jatf.common.util.ArchitectureTestUtil.resetReflections;
 
 public class ArchitectureTestConstants {
 
@@ -101,6 +102,7 @@ public class ArchitectureTestConstants {
                     Double.parseDouble(configuration.getProperty("degree-of-purity.minimum"));
             MAX_CHAINED_METHOD_CALLS =
                     Integer.parseInt(configuration.getProperty("chained-method-calls.maximum"));
+            resetReflections();
         }
     }
 }
