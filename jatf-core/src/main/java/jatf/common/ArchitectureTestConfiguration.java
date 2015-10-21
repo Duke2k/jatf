@@ -14,4 +14,9 @@ public class ArchitectureTestConfiguration {
         String value = properties.get(name);
         return value != null ? value : "";
     }
+
+    @SuppressWarnings("unused")
+    public void setProperty(@Nonnull String name, @Nonnull String value) {
+        properties.put(name, value);
+    }
 }
