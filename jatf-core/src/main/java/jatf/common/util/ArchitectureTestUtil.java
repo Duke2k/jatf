@@ -25,6 +25,7 @@ import japa.parser.ast.stmt.BlockStmt;
 import japa.parser.ast.visitor.VoidVisitorAdapter;
 import jatf.annotations.Dependency;
 import jatf.annotations.Pattern;
+import jatf.common.ArchitectureTestConstants;
 import jatf.common.rules.markers.ArchitectureTestMarker;
 import jatf.common.rules.markers.MustBePureMarker;
 import jatf.common.rules.markers.MustExtendMarker;
@@ -76,6 +77,7 @@ public class ArchitectureTestUtil {
     @Nonnull
     public static Reflections buildReflections() {
         if (reflections == null) {
+            ArchitectureTestConstants.init();
             initTargetFolderUrlSetIfNecessary();
             for (String scope : SCOPES) {
                 targetFolderUrls.addAll(new Reflections(scope).getConfiguration().getUrls());

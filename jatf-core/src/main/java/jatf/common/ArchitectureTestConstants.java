@@ -16,6 +16,7 @@
 
 package jatf.common;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -24,18 +25,6 @@ import static jatf.common.ArchitectureTestRunListener.report;
 
 public class ArchitectureTestConstants {
 
-    private static Properties properties;
-
-    static {
-        properties = new Properties();
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("jatf.properties");
-        try {
-            properties.load(inputStream);
-        } catch (IOException e) {
-            report("Could not load jatf.properties:", e);
-        }
-    }
     public static String[] SCOPES = "".split(",");
     public static String ROOT_FOLDER = ".";
     public static double INSTABILITY_STRICT = 0.4;
@@ -47,6 +36,19 @@ public class ArchitectureTestConstants {
     public static int MAX_DEPTH_FOR_DFS = 10;
     public static double MIN_DEGREE_OF_PURITY = 0.5;
     public static int MAX_CHAINED_METHOD_CALLS = 5;
+    private static Properties properties;
+    private static ArchitectureTestConfiguration configuration;
+
+    static {
+        properties = new Properties();
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("jatf.properties");
+        try {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            report("Could not load jatf.properties:", e);
+        }
+    }
 
     static {
         try {
@@ -68,6 +70,37 @@ public class ArchitectureTestConstants {
                     Integer.parseInt(properties.getProperty("chained-method-calls.maximum"));
         } catch (Exception e) {
             ArchitectureTestRunListener.report("Unable to query properties, using default constraints instead.", e);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static void initWith(@Nonnull ArchitectureTestConfiguration conf) {
+        setConfiguration(conf);
+        init();
+    }
+
+    public static void setConfiguration(@Nonnull ArchitectureTestConfiguration conf) {
+        configuration = conf;
+    }
+
+    public static void init() {
+        if (configuration != null) {
+            SCOPES = configuration.getProperty("scopes").split(",");
+            ROOT_FOLDER = configuration.getProperty("root.folder");
+            INSTABILITY_STRICT = Double.parseDouble(configuration.getProperty("instability.strict"));
+            INSTABILITY_LOOSE = Double.parseDouble(configuration.getProperty("instability.loose"));
+            MAXIMUM_CCN = Integer.parseInt(configuration.getProperty("cyclomatic-complexity.maximum"));
+            MAX_HALSTEAD_DELIVERED_BUGS =
+                    Double.parseDouble(configuration.getProperty("halstead-delivered-bugs.maximum"));
+            MAX_NUMBER_OF_METHODS_PER_CLASS =
+                    Integer.parseInt(configuration.getProperty("methods-per-class.maximum"));
+            MAX_NUMBER_OF_STATEMENTS_PER_METHOD =
+                    Integer.parseInt(configuration.getProperty("statements-per-method.maximum"));
+            MAX_DEPTH_FOR_DFS = Integer.parseInt(configuration.getProperty("depth-for-dfs.maximum"));
+            MIN_DEGREE_OF_PURITY =
+                    Double.parseDouble(configuration.getProperty("degree-of-purity.minimum"));
+            MAX_CHAINED_METHOD_CALLS =
+                    Integer.parseInt(configuration.getProperty("chained-method-calls.maximum"));
         }
     }
 }
