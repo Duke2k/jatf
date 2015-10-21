@@ -20,7 +20,7 @@
     <parent>
         <artifactId>jatf-project</artifactId>
         <groupId>com.github.duke2k.jatf</groupId>
-        <version>1.0.4.6</version>
+        <version>1.0.4.7</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

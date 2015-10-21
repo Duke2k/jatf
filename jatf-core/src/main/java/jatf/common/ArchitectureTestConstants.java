@@ -19,10 +19,10 @@ package jatf.common;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Observable;
 import java.util.Properties;
 
 import static jatf.common.ArchitectureTestRunListener.report;
-import static jatf.common.util.ArchitectureTestUtil.resetReflections;
 
 public class ArchitectureTestConstants {
 
@@ -37,6 +37,8 @@ public class ArchitectureTestConstants {
     public static int MAX_DEPTH_FOR_DFS = 10;
     public static double MIN_DEGREE_OF_PURITY = 0.5;
     public static int MAX_CHAINED_METHOD_CALLS = 5;
+    public static ArchitectureTestConstantsChangeNotifier notifier = new ArchitectureTestConstantsChangeNotifier();
+
     private static Properties properties;
     private static ArchitectureTestConfiguration configuration;
 
@@ -102,7 +104,15 @@ public class ArchitectureTestConstants {
                     Double.parseDouble(configuration.getProperty("degree-of-purity.minimum"));
             MAX_CHAINED_METHOD_CALLS =
                     Integer.parseInt(configuration.getProperty("chained-method-calls.maximum"));
-            resetReflections();
+            notifier.doIt();
+        }
+    }
+
+    public static class ArchitectureTestConstantsChangeNotifier extends Observable {
+
+        public void doIt() {
+            setChanged();
+            notifyObservers();
         }
     }
 }

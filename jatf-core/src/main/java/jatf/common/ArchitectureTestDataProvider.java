@@ -16,30 +16,28 @@
 
 package jatf.common;
 
+import jatf.common.ArchitectureTestConstants.ArchitectureTestConstantsChangeNotifier;
 import org.reflections.Reflections;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.annotation.Annotation;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
 
 import static com.google.common.collect.Maps.newHashMap;
 import static jatf.common.util.ArchitectureTestUtil.buildReflections;
+import static jatf.common.util.ArchitectureTestUtil.resetReflections;
 
-public class ArchitectureTestDataProvider {
+public class ArchitectureTestDataProvider implements Observer {
 
     private ArchitectureTestRuleEvaluator ruleEvaluator;
     private Map<String, Set<Class<?>>> testClassesMap;
 
     public ArchitectureTestDataProvider() {
-        Reflections reflections = buildReflections();
-        ArchitectureTestAnnotationEvaluator annotationEvaluator =
-                new ArchitectureTestAnnotationEvaluator(reflections);
-        ruleEvaluator = new ArchitectureTestRuleEvaluator(reflections);
-        testClassesMap = newHashMap();
-        annotationEvaluator.evaluateInto(testClassesMap);
-        ruleEvaluator.evaluateInto(testClassesMap);
+        initializeInstance();
     }
 
     @Nullable
@@ -50,5 +48,23 @@ public class ArchitectureTestDataProvider {
     @Nullable
     public <A extends Annotation> Annotation getAnnotationFor(Class<?> clazz, Class<A> annotationType) {
         return ruleEvaluator.getAnnotationFor(clazz, annotationType);
+    }
+
+    @Override
+    public void update(Observable observable, Object argument) {
+        if (observable instanceof ArchitectureTestConstantsChangeNotifier) {
+            resetReflections();
+            initializeInstance();
+        }
+    }
+
+    private void initializeInstance() {
+        Reflections reflections = buildReflections();
+        ArchitectureTestAnnotationEvaluator annotationEvaluator =
+                new ArchitectureTestAnnotationEvaluator(reflections);
+        ruleEvaluator = new ArchitectureTestRuleEvaluator(reflections);
+        testClassesMap = newHashMap();
+        annotationEvaluator.evaluateInto(testClassesMap);
+        ruleEvaluator.evaluateInto(testClassesMap);
     }
 }
