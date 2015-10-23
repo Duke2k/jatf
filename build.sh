@@ -13,4 +13,4 @@
 #  You should have received a copy of the GNU General Public License
 #  along with JATF.  If not, see <http://www.gnu.org/licenses/>.
 #
-mvn clean install process-resources -Pjatf-example-loose
+mvn clean install process-resources

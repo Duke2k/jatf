@@ -13,5 +13,4 @@ REM
 REM  You should have received a copy of the GNU General Public License
 REM  along with JATF.  If not, see <http://www.gnu.org/licenses/>.
 REM
-mvn clean install process-resources -Pjatf-example-strict
-pause
+mvn clean install process-resources

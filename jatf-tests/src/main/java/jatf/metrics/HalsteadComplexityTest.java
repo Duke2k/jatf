@@ -16,17 +16,17 @@
 
 package jatf.metrics;
 
-import jatf.common.parser.TokenVisitor;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.common.parser.TokenVisitor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
 import java.util.Set;
 
-import static jatf.common.ArchitectureTestConstants.MAX_HALSTEAD_DELIVERED_BUGS;
+import static jatf.common.ArchitectureTestConstraints.MAX_HALSTEAD_DELIVERED_BUGS;
 import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
 import static org.junit.Assert.assertTrue;
 

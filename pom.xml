@@ -23,7 +23,7 @@
     <packaging>pom</packaging>
 
     <name>Java Architecture Test Framework</name>
-    <version>1.0.4.7</version>
+    <version>1.0.4.8</version>
 
     <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the root project, POM only.</description>
     <url>https://github.com/Duke2k/jatf</url>
@@ -53,45 +53,4 @@
         <java.version>1.6</java.version>
     </properties>
 
-    <profiles>
-        <profile>
-            <id>jatf-example-strict</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <jatf.root>${project.basedir}</jatf.root>
-                <jatf.scopes>jatf</jatf.scopes>
-                <jatf.instability.strict>0.3</jatf.instability.strict>
-                <jatf.instability.loose>0.6</jatf.instability.loose>
-                <jatf.cyclomatic-complexity.maximum>20</jatf.cyclomatic-complexity.maximum>
-                <jatf.halstead-delivered-bugs.maximum>2.5</jatf.halstead-delivered-bugs.maximum>
-                <jatf.methods-per-class.maximum>20</jatf.methods-per-class.maximum>
-                <jatf.statements-per-method.maximum>20</jatf.statements-per-method.maximum>
-                <jatf.depth-for-dfs.maximum>10</jatf.depth-for-dfs.maximum>
-                <jatf.degree-of-purity.minimum>0.8</jatf.degree-of-purity.minimum>
-                <jatf.chained-method-calls.maximum>5</jatf.chained-method-calls.maximum>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>jatf-example-loose</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <jatf.root>${project.basedir}</jatf.root>
-                <jatf.scopes>jatf</jatf.scopes>
-                <jatf.instability.strict>0.4</jatf.instability.strict>
-                <jatf.instability.loose>0.8</jatf.instability.loose>
-                <jatf.cyclomatic-complexity.maximum>20</jatf.cyclomatic-complexity.maximum>
-                <jatf.halstead-delivered-bugs.maximum>5.0</jatf.halstead-delivered-bugs.maximum>
-                <jatf.methods-per-class.maximum>20</jatf.methods-per-class.maximum>
-                <jatf.statements-per-method.maximum>20</jatf.statements-per-method.maximum>
-                <jatf.depth-for-dfs.maximum>10</jatf.depth-for-dfs.maximum>
-                <jatf.degree-of-purity.minimum>0.5</jatf.degree-of-purity.minimum>
-                <jatf.chained-method-calls.maximum>5</jatf.chained-method-calls.maximum>
-            </properties>
-        </profile>
-    </profiles>
 </project>

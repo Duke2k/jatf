@@ -63,8 +63,8 @@ import java.util.Set;
 
 import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
-import static jatf.common.ArchitectureTestConstants.ROOT_FOLDER;
-import static jatf.common.ArchitectureTestConstants.SCOPES;
+import static jatf.common.ArchitectureTestConstraints.ROOT_FOLDER;
+import static jatf.common.ArchitectureTestConstraints.SCOPES;
 import static jatf.common.ArchitectureTestRunListener.report;
 
 public class ArchitectureTestUtil {

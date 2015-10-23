@@ -16,10 +16,10 @@
 
 package jatf.dependency;
 
-import jatf.common.parser.ImportStatementVisitor;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.common.parser.ImportStatementVisitor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,8 +28,8 @@ import java.util.Set;
 
 import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
-import static jatf.common.ArchitectureTestConstants.INSTABILITY_LOOSE;
-import static jatf.common.ArchitectureTestConstants.INSTABILITY_STRICT;
+import static jatf.common.ArchitectureTestConstraints.INSTABILITY_LOOSE;
+import static jatf.common.ArchitectureTestConstraints.INSTABILITY_STRICT;
 import static jatf.common.ArchitectureTestRunListener.report;
 import static jatf.common.util.ArchitectureTestUtil.buildReflections;
 import static jatf.common.util.ArchitectureTestUtil.getAllClassesInReflections;

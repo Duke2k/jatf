@@ -16,11 +16,11 @@
 
 package jatf.metrics;
 
-import jatf.common.parser.MethodVisitor;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import japa.parser.ast.stmt.Statement;
+import jatf.common.parser.MethodVisitor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import static jatf.common.ArchitectureTestConstants.MAXIMUM_CCN;
+import static jatf.common.ArchitectureTestConstraints.MAXIMUM_CCN;
 import static jatf.common.util.ArchitectureTestUtil.findSourceFileFor;
 import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
 import static org.junit.Assert.assertTrue;

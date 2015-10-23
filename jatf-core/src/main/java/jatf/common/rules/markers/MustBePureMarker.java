@@ -20,7 +20,7 @@ import jatf.annotations.MustBePure;
 
 import java.lang.annotation.Annotation;
 
-import static jatf.common.ArchitectureTestConstants.MIN_DEGREE_OF_PURITY;
+import static jatf.common.ArchitectureTestConstraints.MIN_DEGREE_OF_PURITY;
 
 public class MustBePureMarker extends RuleBasedMarker<MustBePure> {
 

@@ -16,16 +16,16 @@
 
 package jatf.metrics;
 
-import jatf.common.parser.MethodVisitor;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.common.parser.MethodVisitor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Set;
 
-import static jatf.common.ArchitectureTestConstants.MAX_NUMBER_OF_METHODS_PER_CLASS;
+import static jatf.common.ArchitectureTestConstraints.MAX_NUMBER_OF_METHODS_PER_CLASS;
 import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
 import static org.junit.Assert.assertTrue;
 

@@ -18,10 +18,9 @@ package jatf.common;
 
 import org.junit.Test;
 
-import javax.annotation.Nonnull;
 import java.util.Set;
 
-import static com.google.common.collect.Sets.newHashSet;
+import static jatf.common.util.TestNamesUtil.getTestNames;
 import static org.junit.Assert.assertNull;
 
 public class ArchitectureTestDataProviderTest {
@@ -29,40 +28,10 @@ public class ArchitectureTestDataProviderTest {
     @Test
     public void testDataProvider_Valid() {
         ArchitectureTestDataProvider dataProvider = new ArchitectureTestDataProvider();
-        Set<String> testNames = newHashSet();
-        fillTestNames(testNames);
+        Set<String> testNames = getTestNames();
         for (String testName : testNames) {
             Set<Class<?>> classes = dataProvider.getClassesFor(testName);
             assertNull(classes);
         }
-    }
-
-    private void fillTestNames(@Nonnull Set<String> testNames) {
-        testNames.add("CamelCaseTest");
-        testNames.add("NoFinalModifierInLocalVariablesTest");
-        testNames.add("NoInnerClassesTest");
-        testNames.add("OrderingTest");
-        testNames.add("OverlyChainedMethodCallsTest");
-        testNames.add("AcyclicDependenciesPrincipleTest");
-        testNames.add("AnnotationTypeTest");
-        testNames.add("DangerousCastsTest");
-        testNames.add("ExtendsTest");
-        testNames.add("ImplementsTest");
-        testNames.add("InstabilityTest");
-        testNames.add("MethodPurityTest");
-        testNames.add("OverridesTest");
-        testNames.add("ReturnsTest");
-        testNames.add("ThrowsTest");
-        testNames.add("UncheckedCastsTest");
-        testNames.add("UsesTest");
-        testNames.add("CyclomaticComplexityTest");
-        testNames.add("HalsteadComplecityTest");
-        testNames.add("MethodLengthTest");
-        testNames.add("NumberOfMethodsPerClassTest");
-        testNames.add("AdapterTest");
-        testNames.add("SingletonTest");
-        testNames.add("StateTest");
-        testNames.add("StrategyTest");
-        testNames.add("TemplateMethodTest");
     }
 }

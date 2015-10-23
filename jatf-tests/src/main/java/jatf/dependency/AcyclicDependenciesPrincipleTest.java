@@ -17,12 +17,12 @@
 package jatf.dependency;
 
 import com.google.common.io.Files;
-import jatf.common.graph.Edge;
-import jatf.common.graph.Graph;
-import jatf.common.graph.Vertex;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.common.graph.Edge;
+import jatf.common.graph.Graph;
+import jatf.common.graph.Vertex;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -34,8 +34,8 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Set;
 
-import static jatf.common.ArchitectureTestConstants.MAX_DEPTH_FOR_DFS;
-import static jatf.common.ArchitectureTestConstants.SCOPES;
+import static jatf.common.ArchitectureTestConstraints.MAX_DEPTH_FOR_DFS;
+import static jatf.common.ArchitectureTestConstraints.SCOPES;
 import static jatf.common.util.ArchitectureTestUtil.findSourceFileFor;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
