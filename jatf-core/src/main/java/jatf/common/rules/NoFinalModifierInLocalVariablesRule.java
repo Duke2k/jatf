@@ -17,7 +17,7 @@
 package jatf.common.rules;
 
 import jatf.annotations.ArchitectureTest;
-import jatf.api.ClassAnnotationBasedRule;
+import jatf.api.rules.ClassAnnotationBasedRule;
 import jatf.common.rules.conditions.HasAnnotation;
 import jatf.common.rules.conditions.Not;
 import jatf.common.rules.markers.NullMarker;

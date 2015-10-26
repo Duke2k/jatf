@@ -14,19 +14,20 @@
  * along with JATF.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jatf.common.util;
+package jatf.api.rules;
 
-import javax.tools.SimpleJavaFileObject;
-import java.io.File;
-import java.net.URI;
+import java.util.Arrays;
+import java.util.Set;
 
-public class SourceFile extends SimpleJavaFileObject {
+import static com.google.common.collect.Sets.newHashSet;
 
-    protected SourceFile(URI uri, Kind kind) {
-        super(uri, kind);
-    }
+public abstract class CombinedCondition<T> extends Condition<T> {
 
-    public SourceFile(File sourceFile) {
-        this(sourceFile.toURI(), Kind.SOURCE);
+    protected Set<Condition<Class<?>>> conditions;
+
+    public CombinedCondition(T type, Condition<Class<?>>... conditions) {
+        super(type);
+        this.conditions = newHashSet();
+        this.conditions.addAll(Arrays.asList(conditions));
     }
 }

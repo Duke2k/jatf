@@ -18,7 +18,7 @@ package jatf.common.rules;
 
 import jatf.annotations.Dependency;
 import jatf.annotations.Pattern;
-import jatf.api.ClassAnnotationBasedRule;
+import jatf.api.rules.ClassAnnotationBasedRule;
 import jatf.common.rules.conditions.AlwaysTrue;
 import jatf.common.rules.markers.ArchitectureTestMarker;
 

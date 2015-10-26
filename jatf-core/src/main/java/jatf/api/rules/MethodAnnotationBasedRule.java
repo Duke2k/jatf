@@ -14,7 +14,7 @@
  * along with JATF.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jatf.api;
+package jatf.api.rules;
 
 import jatf.common.rules.AnnotationBasedRule;
 import jatf.common.rules.markers.RuleBasedMarker;

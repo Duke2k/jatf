@@ -20,7 +20,7 @@ import org.junit.Test;
 
 import java.util.Set;
 
-import static jatf.common.util.TestNamesUtil.getTestNames;
+import static jatf.api.tests.TestNamesHelper.getTestNames;
 import static org.junit.Assert.assertNull;
 
 public class ArchitectureTestDataProviderTest {

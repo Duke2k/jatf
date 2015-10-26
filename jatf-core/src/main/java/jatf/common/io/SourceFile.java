@@ -14,23 +14,19 @@
  * along with JATF.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jatf.api;
+package jatf.common.io;
 
-public abstract class Condition<T> {
+import javax.tools.SimpleJavaFileObject;
+import java.io.File;
+import java.net.URI;
 
-    protected T type;
+public class SourceFile extends SimpleJavaFileObject {
 
-    public Condition(T type) {
-        this.type = type;
+    protected SourceFile(URI uri, Kind kind) {
+        super(uri, kind);
     }
 
-    public abstract boolean firesFor(T type);
-
-    public boolean fires() {
-        return firesFor(type);
-    }
-
-    public T getType() {
-        return type;
+    public SourceFile(File sourceFile) {
+        this(sourceFile.toURI(), Kind.SOURCE);
     }
 }

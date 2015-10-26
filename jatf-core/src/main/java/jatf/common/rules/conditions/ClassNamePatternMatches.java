@@ -16,7 +16,7 @@
 
 package jatf.common.rules.conditions;
 
-import jatf.api.Condition;
+import jatf.api.rules.Condition;
 
 import java.util.regex.Pattern;
 

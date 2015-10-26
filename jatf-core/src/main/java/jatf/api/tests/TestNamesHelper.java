@@ -14,14 +14,14 @@
  * along with JATF.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jatf.common.util;
+package jatf.api.tests;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
 
-public class TestNamesUtil {
+public class TestNamesHelper {
 
     @Nonnull
     public static Set<String> getTestNames() {

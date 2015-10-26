@@ -17,10 +17,10 @@
 package jatf.dependency;
 
 import com.google.common.io.Files;
-import jatf.common.util.SourceFile;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.common.io.SourceFile;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

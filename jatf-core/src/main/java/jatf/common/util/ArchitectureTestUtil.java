@@ -97,6 +97,15 @@ public class ArchitectureTestUtil {
         buildReflections();
     }
 
+    public static void resetSourceFilesMap() {
+        sourceFiles = null;
+        try {
+            initSourceFilesMapIfNecessary();
+        } catch (IOException e) {
+            report("Source files could not be mapped:", e);
+        }
+    }
+
     @Nonnull
     public static Set<String> getAllClassesInReflections(Reflections reflections) {
         Set<String> result = newHashSet();
