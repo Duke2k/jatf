@@ -16,6 +16,7 @@
 
 package jatf.common.rules;
 
+import jatf.api.ClassAnnotationBasedRule;
 import jatf.common.rules.conditions.Implements;
 import jatf.common.rules.markers.MustOverrideMarker;
 

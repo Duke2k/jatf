@@ -16,6 +16,8 @@
 
 package jatf.common.rules.conditions;
 
+import jatf.api.Condition;
+
 public final class Implements extends Condition<Class<?>> {
 
     public Implements(Class<?> type) {

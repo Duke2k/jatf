@@ -1,4 +1,4 @@
-package jatf.constraints;
+package jatf.api.constraints;
 
 public enum Constraint {
     SCOPES,

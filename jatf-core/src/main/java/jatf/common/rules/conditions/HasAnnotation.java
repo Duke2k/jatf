@@ -16,6 +16,8 @@
 
 package jatf.common.rules.conditions;
 
+import jatf.api.Condition;
+
 import javax.annotation.Nonnull;
 import java.lang.annotation.Annotation;
 

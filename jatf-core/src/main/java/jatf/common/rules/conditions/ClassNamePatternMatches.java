@@ -16,6 +16,8 @@
 
 package jatf.common.rules.conditions;
 
+import jatf.api.Condition;
+
 import java.util.regex.Pattern;
 
 public final class ClassNamePatternMatches extends Condition<Class<?>> {

@@ -14,9 +14,12 @@
  * along with JATF.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jatf.common.rules;
+package jatf.api;
 
-import jatf.common.rules.conditions.Condition;
+import jatf.common.rules.AnnotationBasedRule;
+import jatf.common.rules.ArchitectureTestAttributes;
+import jatf.common.rules.ArchitectureTestRule;
+import jatf.common.rules.RuleGenerator;
 import jatf.common.rules.markers.ArchitectureTestMarker;
 import jatf.common.rules.markers.RuleBasedMarker;
 

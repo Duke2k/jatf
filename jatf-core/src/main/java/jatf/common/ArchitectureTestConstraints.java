@@ -16,8 +16,8 @@
 
 package jatf.common;
 
-import jatf.constraints.Constraint;
-import jatf.constraints.Constraints;
+import jatf.api.constraints.Constraint;
+import jatf.api.constraints.Constraints;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

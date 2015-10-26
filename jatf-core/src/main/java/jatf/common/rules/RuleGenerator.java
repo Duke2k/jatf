@@ -16,7 +16,7 @@
 
 package jatf.common.rules;
 
-import jatf.common.rules.conditions.Condition;
+import jatf.api.Condition;
 import jatf.common.rules.markers.RuleBasedMarker;
 
 import javax.annotation.Nonnull;

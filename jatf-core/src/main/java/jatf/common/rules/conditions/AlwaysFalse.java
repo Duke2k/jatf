@@ -16,6 +16,8 @@
 
 package jatf.common.rules.conditions;
 
+import jatf.api.Condition;
+
 public final class AlwaysFalse extends Condition<Class<?>> {
 
     public AlwaysFalse() {

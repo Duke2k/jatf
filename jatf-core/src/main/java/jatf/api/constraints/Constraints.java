@@ -1,4 +1,4 @@
-package jatf.constraints;
+package jatf.api.constraints;
 
 import javax.annotation.Nonnull;
 import java.util.Map;

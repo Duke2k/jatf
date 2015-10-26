@@ -16,6 +16,7 @@
 
 package jatf.common.rules;
 
+import jatf.api.MethodAnnotationBasedRule;
 import jatf.common.rules.conditions.AlwaysTrue;
 import jatf.common.rules.markers.MustNotReturnMarker;
 

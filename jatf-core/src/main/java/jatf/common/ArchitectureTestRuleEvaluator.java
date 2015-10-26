@@ -17,9 +17,9 @@
 package jatf.common;
 
 import jatf.annotations.ArchitectureTest;
+import jatf.api.ArchitectureTestRuleGenerator;
 import jatf.common.rules.AnnotationBasedRule;
 import jatf.common.rules.ArchitectureTestRule;
-import jatf.common.rules.ArchitectureTestRuleGenerator;
 import jatf.common.rules.markers.ArchitectureTestMarker;
 import jatf.common.rules.markers.RuleBasedMarker;
 import org.reflections.Reflections;

@@ -14,23 +14,20 @@
  * along with JATF.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jatf.common.rules.conditions;
+package jatf.api;
 
-public abstract class Condition<T> {
+import java.util.Arrays;
+import java.util.Set;
 
-    protected T type;
+import static com.google.common.collect.Sets.newHashSet;
 
-    public Condition(T type) {
-        this.type = type;
-    }
+public abstract class CombinedCondition<T> extends Condition<T> {
 
-    public abstract boolean firesFor(T type);
+    protected Set<Condition<Class<?>>> conditions;
 
-    public boolean fires() {
-        return firesFor(type);
-    }
-
-    public T getType() {
-        return type;
+    public CombinedCondition(T type, Condition<Class<?>>... conditions) {
+        super(type);
+        this.conditions = newHashSet();
+        this.conditions.addAll(Arrays.asList(conditions));
     }
 }

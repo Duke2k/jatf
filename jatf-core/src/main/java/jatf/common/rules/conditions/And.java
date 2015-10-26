@@ -16,6 +16,9 @@
 
 package jatf.common.rules.conditions;
 
+import jatf.api.CombinedCondition;
+import jatf.api.Condition;
+
 public final class And extends CombinedCondition<Class<?>> {
 
     public And(Class<?> type, Condition<Class<?>>... conditions) {

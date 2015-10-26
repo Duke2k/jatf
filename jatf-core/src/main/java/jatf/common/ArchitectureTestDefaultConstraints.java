@@ -1,7 +1,7 @@
 package jatf.common;
 
-import jatf.constraints.Constraint;
-import jatf.constraints.Constraints;
+import jatf.api.constraints.Constraint;
+import jatf.api.constraints.Constraints;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
