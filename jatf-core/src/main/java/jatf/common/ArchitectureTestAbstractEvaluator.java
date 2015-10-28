@@ -18,6 +18,7 @@ package jatf.common;
 
 import jatf.annotations.ArchitectureTest;
 import jatf.annotations.Dependency;
+import jatf.annotations.Exclude;
 import jatf.annotations.Pattern;
 import org.reflections.Reflections;
 
@@ -189,6 +190,15 @@ public abstract class ArchitectureTestAbstractEvaluator {
     }
 
     private void addToSourceMap(String key, Class<?> value) {
+        Exclude exclude = value.getAnnotation(Exclude.class);
+        if (exclude != null) {
+            Class<?>[] tests = exclude.tests();
+            for (Class<?> test : tests) {
+                if (test.getSimpleName().equals(key)) {
+                    return;
+                }
+            }
+        }
         Set<Class<?>> items = sourceMap.get(key);
         if (items == null) {
             items = newHashSet();

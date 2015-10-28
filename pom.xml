@@ -23,7 +23,7 @@
     <packaging>pom</packaging>
 
     <name>Java Architecture Test Framework</name>
-    <version>1.0.4.8</version>
+    <version>1.0.4.9</version>
 
     <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the root project, POM only.</description>
     <url>https://github.com/Duke2k/jatf</url>
