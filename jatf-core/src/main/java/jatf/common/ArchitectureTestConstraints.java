@@ -36,6 +36,7 @@ public class ArchitectureTestConstraints {
     public static int MAX_DEPTH_FOR_DFS;
     public static double MIN_DEGREE_OF_PURITY;
     public static int MAX_CHAINED_METHOD_CALLS;
+    public static boolean WRITE_TESTMAP_SNAPSHOT_JSON_TO_ROOT_FOLDER;
 
     static {
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
@@ -56,5 +57,7 @@ public class ArchitectureTestConstraints {
                 Double.parseDouble(constraints.valueOf(Constraint.MIN_DEGREE_OF_PURITY));
         MAX_CHAINED_METHOD_CALLS =
                 Integer.parseInt(constraints.valueOf(Constraint.MAX_CHAINED_METHOD_CALLS));
+        WRITE_TESTMAP_SNAPSHOT_JSON_TO_ROOT_FOLDER =
+                Boolean.parseBoolean(constraints.valueOf(Constraint.WRITE_TESTMAP_SNAPSHOT_JSON_TO_ROOT_FOLDER));
     }
 }

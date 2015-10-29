@@ -36,6 +36,7 @@ public class ArchitectureTestDefaultConstraints extends HashMap<Constraint, Stri
         put(Constraint.MIN_DEGREE_OF_PURITY, "0.5");
         put(Constraint.ROOT_FOLDER, ".");
         put(Constraint.SCOPES, "jatf");
+        put(Constraint.WRITE_TESTMAP_SNAPSHOT_JSON_TO_ROOT_FOLDER, "false");
     }
 
     @Override
