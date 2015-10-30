@@ -16,18 +16,25 @@
 
 package jatf.common;
 
+import com.google.gson.Gson;
 import org.reflections.Reflections;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.Set;
 
 import static com.google.common.collect.Maps.newHashMap;
+import static jatf.common.ArchitectureTestRunListener.report;
 import static jatf.common.util.ArchitectureTestUtil.buildReflections;
 
 public class ArchitectureTestDataProvider {
+
+    private static final String TESTMAP_SNAPSHOT_JSON_FILENAME = "testMapping-%s.json";
 
     private ArchitectureTestRuleEvaluator ruleEvaluator;
     private Map<String, Set<Class<?>>> testClassesMap;
@@ -54,5 +61,24 @@ public class ArchitectureTestDataProvider {
         testClassesMap = newHashMap();
         annotationEvaluator.evaluateInto(testClassesMap);
         ruleEvaluator.evaluateInto(testClassesMap);
+        writeTestMappingSnapshot();
+    }
+
+    private void writeTestMappingSnapshot() {
+        if (ArchitectureTestConstraints.WRITE_TESTMAP_SNAPSHOT_JSON_TO_ROOT_FOLDER) {
+            File jsonFile = new File(
+                    ArchitectureTestConstraints.ROOT_FOLDER,
+                    String.format(TESTMAP_SNAPSHOT_JSON_FILENAME, System.currentTimeMillis())
+            );
+            try {
+                FileWriter writer = new FileWriter(jsonFile);
+                Gson gson = new Gson();
+                gson.toJson(testClassesMap, writer);
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                report("Could not write test mapping snapshot to " + jsonFile, e);
+            }
+        }
     }
 }
