@@ -14,14 +14,17 @@
  You should have received a copy of the GNU General Public License
  along with JATF.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>jatf-core</artifactId>
 
-    <name>Java Architecture Test Framework - Core</name>
+    <artifactId>jatf-graph</artifactId>
+    <name>Java Architecture Test Framework - Graph DB Connector</name>
 
-    <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the core project, delivering all required functionality.</description>
+    <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the
+        core project, delivering all required functionality.
+    </description>
     <url>https://github.com/Duke2k/jatf</url>
     <licenses>
         <license>
@@ -33,67 +36,22 @@
             <name>Samuel Eickelberg</name>
         </developer>
     </developers>
-    <contributors />
+    <contributors/>
     <organization>
         <name>Freie Universität Berlin and Anybet GmbH, Berlin, Germany</name>
     </organization>
 
     <parent>
-        <groupId>com.github.duke2k.jatf</groupId>
         <artifactId>jatf-project</artifactId>
+        <groupId>com.github.duke2k.jatf</groupId>
         <version>1.0.4.9</version>
     </parent>
-    
+
     <dependencies>
         <dependency>
-            <groupId>com.github.duke2k.jatf</groupId>
-            <artifactId>jatf-graph</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>com.tngtech.java</groupId>
-            <artifactId>junit-dataprovider</artifactId>
-            <version>1.10.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.10</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>annotations</artifactId>
-            <version>3.0.1u2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.javaparser</groupId>
-            <artifactId>javaparser</artifactId>
-            <version>1.0.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>4.2.2.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.4</version>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j</artifactId>
+            <version>2.3.0</version>
         </dependency>
     </dependencies>
 
@@ -135,4 +93,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

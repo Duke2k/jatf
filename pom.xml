@@ -46,6 +46,7 @@
         <module>jatf-tests</module>
         <module>jatf-live</module>
         <module>jatf-rules</module>
+        <module>jatf-graph</module>
     </modules>
 
     <properties>
