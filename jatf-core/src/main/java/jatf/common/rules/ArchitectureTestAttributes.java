@@ -36,6 +36,7 @@ public class ArchitectureTestAttributes {
         this(false, false);
     }
 
+    @Nonnull
     public ArchitectureTestAttributes(boolean omitMetrics, boolean omitConventions) {
         this.omitMetrics = omitMetrics;
         this.omitConventions = omitConventions;
@@ -51,12 +52,21 @@ public class ArchitectureTestAttributes {
      * @param dependency - dependency to be used as a sole property in attributes
      * @return attributes with only the given dependency
      */
+    @Nonnull
     public static ArchitectureTestAttributes createWithDependencyOnly(@Nonnull Dependency dependency) {
         ArchitectureTestAttributes attributes = new ArchitectureTestAttributes(true, true);
         attributes.addDependency(dependency);
         return attributes;
     }
 
+    /**
+     * Creates test attributes with only the given test identified by testName being active. No other tests would be
+     * run with the resulting attributes.
+     *
+     * @param testName - name of the test to be carried out exclusively
+     * @return attributes with only the given test name
+     */
+    @Nonnull
     public static ArchitectureTestAttributes createWithSingleTestOnly(@Nonnull String testName) {
         ArchitectureTestAttributes attributes = new ArchitectureTestAttributes(true, true);
         attributes.addTestName(testName);
@@ -64,22 +74,40 @@ public class ArchitectureTestAttributes {
     }
 
     /**
-     * Merges attributes with others in a maximizing fashion, that is, to maximize the number of tests being run by the
+     * Merges attributes with others in an optimistic fashion, that is, to minimize the number of tests being run by the
      * merge.
      *
      * @param other - other attributes to be merged into this instance
      * @return this instance (merged attributes)
      */
-    public ArchitectureTestAttributes merge(ArchitectureTestAttributes other) {
+    @Nonnull
+    public ArchitectureTestAttributes mergeOptimistic(@Nonnull ArchitectureTestAttributes other) {
+        if (other.omitConventions) {
+            omitConventions = true;
+        }
+        if (other.omitMetrics) {
+            omitMetrics = true;
+        }
+        mergeExceptConventionsAndMetrics(other);
+        return this;
+    }
+
+    /**
+     * Merges attributes with others in a pessimistic fashion, that is, to maximize the number of tests being run by the
+     * merge.
+     *
+     * @param other - other attributes to be merged into this instance
+     * @return this instance (merged attributes)
+     */
+    @Nonnull
+    public ArchitectureTestAttributes mergePessimistic(@Nonnull ArchitectureTestAttributes other) {
         if (!other.omitConventions) {
             omitConventions = false;
         }
         if (!other.omitMetrics) {
             omitMetrics = false;
         }
-        dependencies.addAll(other.dependencies);
-        patterns.addAll(other.patterns);
-        testNames.addAll(other.testNames);
+        mergeExceptConventionsAndMetrics(other);
         return this;
     }
 
@@ -117,5 +145,11 @@ public class ArchitectureTestAttributes {
 
     public String[] getTestNames() {
         return testNames.toArray(new String[testNames.size()]);
+    }
+
+    private void mergeExceptConventionsAndMetrics(@Nonnull ArchitectureTestAttributes other) {
+        dependencies.addAll(other.dependencies);
+        patterns.addAll(other.patterns);
+        testNames.addAll(other.testNames);
     }
 }
