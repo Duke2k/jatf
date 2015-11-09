@@ -51,8 +51,6 @@
     <properties>
         <neo4j.host>${neo4j.host}</neo4j.host>
         <neo4j.port>${neo4j.port}</neo4j.port>
-        <neo4j.user>${neo4j.user}</neo4j.user>
-        <neo4j.pass>${neo4j.pass}</neo4j.pass>
         <neo4j.url>http://${neo4j.host}:${neo4j.port}</neo4j.url>
     </properties>
 
@@ -88,8 +86,6 @@
             <properties>
                 <neo4j.host>localhost</neo4j.host>
                 <neo4j.port>7474</neo4j.port>
-                <neo4j.user>admin</neo4j.user>
-                <neo4j.pass>admin</neo4j.pass>
             </properties>
         </profile>
     </profiles>

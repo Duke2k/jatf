@@ -16,15 +16,16 @@
 
 package jatf.common;
 
+import jatf.annotations.ArchitectureTest;
 import org.junit.runner.notification.RunListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ArchitectureTestRunListener extends RunListener {
 
-    public static final String PREFIX = "[Architecture Test] ";
+    public static final String PREFIX = "";
 
-    private static Logger staticLog = LoggerFactory.getLogger(ArchitectureTestRunListener.class);
+    private static Logger staticLog = LoggerFactory.getLogger(ArchitectureTest.class);
 
     public static void report(String message, Object... items) {
         StringBuilder stringBuilder = new StringBuilder(PREFIX);
