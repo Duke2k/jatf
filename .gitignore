@@ -2,3 +2,7 @@
 /.idea
 /jatf-tests/target
 /jatf-core/target
+/jatf-rules/target
+/jatf-live/target
+/jatf-graph/target
+*.class
