@@ -16,8 +16,13 @@
 
 package jatf.common.io;
 
+import javax.annotation.Nullable;
 import javax.tools.SimpleJavaFileObject;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 
 public class SourceFile extends SimpleJavaFileObject {
@@ -28,5 +33,27 @@ public class SourceFile extends SimpleJavaFileObject {
 
     public SourceFile(File sourceFile) {
         this(sourceFile.toURI(), Kind.SOURCE);
+    }
+
+    @Override
+    @Nullable
+    public CharSequence getCharContent(boolean ignoreEncodingErrors) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        InputStream inputStream = uri.toURL().openStream();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+            inputStream.close();
+        }
+        CharSequence result = stringBuilder.toString();
+        return result.length() == 0 ? null : result;
     }
 }
