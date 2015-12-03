@@ -26,6 +26,7 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
 import jatf.annotations.Dependency;
 import jatf.annotations.Pattern;
 import jatf.common.rules.markers.ArchitectureTestMarker;
+import jatf.common.rules.markers.ExcludeMarker;
 import jatf.common.rules.markers.MustBePureMarker;
 import jatf.common.rules.markers.MustExtendMarker;
 import jatf.common.rules.markers.MustHaveAnnotationMarker;
@@ -291,6 +292,8 @@ public class ArchitectureTestUtil {
                 ((MustReturnMarker) marker).type = (Class<?>) fields.get("type").get(0);
             } else if (marker instanceof MustNotReturnMarker) {
                 ((MustNotReturnMarker) marker).type = (Class<?>) fields.get("type").get(0);
+            } else if (marker instanceof ExcludeMarker) {
+                ((ExcludeMarker) marker).tests = convertToTypeArray(fields.get("tests"));
             }
         } catch (Exception e) {
             report("RuleBasedAnnotation " + markerType + " could not be created:", e);
