@@ -129,6 +129,11 @@ public class ArchitectureTestUtil {
         return "Assertion not met in " + type.getName();
     }
 
+    @Nonnull
+    public static String assertMessage(@Nonnull Class<?> type, @Nonnull String details) {
+        return assertMessage(type) + ": " + details;
+    }
+
     public static void closeQuietly(Closeable closeable) {
         try {
             closeable.close();

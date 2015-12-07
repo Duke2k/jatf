@@ -16,11 +16,11 @@
 
 package jatf.dependency;
 
-import jatf.annotations.MustNotUse;
-import jatf.annotations.MustUse;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.annotations.MustNotUse;
+import jatf.annotations.MustUse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -58,11 +58,11 @@ public class UsesTest extends DependencyTestBase {
     }
 
     protected void testUses(Class<?> clazz, Class<?> toBeUsed) {
-        assertTrue(assertMessage(clazz), isUsed(clazz, toBeUsed));
+        assertTrue(assertMessage(clazz, toBeUsed + " not used."), isUsed(clazz, toBeUsed));
     }
 
     protected void testDoesNotUse(Class<?> clazz, Class<?> notToBeUsed) {
-        assertFalse(assertMessage(clazz), isUsed(clazz, notToBeUsed));
+        assertFalse(assertMessage(clazz, notToBeUsed + " used."), isUsed(clazz, notToBeUsed));
     }
 
     private boolean isUsed(Class<?> clazz, Class<?> toBeUsed) {
