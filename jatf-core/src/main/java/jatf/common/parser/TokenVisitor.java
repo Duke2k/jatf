@@ -791,6 +791,7 @@ public class TokenVisitor extends VoidVisitorAdapter<Object> {
         tokens.add("enum");
         tokens.add(n.getName());
 
+        //noinspection Duplicates
         if (n.getImplements() != null) {
             tokens.add("implements");
             for (Iterator<ClassOrInterfaceType> i = n.getImplements().iterator(); i.hasNext(); ) {

@@ -25,7 +25,6 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -73,13 +72,7 @@ public class MethodVisitor extends VoidVisitorAdapter<Object> {
     @Nonnull
     public List<String> getMethodNames() {
         if (!sorted) {
-            Collections.sort(methodNames, new Comparator<String>() {
-
-                @Override
-                public int compare(String method1Name, String method2Name) {
-                    return positionsByName.get(method1Name).compareTo(positionsByName.get(method2Name));
-                }
-            });
+            Collections.sort(methodNames, (method1Name, method2Name) -> positionsByName.get(method1Name).compareTo(positionsByName.get(method2Name)));
             sorted = true;
         }
         return methodNames;

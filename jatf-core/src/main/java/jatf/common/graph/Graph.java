@@ -91,7 +91,7 @@ public class Graph<T> {
      */
     public boolean addVertex(Vertex<T> v) {
         boolean added = false;
-        if (verticies.contains(v) == false) {
+        if (!verticies.contains(v)) {
             added = verticies.add(v);
         }
         return added;

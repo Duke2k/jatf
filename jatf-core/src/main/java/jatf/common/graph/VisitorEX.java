@@ -19,5 +19,5 @@ interface VisitorEX<T, E extends Exception> {
      *          the vertex being visited.
      * @throws E exception for any error
      */
-    public void visit(Graph<T> g, Vertex<T> v) throws E;
+    void visit(Graph<T> g, Vertex<T> v) throws E;
 }

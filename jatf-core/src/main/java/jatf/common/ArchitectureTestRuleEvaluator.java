@@ -29,6 +29,7 @@ import javax.annotation.Nullable;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
@@ -117,9 +118,7 @@ public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvalu
         Set<RuleBasedMarker> markerSet = markerMap.get(clazz);
         Set<Annotation> annotationSet = newHashSet();
         if (markerSet != null) {
-            for (RuleBasedMarker marker : markerSet) {
-                annotationSet.add(marker.createAnnotation());
-            }
+            annotationSet.addAll(markerSet.stream().map(RuleBasedMarker::createAnnotation).collect(Collectors.toList()));
         }
         return annotationSet;
     }

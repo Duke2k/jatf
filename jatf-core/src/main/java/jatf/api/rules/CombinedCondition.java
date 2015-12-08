@@ -25,6 +25,7 @@ public abstract class CombinedCondition<T> extends Condition<T> {
 
     protected Set<Condition<Class<?>>> conditions;
 
+    @SafeVarargs
     public CombinedCondition(T type, Condition<Class<?>>... conditions) {
         super(type);
         this.conditions = newHashSet();

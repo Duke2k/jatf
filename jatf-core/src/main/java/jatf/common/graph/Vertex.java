@@ -34,7 +34,6 @@ public class Vertex<T> {
     /**
      * Create a vertex with the given name and no data
      *
-     * @param n
      */
     public Vertex(String n) {
         this(n, null);
@@ -281,21 +280,21 @@ public class Vertex<T> {
     }
 
     /**
-     * Set the mark state to state.
-     *
-     * @param state the state
-     */
-    public void setMarkState(int state) {
-        markState = state;
-    }
-
-    /**
      * Get the mark state value.
      *
      * @return the mark state
      */
     public int getMarkState() {
         return markState;
+    }
+
+    /**
+     * Set the mark state to state.
+     *
+     * @param state the state
+     */
+    public void setMarkState(int state) {
+        markState = state;
     }
 
     /**
