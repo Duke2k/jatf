@@ -76,13 +76,6 @@ public class Edge<T> {
     }
 
     /**
-     * Clear the edge mark flag
-     */
-    public void clearMark() {
-        mark = false;
-    }
-
-    /**
      * Get the edge mark flag
      *
      * @return edge mark flag

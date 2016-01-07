@@ -48,8 +48,8 @@ public class Vertex<T> {
      *             data associated with vertex
      */
     public Vertex(String n, T data) {
-        incomingEdges = new ArrayList<Edge<T>>();
-        outgoingEdges = new ArrayList<Edge<T>>();
+        incomingEdges = new ArrayList<>();
+        outgoingEdges = new ArrayList<>();
         name = n;
         mark = false;
         this.data = data;
@@ -67,13 +67,6 @@ public class Vertex<T> {
      */
     public T getData() {
         return this.data;
-    }
-
-    /**
-     * @param data The data to set.
-     */
-    public void setData(T data) {
-        this.data = data;
     }
 
     /**
@@ -96,45 +89,6 @@ public class Vertex<T> {
     }
 
     /**
-     * Add an outgoing edge ending at to.
-     *
-     * @param to   -
-     *             the destination vertex
-     * @param cost the edge cost
-     */
-    public void addOutgoingEdge(Vertex<T> to, int cost) {
-        Edge<T> out = new Edge<T>(this, to, cost);
-        outgoingEdges.add(out);
-    }
-
-    /**
-     * Add an incoming edge starting at from
-     *
-     * @param from -
-     *             the starting vertex
-     * @param cost the edge cost
-     */
-    public void addIncomingEdge(Vertex<T> from, int cost) {
-        Edge<T> out = new Edge<T>(this, from, cost);
-        incomingEdges.add(out);
-    }
-
-    /**
-     * Check the vertex for either an incoming or outgoing edge mathcing e.
-     *
-     * @param e the edge to check
-     * @return true it has an edge
-     */
-    public boolean hasEdge(Edge<T> e) {
-        if (e.getFrom() == this)
-            return incomingEdges.contains(e);
-        else if (e.getTo() == this)
-            return outgoingEdges.contains(e);
-        else
-            return false;
-    }
-
-    /**
      * Remove an edge from this vertex
      *
      * @param e -
@@ -153,13 +107,6 @@ public class Vertex<T> {
     }
 
     /**
-     * @return the count of incoming edges
-     */
-    public int getIncomingEdgeCount() {
-        return incomingEdges.size();
-    }
-
-    /**
      * Get the ith incoming edge
      *
      * @param i the index into incoming edges
@@ -167,15 +114,6 @@ public class Vertex<T> {
      */
     public Edge<T> getIncomingEdge(int i) {
         return incomingEdges.get(i);
-    }
-
-    /**
-     * Get the incoming edges
-     *
-     * @return incoming edge list
-     */
-    public List getIncomingEdges() {
-        return this.incomingEdges;
     }
 
     /**
@@ -196,15 +134,6 @@ public class Vertex<T> {
     }
 
     /**
-     * Get the outgoing edges
-     *
-     * @return outgoing edge list
-     */
-    public List getOutgoingEdges() {
-        return this.outgoingEdges;
-    }
-
-    /**
      * Search the outgoing edges looking for an edge whose's edge.to == dest.
      *
      * @param dest the destination
@@ -216,20 +145,6 @@ public class Vertex<T> {
                 return e;
         }
         return null;
-    }
-
-    /**
-     * Search the outgoing edges for a match to e.
-     *
-     * @param e -
-     *          the edge to check
-     * @return e if its a member of the outgoing edges, null otherwise.
-     */
-    public Edge<T> findEdge(Edge<T> e) {
-        if (outgoingEdges.contains(e))
-            return e;
-        else
-            return null;
     }
 
     /**
@@ -249,18 +164,6 @@ public class Vertex<T> {
         if (e != null)
             cost = e.getCost();
         return cost;
-    }
-
-    /**
-     * Is there an outgoing edge ending at dest.
-     *
-     * @param dest -
-     *             the vertex to check
-     * @return true if there is an outgoing edge ending at vertex, false
-     * otherwise.
-     */
-    public boolean hasEdge(Vertex<T> dest) {
-        return (findEdge(dest) != null);
     }
 
     /**
@@ -305,25 +208,19 @@ public class Vertex<T> {
     }
 
     /**
-     * Clear the visited mark flag.
-     */
-    public void clearMark() {
-        mark = false;
-    }
-
-    /**
      * @return a string form of the vertex with in and out edges.
      */
     public String toString() {
-        StringBuffer tmp = new StringBuffer("Vertex(");
+        StringBuilder tmp = new StringBuilder("Vertex(");
         tmp.append(name);
         tmp.append(", data=");
         tmp.append(data);
         tmp.append("), in:[");
         for (int i = 0; i < incomingEdges.size(); i++) {
             Edge<T> e = incomingEdges.get(i);
-            if (i > 0)
+            if (i > 0) {
                 tmp.append(',');
+            }
             tmp.append('{');
             tmp.append(e.getFrom().name);
             tmp.append(',');

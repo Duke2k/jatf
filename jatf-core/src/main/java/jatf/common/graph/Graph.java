@@ -23,7 +23,6 @@ package jatf.common.graph;
  */
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -59,28 +58,15 @@ public class Graph<T> {
     /**
      * Vector<Edge> of edges in the graph
      */
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private List<Edge<T>> edges;
-
-    /**
-     * The vertex identified as the root of the graph
-     */
-    private Vertex<T> rootVertex;
 
     /**
      * Construct a new graph without any vertices or edges
      */
     public Graph() {
-        verticies = new ArrayList<Vertex<T>>();
-        edges = new ArrayList<Edge<T>>();
-    }
-
-    /**
-     * Are there any verticies in the graph
-     *
-     * @return true if there are no verticies in the graph
-     */
-    public boolean isEmpty() {
-        return verticies.size() == 0;
+        verticies = new ArrayList<>();
+        edges = new ArrayList<>();
     }
 
     /**
@@ -90,10 +76,9 @@ public class Graph<T> {
      * @return true if the vertex was added, false if it was already in the graph.
      */
     public boolean addVertex(Vertex<T> v) {
-        boolean added = false;
-        if (!verticies.contains(v)) {
-            added = verticies.add(v);
-        }
+        boolean added;
+        if (verticies.contains(v)) return false;
+        added = verticies.add(v);
         return added;
     }
 
@@ -107,16 +92,6 @@ public class Graph<T> {
     }
 
     /**
-     * Get the root vertex
-     *
-     * @return the root vertex if one is set, null if no vertex has been set as
-     * the root.
-     */
-    public Vertex<T> getRootVertex() {
-        return rootVertex;
-    }
-
-    /**
      * Set a root vertex. If root does no exist in the graph it is added.
      *
      * @param root -
@@ -124,7 +99,10 @@ public class Graph<T> {
      *             exist in the graph.
      */
     public void setRootVertex(Vertex<T> root) {
-        this.rootVertex = root;
+        /*
+      The vertex identified as the root of the graph
+     */
+        Vertex<T> rootVertex = root;
         if (!verticies.contains(root))
             this.addVertex(root);
     }
@@ -137,15 +115,6 @@ public class Graph<T> {
      */
     public Vertex<T> getVertex(int n) {
         return verticies.get(n);
-    }
-
-    /**
-     * Get the graph verticies
-     *
-     * @return the graph verticies
-     */
-    public List<Vertex<T>> getVerticies() {
-        return this.verticies;
     }
 
     /**
@@ -166,7 +135,7 @@ public class Graph<T> {
         if (!verticies.contains(to))
             throw new IllegalArgumentException("to is not in graph");
 
-        Edge<T> e = new Edge<T>(from, to, cost);
+        Edge<T> e = new Edge<>(from, to, cost);
         if (from.findEdge(to) != null)
             return false;
         else {
@@ -175,104 +144,6 @@ public class Graph<T> {
             edges.add(e);
             return true;
         }
-    }
-
-    /**
-     * Insert a bidirectional Edge<T> in the graph
-     *
-     * @param from -
-     *             the Edge<T> starting vertex
-     * @param to   -
-     *             the Edge<T> ending vertex
-     * @param cost -
-     *             the Edge<T> weight/cost
-     * @return true if edges between both nodes were added, false otherwise
-     * @throws IllegalArgumentException if from/to are not verticies in the graph
-     */
-    public boolean insertBiEdge(Vertex<T> from, Vertex<T> to, int cost)
-            throws IllegalArgumentException {
-        return addEdge(from, to, cost) && addEdge(to, from, cost);
-    }
-
-    /**
-     * Get the graph edges
-     *
-     * @return the graph edges
-     */
-    public List<Edge<T>> getEdges() {
-        return this.edges;
-    }
-
-    /**
-     * Remove a vertex from the graph
-     *
-     * @param v the Vertex to remove
-     * @return true if the Vertex was removed
-     */
-    public boolean removeVertex(Vertex<T> v) {
-        if (!verticies.contains(v))
-            return false;
-
-        verticies.remove(v);
-        if (v == rootVertex)
-            rootVertex = null;
-
-        // Remove the edges associated with v
-        for (int n = 0; n < v.getOutgoingEdgeCount(); n++) {
-            Edge<T> e = v.getOutgoingEdge(n);
-            v.remove(e);
-            Vertex<T> to = e.getTo();
-            to.remove(e);
-            edges.remove(e);
-        }
-        for (int n = 0; n < v.getIncomingEdgeCount(); n++) {
-            Edge<T> e = v.getIncomingEdge(n);
-            v.remove(e);
-            Vertex<T> predecessor = e.getFrom();
-            predecessor.remove(e);
-        }
-        return true;
-    }
-
-    /**
-     * Remove an Edge<T> from the graph
-     *
-     * @param from -
-     *             the Edge<T> starting vertex
-     * @param to   -
-     *             the Edge<T> ending vertex
-     * @return true if the Edge<T> exists, false otherwise
-     */
-    public boolean removeEdge(Vertex<T> from, Vertex<T> to) {
-        Edge<T> e = from.findEdge(to);
-        if (e == null)
-            return false;
-        else {
-            from.remove(e);
-            to.remove(e);
-            edges.remove(e);
-            return true;
-        }
-    }
-
-    /**
-     * Clear the mark state of all verticies in the graph by calling clearMark()
-     * on all verticies.
-     *
-     * @see Vertex#clearMark()
-     */
-    public void clearMark() {
-        for (Vertex<T> w : verticies)
-            w.clearMark();
-    }
-
-    /**
-     * Clear the mark state of all edges in the graph by calling clearMark() on
-     * all edges.
-     */
-    public void clearEdges() {
-        for (Edge<T> e : edges)
-            e.clearMark();
     }
 
     /**
@@ -285,11 +156,9 @@ public class Graph<T> {
      * @see Visitor#visit(Graph, Vertex)
      */
     public void depthFirstSearch(Vertex<T> v, final Visitor<T> visitor) {
-        VisitorEX<T, RuntimeException> wrapper = new VisitorEX<T, RuntimeException>() {
-            public void visit(Graph<T> g, Vertex<T> v) throws RuntimeException {
-                if (visitor != null)
-                    visitor.visit(g, v);
-            }
+        VisitorEX<T, RuntimeException> wrapper = (g, v1) -> {
+            if (visitor != null)
+                visitor.visit(g, v1);
         };
         this.depthFirstSearch(v, wrapper);
     }
@@ -326,11 +195,9 @@ public class Graph<T> {
      *                the vistor whose vist method is called prior to visting a vertex.
      */
     public void breadthFirstSearch(Vertex<T> v, final Visitor<T> visitor) {
-        VisitorEX<T, RuntimeException> wrapper = new VisitorEX<T, RuntimeException>() {
-            public void visit(Graph<T> g, Vertex<T> v) throws RuntimeException {
-                if (visitor != null)
-                    visitor.visit(g, v);
-            }
+        VisitorEX<T, RuntimeException> wrapper = (g, v1) -> {
+            if (visitor != null)
+                visitor.visit(g, v1);
         };
         this.breadthFirstSearch(v, wrapper);
     }
@@ -347,7 +214,7 @@ public class Graph<T> {
      */
     public <E extends Exception> void breadthFirstSearch(Vertex<T> v, VisitorEX<T, E> visitor)
             throws E {
-        LinkedList<Vertex<T>> q = new LinkedList<Vertex<T>>();
+        LinkedList<Vertex<T>> q = new LinkedList<>();
 
         q.add(v);
         if (visitor != null)
@@ -412,26 +279,6 @@ public class Graph<T> {
     }
 
     /**
-     * Search the verticies for one with data.
-     *
-     * @param data    -
-     *                the vertex data to match
-     * @param compare -
-     *                the comparator to perform the match
-     * @return the first vertex with a matching data, null if no matches are found
-     */
-    public Vertex<T> findVertexByData(T data, Comparator<T> compare) {
-        Vertex<T> match = null;
-        for (Vertex<T> v : verticies) {
-            if (compare.compare(data, v.getData()) == 0) {
-                match = v;
-                break;
-            }
-        }
-        return match;
-    }
-
-    /**
      * Search the graph for cycles. In order to detect cycles, we use a modified
      * depth first search called a colored DFS. All nodes are initially marked
      * white. When a node is encountered, it is marked grey, and when its
@@ -442,7 +289,7 @@ public class Graph<T> {
      * there are no cycles.
      */
     public Edge<T>[] findCycles() {
-        ArrayList<Edge<T>> cycleEdges = new ArrayList<Edge<T>>();
+        ArrayList<Edge<T>> cycleEdges = new ArrayList<>();
         // Mark all verticies as white
         for (int n = 0; n < verticies.size(); n++) {
             Vertex<T> v = getVertex(n);
@@ -476,8 +323,7 @@ public class Graph<T> {
 
     public String toString() {
         StringBuilder tmp = new StringBuilder("Graph[");
-        for (Vertex<T> v : verticies)
-            tmp.append(v);
+        verticies.forEach(tmp::append);
         tmp.append(']');
         return tmp.toString();
     }

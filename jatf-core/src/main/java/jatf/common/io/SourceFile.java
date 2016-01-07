@@ -39,19 +39,13 @@ public class SourceFile extends SimpleJavaFileObject {
     @Nullable
     public CharSequence getCharContent(boolean ignoreEncodingErrors) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
-        InputStream inputStream = uri.toURL().openStream();
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
+        try (InputStream inputStream = uri.toURL().openStream()) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
             }
-        } finally {
-            if (reader != null) {
-                reader.close();
-            }
-            inputStream.close();
         }
         CharSequence result = stringBuilder.toString();
         return result.length() == 0 ? null : result;
