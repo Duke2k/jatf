@@ -236,8 +236,7 @@ public class ArchitectureTestUtil {
     @Nonnull
     private static String getClassNameFor(@Nonnull File file) throws IOException {
         StringBuilder result = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        try {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String sourceLine;
             String packageKeyword = "package ";
             while ((sourceLine = reader.readLine()) != null) {
@@ -251,8 +250,6 @@ public class ArchitectureTestUtil {
             }
             String fileName = file.getName();
             result.append(fileName.substring(0, fileName.indexOf('.')));
-        } finally {
-            reader.close();
         }
         return result.toString();
     }
