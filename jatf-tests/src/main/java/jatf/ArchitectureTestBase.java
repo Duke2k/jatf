@@ -17,6 +17,7 @@
 package jatf;
 
 import jatf.common.ArchitectureTestDataProvider;
+import jatf.common.IArchitectureTest;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,7 +30,7 @@ import java.util.Set;
 import static com.google.common.collect.Sets.newHashSet;
 import static jatf.common.ArchitectureTestRunListener.report;
 
-public abstract class ArchitectureTestBase {
+public abstract class ArchitectureTestBase implements IArchitectureTest {
 
     protected static final String DATA_PROVIDER_NAME = "provideClassesToTest";
 

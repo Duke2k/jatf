@@ -1,28 +1,24 @@
 /**
  * This file is part of JATF.
- * <p/>
+ * <p>
  * JATF is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, version 3 of the License.
- * <p/>
+ * <p>
  * JATF is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * <p/>
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with JATF.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package jatf.annotations;
+package jatf.common;
 
-import jatf.common.IArchitectureTest;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Exclude {
-
-    Class<? extends IArchitectureTest>[] tests() default {};
+/**
+ * This interface is a placeholder interface to fixate architecture tests as such. Since the actual tests are in a
+ * different module (jatf-tests), which depends on this module (jatf-core), we have this interface included here.
+ */
+public interface IArchitectureTest {
 }

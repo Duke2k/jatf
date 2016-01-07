@@ -25,6 +25,7 @@ import japa.parser.ast.stmt.BlockStmt;
 import japa.parser.ast.visitor.VoidVisitorAdapter;
 import jatf.annotations.Dependency;
 import jatf.annotations.Pattern;
+import jatf.common.IArchitectureTest;
 import jatf.common.rules.markers.ArchitectureTestMarker;
 import jatf.common.rules.markers.ExcludeMarker;
 import jatf.common.rules.markers.MustBePureMarker;
@@ -61,6 +62,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
@@ -114,11 +116,7 @@ public class ArchitectureTestUtil {
             Multimap<String, String> multimap = reflections.getStore().get(key);
             for (String name : multimap.keySet()) {
                 Collection<String> collection = multimap.get(name);
-                for (String item : collection) {
-                    if (startsWithAnyOf(SCOPES, item)) {
-                        result.add(item);
-                    }
-                }
+                result.addAll(collection.stream().filter(item -> startsWithAnyOf(SCOPES, item)).collect(Collectors.toList()));
             }
         }
         return result;
@@ -295,7 +293,7 @@ public class ArchitectureTestUtil {
             } else if (marker instanceof MustNotReturnMarker) {
                 ((MustNotReturnMarker) marker).type = (Class<?>) fields.get("type").get(0);
             } else if (marker instanceof ExcludeMarker) {
-                ((ExcludeMarker) marker).tests = convertToTypeArray(fields.get("tests"));
+                ((ExcludeMarker) marker).tests = convertToArchitectureTestTypeArray(fields.get("tests"));
             }
         } catch (Exception e) {
             report("RuleBasedAnnotation " + markerType + " could not be created:", e);
@@ -408,6 +406,16 @@ public class ArchitectureTestUtil {
             result[i++] = (Dependency) object;
         }
         return result;
+    }
+
+    private static Class<? extends IArchitectureTest>[] convertToArchitectureTestTypeArray(List<?> items) {
+        Class<?>[] result = new Class<?>[items.size()];
+        int i = 0;
+        for (Object object : items) {
+            result[i++] = (Class<?>) object;
+        }
+        //noinspection unchecked
+        return (Class<? extends IArchitectureTest>[]) result;
     }
 
     private static boolean startsWithAnyOf(String[] prefixes, @Nonnull String s) {
