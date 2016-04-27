@@ -20,6 +20,7 @@ import jatf.api.rules.ClassAnnotationBasedRule;
 import jatf.common.rules.conditions.AlwaysTrue;
 import jatf.common.rules.markers.MustNotExtendMarker;
 
+@SuppressWarnings("WeakerAccess")
 public final class MustNotExtendRule extends ClassAnnotationBasedRule<MustNotExtendMarker, AlwaysTrue> {
 
     public MustNotExtendRule(Class<?>[] classes, MustNotExtendMarker marker) {

@@ -29,6 +29,7 @@ import java.util.Set;
 import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 
+@SuppressWarnings("WeakerAccess")
 public abstract class ArchitectureTestAbstractEvaluator {
 
     protected Map<String, Set<Class<?>>> sourceMap;

@@ -5,6 +5,7 @@ import jatf.common.IArchitectureTest;
 import jatf.common.rules.conditions.AlwaysTrue;
 import jatf.common.rules.markers.ExcludeMarker;
 
+@SuppressWarnings("unused")
 public final class ExcludeRule extends ClassAnnotationBasedRule<ExcludeMarker, AlwaysTrue> {
 
     public ExcludeRule(Class<?>[] classes, Class<? extends IArchitectureTest>[] tests) {

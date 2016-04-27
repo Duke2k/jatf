@@ -16,11 +16,11 @@
 
 package jatf.dependency;
 
-import jatf.annotations.MustImplement;
-import jatf.annotations.MustNotImplement;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.annotations.MustImplement;
+import jatf.annotations.MustNotImplement;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -55,10 +55,12 @@ public class ImplementsTest extends DependencyTestBase {
         }
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected void testNotImplements(Class<?> clazz, Class<?> in) {
         assertFalse("Class " + clazz.getName() + " implements " + in.getName(), isImplemented(clazz, in));
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected void testImplements(Class<?> clazz, Class<?> in) {
         assertTrue("Class " + clazz.getName() + " does not implement " + in.getName(), isImplemented(clazz, in));
     }

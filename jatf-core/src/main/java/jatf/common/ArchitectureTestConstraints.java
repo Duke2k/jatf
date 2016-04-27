@@ -36,6 +36,7 @@ public class ArchitectureTestConstraints {
     public static int MAX_DEPTH_FOR_DFS;
     public static double MIN_DEGREE_OF_PURITY;
     public static int MAX_CHAINED_METHOD_CALLS;
+    @SuppressWarnings("WeakerAccess")
     public static boolean WRITE_TESTMAP_SNAPSHOT_JSON_TO_ROOT_FOLDER;
 
     static {

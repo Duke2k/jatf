@@ -27,6 +27,7 @@ import java.util.Set;
 import static jatf.common.util.ArchitectureTestUtil.resetReflections;
 import static jatf.common.util.ArchitectureTestUtil.resetSourceFilesMap;
 
+@SuppressWarnings("unused")
 public class TestsHelper {
 
     private static ArchitectureTestDataProvider dataProvider;

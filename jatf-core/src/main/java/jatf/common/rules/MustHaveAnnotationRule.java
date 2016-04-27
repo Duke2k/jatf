@@ -22,6 +22,7 @@ import jatf.common.rules.markers.MustHaveAnnotationMarker;
 
 import java.lang.annotation.Annotation;
 
+@SuppressWarnings("unused")
 public final class MustHaveAnnotationRule extends ClassAnnotationBasedRule<MustHaveAnnotationMarker, AlwaysTrue> {
 
     public MustHaveAnnotationRule(Class<?>[] classes, MustHaveAnnotationMarker marker) {

@@ -54,7 +54,7 @@ public class AssignmentVisitor extends VoidVisitorAdapter<Object> {
         private Operator operator;
         private Expression value;
 
-        public Assignment(Expression target, Operator operator, Expression value) {
+        Assignment(Expression target, Operator operator, Expression value) {
             this.target = target;
             this.operator = operator;
             this.value = value;

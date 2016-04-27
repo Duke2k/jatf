@@ -18,6 +18,7 @@ package jatf.common.rules.conditions;
 
 import jatf.api.rules.Condition;
 
+@SuppressWarnings("unused")
 public final class Extends extends Condition<Class<?>> {
 
     public Extends(Class<?> type) {

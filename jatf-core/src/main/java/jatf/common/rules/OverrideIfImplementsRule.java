@@ -20,6 +20,7 @@ import jatf.api.rules.ClassAnnotationBasedRule;
 import jatf.common.rules.conditions.Implements;
 import jatf.common.rules.markers.MustOverrideMarker;
 
+@SuppressWarnings("unused")
 public final class OverrideIfImplementsRule extends ClassAnnotationBasedRule<MustOverrideMarker, Implements> {
 
     public OverrideIfImplementsRule(Class<?> toBeImplemented, Class<?>[] classes, MustOverrideMarker marker) {

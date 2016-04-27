@@ -35,6 +35,7 @@ import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 import static jatf.common.ArchitectureTestRunListener.report;
 
+@SuppressWarnings("WeakerAccess")
 public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvaluator {
 
     private Map<Class<?>, Set<RuleBasedMarker>> markerMap;

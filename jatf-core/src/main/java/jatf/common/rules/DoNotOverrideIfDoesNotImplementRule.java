@@ -20,6 +20,7 @@ import jatf.api.rules.ClassAnnotationBasedRule;
 import jatf.common.rules.conditions.DoesNotImplement;
 import jatf.common.rules.markers.MustNotOverrideMarker;
 
+@SuppressWarnings("unused")
 public final class DoNotOverrideIfDoesNotImplementRule extends ClassAnnotationBasedRule<MustNotOverrideMarker, DoesNotImplement> {
 
     public DoNotOverrideIfDoesNotImplementRule(Class<?> notToBeImplemented, Class<?>[] classes, MustNotOverrideMarker marker) {

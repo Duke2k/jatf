@@ -16,13 +16,13 @@
 
 package jatf.conventions;
 
-import jatf.common.parser.DeclarationVisitor;
-import jatf.common.parser.MethodVisitor;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import japa.parser.ast.body.Parameter;
 import japa.parser.ast.stmt.BlockStmt;
+import jatf.common.parser.DeclarationVisitor;
+import jatf.common.parser.MethodVisitor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -72,6 +72,7 @@ public class NoFinalModifierInLocalVariablesTest extends ConventionsTestBase {
     }
 
     private boolean isUsedInAnonymousClass(@Nonnull Parameter parameter, @Nullable BlockStmt body) {
+        //noinspection RedundantIfStatement
         if (body != null) {
             // TODO
 

@@ -108,7 +108,7 @@ import static com.google.common.collect.Sets.newHashSet;
 
 public class TokenVisitor extends VoidVisitorAdapter<Object> {
 
-    List<String> tokens = newArrayList();
+    private List<String> tokens = newArrayList();
 
     public List<String> getTokens() {
         return tokens;

@@ -32,7 +32,8 @@ public class ArchitectureTestMarker extends RuleBasedMarker<ArchitectureTest> {
     public boolean omitConventions = false;
     public Pattern[] patterns = new Pattern[0];
     public Dependency[] dependencies = new Dependency[0];
-    public String[] testNames = new String[0];
+
+    private String[] testNames = new String[0];
 
     @Override
     public Class<ArchitectureTest> annotationType() {

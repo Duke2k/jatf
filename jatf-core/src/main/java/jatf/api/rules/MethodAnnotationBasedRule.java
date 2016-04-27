@@ -37,6 +37,7 @@ public abstract class MethodAnnotationBasedRule<M extends RuleBasedMarker, C ext
         }
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void addMethodIfConditionFires(@Nonnull Method method) {
         if (condition.firesFor(method.getDeclaringClass())) {
             methods.add(method);

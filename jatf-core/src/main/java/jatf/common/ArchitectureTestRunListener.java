@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 
 public class ArchitectureTestRunListener extends RunListener {
 
+    @SuppressWarnings("WeakerAccess")
     public static final String PREFIX = "";
 
     private static Logger staticLog = LoggerFactory.getLogger(ArchitectureTest.class);

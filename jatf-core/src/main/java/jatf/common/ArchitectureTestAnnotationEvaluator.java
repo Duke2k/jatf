@@ -24,6 +24,7 @@ import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
 
+@SuppressWarnings("WeakerAccess")
 public class ArchitectureTestAnnotationEvaluator extends ArchitectureTestAbstractEvaluator {
 
     public ArchitectureTestAnnotationEvaluator(@Nonnull Reflections reflections) {

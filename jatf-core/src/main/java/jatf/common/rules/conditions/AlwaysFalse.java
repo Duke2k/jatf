@@ -24,7 +24,7 @@ public final class AlwaysFalse extends Condition<Class<?>> {
         this(null);
     }
 
-    public AlwaysFalse(Class<?> type) {
+    private AlwaysFalse(Class<?> type) {
         super(type);
     }
 

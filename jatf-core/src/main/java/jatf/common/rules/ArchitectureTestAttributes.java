@@ -37,7 +37,7 @@ public class ArchitectureTestAttributes {
     }
 
     @Nonnull
-    public ArchitectureTestAttributes(boolean omitMetrics, boolean omitConventions) {
+    private ArchitectureTestAttributes(boolean omitMetrics, boolean omitConventions) {
         this.omitMetrics = omitMetrics;
         this.omitConventions = omitConventions;
         dependencies = newHashSet();
@@ -52,6 +52,7 @@ public class ArchitectureTestAttributes {
      * @param dependency - dependency to be used as a sole property in attributes
      * @return attributes with only the given dependency
      */
+    @SuppressWarnings("unused")
     @Nonnull
     public static ArchitectureTestAttributes createWithDependencyOnly(@Nonnull Dependency dependency) {
         ArchitectureTestAttributes attributes = new ArchitectureTestAttributes(true, true);
@@ -66,6 +67,7 @@ public class ArchitectureTestAttributes {
      * @param testName - name of the test to be carried out exclusively
      * @return attributes with only the given test name
      */
+    @SuppressWarnings("unused")
     @Nonnull
     public static ArchitectureTestAttributes createWithSingleTestOnly(@Nonnull String testName) {
         ArchitectureTestAttributes attributes = new ArchitectureTestAttributes(true, true);
@@ -80,6 +82,7 @@ public class ArchitectureTestAttributes {
      * @param other - other attributes to be merged into this instance
      * @return this instance (merged attributes)
      */
+    @SuppressWarnings("unused")
     @Nonnull
     public ArchitectureTestAttributes mergeOptimistic(@Nonnull ArchitectureTestAttributes other) {
         if (other.omitConventions) {
@@ -99,6 +102,7 @@ public class ArchitectureTestAttributes {
      * @param other - other attributes to be merged into this instance
      * @return this instance (merged attributes)
      */
+    @SuppressWarnings("unused")
     @Nonnull
     public ArchitectureTestAttributes mergePessimistic(@Nonnull ArchitectureTestAttributes other) {
         if (!other.omitConventions) {
@@ -119,6 +123,7 @@ public class ArchitectureTestAttributes {
         return omitMetrics;
     }
 
+    @SuppressWarnings("unused")
     public void setOmitMetrics(boolean omitMetrics) {
         this.omitMetrics = omitMetrics;
     }
@@ -131,6 +136,7 @@ public class ArchitectureTestAttributes {
         this.dependencies = dependencies;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void addDependency(Dependency dependency) {
         dependencies.add(dependency);
     }
@@ -139,10 +145,12 @@ public class ArchitectureTestAttributes {
         return patterns.toArray(new Pattern[patterns.size()]);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void addTestName(String testName) {
         testNames.add(testName);
     }
 
+    @SuppressWarnings("unused")
     public String[] getTestNames() {
         return testNames.toArray(new String[testNames.size()]);
     }

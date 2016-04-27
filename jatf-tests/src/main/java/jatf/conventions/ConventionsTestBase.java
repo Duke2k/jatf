@@ -16,10 +16,10 @@
 
 package jatf.conventions;
 
+import japa.parser.ast.visitor.VoidVisitorAdapter;
 import jatf.ArchitectureTestBase;
 import jatf.common.parser.DeclarationVisitor;
 import jatf.common.parser.MethodVisitor;
-import japa.parser.ast.visitor.VoidVisitorAdapter;
 
 import java.util.Comparator;
 import java.util.List;
@@ -32,6 +32,7 @@ import static java.lang.reflect.Modifier.isPublic;
 import static java.lang.reflect.Modifier.isStatic;
 import static org.junit.Assert.fail;
 
+@SuppressWarnings("WeakerAccess")
 public abstract class ConventionsTestBase extends ArchitectureTestBase {
 
     /**

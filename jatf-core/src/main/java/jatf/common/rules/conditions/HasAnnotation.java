@@ -23,6 +23,7 @@ import java.lang.annotation.Annotation;
 
 public final class HasAnnotation extends Condition<Class<?>> {
 
+    @SuppressWarnings("unused")
     public HasAnnotation(@Nonnull Annotation annotation) {
         super(annotation.annotationType());
     }

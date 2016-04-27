@@ -27,7 +27,7 @@ import static com.google.common.collect.Sets.newHashSet;
 
 public class ImportStatementVisitor extends VoidVisitorAdapter<Object> {
 
-    Set<String> importStatements = newHashSet();
+    private Set<String> importStatements = newHashSet();
 
     @Override
     public void visit(ImportDeclaration importDeclaration, Object arguments) {

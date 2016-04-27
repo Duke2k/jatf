@@ -55,10 +55,12 @@ public abstract class ArchitectureTestRuleGenerator<M extends RuleBasedMarker, R
         return generateArchitectureTestRuleFor(classes.toArray(new Class<?>[classes.size()]));
     }
 
+    @SuppressWarnings("unused")
     public ArchitectureTestAttributes getAttributes() {
         return attributes;
     }
 
+    @SuppressWarnings("unused")
     public void setAttributes(ArchitectureTestAttributes attributes) {
         this.attributes = attributes;
     }

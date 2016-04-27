@@ -98,7 +98,7 @@ public class AcyclicDependenciesPrincipleTest extends DependencyTestBase {
                             if (isInScopes(importedClass)) {
                                 Vertex<Class<?>> found = graph.findVertexByName(importedClass.getCanonicalName());
                                 if (found == null) {
-                                    Vertex<Class<?>> imported = new Vertex<Class<?>>(importedClass.getCanonicalName(), importedClass);
+                                    Vertex<Class<?>> imported = new Vertex<>(importedClass.getCanonicalName(), importedClass);
                                     graph.addVertex(imported);
                                     graph.addEdge(start, imported, 1);
                                     buildGraphForImportStatementsIn(importedClass, graph, imported, currentDepth + 1);
@@ -131,7 +131,7 @@ public class AcyclicDependenciesPrincipleTest extends DependencyTestBase {
                     if (isInScopes(usedClass)) {
                         Vertex<Class<?>> found = graph.findVertexByName(usedClass.getCanonicalName());
                         if (found == null) {
-                            Vertex<Class<?>> used = new Vertex<Class<?>>(usedClass.getCanonicalName(), usedClass);
+                            Vertex<Class<?>> used = new Vertex<>(usedClass.getCanonicalName(), usedClass);
                             graph.addVertex(used);
                             graph.addEdge(start, used, 1);
                             if (findSourceFileFor(usedClass) != null) {
@@ -162,21 +162,21 @@ public class AcyclicDependenciesPrincipleTest extends DependencyTestBase {
         private Graph<Class<?>> graph;
         private Vertex<Class<?>> start;
 
-        public GraphBuilder(Class<?> clazz) {
+        GraphBuilder(Class<?> clazz) {
             this.clazz = clazz;
         }
 
-        public Graph<Class<?>> getGraph() {
+        Graph<Class<?>> getGraph() {
             return graph;
         }
 
-        public Vertex<Class<?>> getStart() {
+        Vertex<Class<?>> getStart() {
             return start;
         }
 
-        public GraphBuilder invoke() {
-            graph = new Graph<Class<?>>();
-            start = new Vertex<Class<?>>(clazz.getCanonicalName(), clazz);
+        GraphBuilder invoke() {
+            graph = new Graph<>();
+            start = new Vertex<>(clazz.getCanonicalName(), clazz);
             graph.addVertex(start);
             graph.setRootVertex(start);
             return this;

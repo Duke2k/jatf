@@ -28,6 +28,7 @@ import jatf.common.rules.markers.NullMarker;
  * context is therefore commonly considered as clogging up code unnecessarily.
  * The rule does this only if no other architecture tests are defined by annotations for any of the given classes.
  */
+@SuppressWarnings("unused")
 public final class NoFinalModifierInLocalVariablesRule extends ClassAnnotationBasedRule<NullMarker, Not> {
 
     public NoFinalModifierInLocalVariablesRule(Class<?>[] classes) {

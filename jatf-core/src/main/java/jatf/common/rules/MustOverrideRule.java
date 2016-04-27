@@ -20,6 +20,7 @@ import jatf.api.rules.ClassAnnotationBasedRule;
 import jatf.common.rules.conditions.AlwaysTrue;
 import jatf.common.rules.markers.MustOverrideMarker;
 
+@SuppressWarnings("unused")
 public final class MustOverrideRule extends ClassAnnotationBasedRule<MustOverrideMarker, AlwaysTrue> {
 
     public MustOverrideRule(Class<?>[] classes, MustOverrideMarker marker) {

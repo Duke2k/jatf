@@ -22,6 +22,7 @@ import jatf.common.rules.markers.MustReturnMarker;
 
 import java.lang.reflect.Method;
 
+@SuppressWarnings("unused")
 public final class MustReturnRule extends MethodAnnotationBasedRule<MustReturnMarker, AlwaysTrue> {
 
     public MustReturnRule(Method[] methods, MustReturnMarker marker) {

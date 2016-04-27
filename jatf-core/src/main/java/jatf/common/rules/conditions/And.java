@@ -21,6 +21,8 @@ import jatf.api.rules.Condition;
 
 public final class And extends CombinedCondition<Class<?>> {
 
+    @SafeVarargs
+    @SuppressWarnings("unused")
     public And(Class<?> type, Condition<Class<?>>... conditions) {
         super(type, conditions);
     }

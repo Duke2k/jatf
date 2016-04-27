@@ -30,6 +30,7 @@ public abstract class ClassAnnotationBasedRule<M extends RuleBasedMarker, C exte
         }
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void addClassIfConditionFires(@Nonnull Class<?> clazz) {
         if (condition.firesFor(clazz)) {
             classes.add(clazz);

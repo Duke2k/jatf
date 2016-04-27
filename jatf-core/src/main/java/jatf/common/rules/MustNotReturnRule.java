@@ -24,6 +24,7 @@ import java.lang.reflect.Method;
 
 public final class MustNotReturnRule extends MethodAnnotationBasedRule<MustNotReturnMarker, AlwaysTrue> {
 
+    @SuppressWarnings("unused")
     public MustNotReturnRule(Method[] methods, MustNotReturnMarker marker) {
         super(methods, new AlwaysTrue(), marker);
     }

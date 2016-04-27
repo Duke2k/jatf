@@ -33,12 +33,19 @@ import static org.junit.Assert.assertTrue;
 @RunWith(DataProviderRunner.class)
 public class CamelCaseTest extends ConventionsTestBase {
 
+    @SuppressWarnings("WeakerAccess")
     public static final Pattern CLASS_CAMEL_CASE_PATTERN =
             Pattern.compile(properties.getProperty("namePattern.for.classes"));
+
+    @SuppressWarnings("WeakerAccess")
     public static final Pattern METHOD_CAMEL_CASE_PATTERN =
             Pattern.compile(properties.getProperty("namePattern.for.methods"));
+
+    @SuppressWarnings("WeakerAccess")
     public static final Pattern FIELD_CAMEL_CASE_PATTERN =
             Pattern.compile(properties.getProperty("namePattern.for.fields"));
+
+    @SuppressWarnings("WeakerAccess")
     public static final Pattern CONST_CAMEL_CASE_PATTERN =
             Pattern.compile(properties.getProperty("namePattern.for.constants"));
 

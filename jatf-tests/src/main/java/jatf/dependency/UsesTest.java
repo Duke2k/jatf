@@ -57,10 +57,12 @@ public class UsesTest extends DependencyTestBase {
         }
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected void testUses(Class<?> clazz, Class<?> toBeUsed) {
         assertTrue(assertMessage(clazz, toBeUsed + " not used."), isUsed(clazz, toBeUsed));
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected void testDoesNotUse(Class<?> clazz, Class<?> notToBeUsed) {
         assertFalse(assertMessage(clazz, notToBeUsed + " used."), isUsed(clazz, notToBeUsed));
     }

@@ -22,6 +22,7 @@ import jatf.common.rules.markers.MustBePureMarker;
 
 import java.lang.reflect.Method;
 
+@SuppressWarnings("unused")
 public final class MustBePureRule extends MethodAnnotationBasedRule<MustBePureMarker, AlwaysTrue> {
 
     public MustBePureRule(Method[] methods, MustBePureMarker marker) {

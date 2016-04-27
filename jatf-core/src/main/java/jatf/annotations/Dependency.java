@@ -46,6 +46,7 @@ public enum Dependency {
      * @param toAdd - the Dependency to be added
      * @return the new array of Dependencies
      */
+    @SuppressWarnings("unused")
     @Nonnull
     public static Dependency[] addDependency(Dependency[] orig, Dependency toAdd) {
         Set<Dependency> origSet = newHashSet();
@@ -71,6 +72,7 @@ public enum Dependency {
      * @param toRemove - the Dependency to be removed
      * @return the new array of Dependencies
      */
+    @SuppressWarnings("unused")
     @Nonnull
     public static Dependency[] removeDependency(Dependency[] orig, Dependency toRemove) {
         Set<Dependency> origSet = newHashSet();

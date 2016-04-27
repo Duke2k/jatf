@@ -16,11 +16,11 @@
 
 package jatf.dependency;
 
-import jatf.annotations.MustExtend;
-import jatf.annotations.MustNotExtend;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.annotations.MustExtend;
+import jatf.annotations.MustNotExtend;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -62,10 +62,12 @@ public class ExtendsTest extends DependencyTestBase {
         }
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected void testDoesNotExtend(Class<?> clazz, Class<?> classNotToExtend) {
         assertFalse(clazz.getSuperclass().equals(classNotToExtend));
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected void testExtends(Class<?> clazz, Class<?> classToExtend) {
         assertTrue(clazz.getSuperclass().equals(classToExtend));
     }

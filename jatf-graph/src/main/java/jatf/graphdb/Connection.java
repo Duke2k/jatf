@@ -1,9 +1,11 @@
 package jatf.graphdb;
 
+import org.neo4j.ogm.session.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
+import org.springframework.data.neo4j.repository.GraphRepository;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 @EnableTransactionManagement
 @EnableScheduling
 public class Connection extends Neo4jConfiguration {
@@ -18,17 +21,24 @@ public class Connection extends Neo4jConfiguration {
     private final static String PROPERTIES_FILE_NAME = "neo4j.properties";
 
     private static Logger log = LoggerFactory.getLogger(Connection.class);
+
     @Autowired
-    ClassService service;
+    private ClassService service;
+
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private Properties properties;
 
     public Connection() {
         properties = new Properties();
         initProperties();
-
     }
 
-    public ClassRepository getRepository() {
+    @Override
+    public SessionFactory getSessionFactory() {
+        return null;
+    }
+
+    public GraphRepository<Class<?>> getRepository() {
         return service.repository;
     }
 

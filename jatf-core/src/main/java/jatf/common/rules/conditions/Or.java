@@ -19,8 +19,10 @@ package jatf.common.rules.conditions;
 import jatf.api.rules.CombinedCondition;
 import jatf.api.rules.Condition;
 
+@SuppressWarnings("unused")
 public final class Or extends CombinedCondition<Class<?>> {
 
+    @SafeVarargs
     public Or(Class<?> type, Condition<Class<?>>... conditions) {
         super(type, conditions);
     }

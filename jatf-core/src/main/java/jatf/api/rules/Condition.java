@@ -26,6 +26,7 @@ public abstract class Condition<T> {
 
     public abstract boolean firesFor(T type);
 
+    @SuppressWarnings("unused")
     public boolean fires() {
         return firesFor(type);
     }

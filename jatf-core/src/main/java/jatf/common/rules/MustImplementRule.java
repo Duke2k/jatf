@@ -20,6 +20,7 @@ import jatf.api.rules.ClassAnnotationBasedRule;
 import jatf.common.rules.conditions.AlwaysTrue;
 import jatf.common.rules.markers.MustImplementMarker;
 
+@SuppressWarnings("WeakerAccess")
 public final class MustImplementRule extends ClassAnnotationBasedRule<MustImplementMarker, AlwaysTrue> {
 
     public MustImplementRule(Class<?>[] classes, MustImplementMarker marker) {

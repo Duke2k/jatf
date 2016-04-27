@@ -23,8 +23,7 @@
     <name>Java Architecture Test Framework - Graph DB Connector</name>
 
     <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the
-        graph database connector, providing Neo4j support. Since we're still developing on JDK 1.6, only version up to
-        1.9.9 of Neo4j is supported. This will be update once the project is switched to Java 8.
+        graph database connector, providing Neo4j support.
     </description>
     <url>https://github.com/Duke2k/jatf</url>
     <licenses>
@@ -45,7 +44,7 @@
     <parent>
         <artifactId>jatf-project</artifactId>
         <groupId>com.github.duke2k.jatf</groupId>
-        <version>1.0.4.12</version>
+        <version>${jatf.version}</version>
     </parent>
 
     <properties>
@@ -58,22 +57,22 @@
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j</artifactId>
-            <version>1.9.9</version>
+            <version>2.3.3</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.12</version>
+            <version>1.7.21</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.12</version>
+            <version>1.7.21</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-neo4j</artifactId>
-            <version>3.2.1.RELEASE</version>
+            <version>4.1.1.RELEASE</version>
         </dependency>
     </dependencies>
 

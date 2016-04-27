@@ -24,6 +24,7 @@ public final class ClassNamePatternMatches extends Condition<Class<?>> {
 
     private Pattern pattern;
 
+    @SuppressWarnings("unused")
     public ClassNamePatternMatches(Class<?> type, String pattern) {
         super(type);
         this.pattern = Pattern.compile(pattern);

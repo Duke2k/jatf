@@ -20,6 +20,7 @@ import jatf.api.rules.ClassAnnotationBasedRule;
 import jatf.common.rules.conditions.AlwaysTrue;
 import jatf.common.rules.markers.MustNotUseMarker;
 
+@SuppressWarnings("WeakerAccess")
 public final class MustNotUseRule extends ClassAnnotationBasedRule<MustNotUseMarker, AlwaysTrue> {
 
     public MustNotUseRule(Class<?>[] classes, MustNotUseMarker marker) {

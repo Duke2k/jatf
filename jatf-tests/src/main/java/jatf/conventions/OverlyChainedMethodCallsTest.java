@@ -63,7 +63,7 @@ public class OverlyChainedMethodCallsTest extends ConventionsTestBase {
                                 for (String token : tokens) {
                                     assertTrue("Found chained method call in " + clazz.getName() + "." +
                                                     methodName + ": " + statement.toString(),
-                                            countDotsWithoutWithIn(token) < MAX_CHAINED_METHOD_CALLS);
+                                            countDotsWithoutWithOrHasIn(token) < MAX_CHAINED_METHOD_CALLS);
                                 }
                             }
                         }
@@ -73,13 +73,15 @@ public class OverlyChainedMethodCallsTest extends ConventionsTestBase {
         }
     }
 
-    private int countDotsWithoutWithIn(@Nonnull String s) {
+    private int countDotsWithoutWithOrHasIn(@Nonnull String s) {
         int result = 0;
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '.') {
                 result++;
             }
-            if (s.substring(i).startsWith(".with") || s.substring(i).startsWith(".class")) {
+            if (s.substring(i).startsWith(".with") ||
+                    s.substring(i).startsWith(".has") ||
+                    s.substring(i).startsWith(".class")) {
                 result--;
             }
         }

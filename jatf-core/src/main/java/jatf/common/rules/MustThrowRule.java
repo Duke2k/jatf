@@ -22,6 +22,7 @@ import jatf.common.rules.markers.MustThrowMarker;
 
 import java.lang.reflect.Method;
 
+@SuppressWarnings("unused")
 public final class MustThrowRule extends MethodAnnotationBasedRule<MustThrowMarker, AlwaysTrue> {
 
     public MustThrowRule(Method[] methods, MustThrowMarker marker) {
