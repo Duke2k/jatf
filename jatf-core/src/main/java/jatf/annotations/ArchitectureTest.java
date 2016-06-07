@@ -33,5 +33,7 @@ public @interface ArchitectureTest {
 
     Dependency[] dependencies() default {none};
 
+    boolean enforceSecurityTests() default true;
+
     String[] testNames() default {};
 }

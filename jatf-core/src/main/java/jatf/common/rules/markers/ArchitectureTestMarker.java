@@ -32,6 +32,7 @@ public class ArchitectureTestMarker extends RuleBasedMarker<ArchitectureTest> {
     public boolean omitConventions = false;
     public Pattern[] patterns = new Pattern[0];
     public Dependency[] dependencies = new Dependency[0];
+    public boolean enforceSecurityTests = true;
 
     private String[] testNames = new String[0];
 
@@ -75,6 +76,11 @@ public class ArchitectureTestMarker extends RuleBasedMarker<ArchitectureTest> {
             }
 
             @Override
+            public boolean enforceSecurityTests() {
+                return enforceSecurityTests;
+            }
+
+            @Override
             public String[] testNames() {
                 return testNames;
             }
@@ -100,6 +106,9 @@ public class ArchitectureTestMarker extends RuleBasedMarker<ArchitectureTest> {
         patterns = mergedPatternSet.toArray(new Pattern[mergedPatternSet.size()]);
         dependencies = mergedDependencySet.toArray(new Dependency[mergedDependencySet.size()]);
         testNames = mergedTestNames.toArray(new String[mergedTestNames.size()]);
+        if (!this.enforceSecurityTests && !other.enforceSecurityTests) {
+            this.enforceSecurityTests = false;
+        }
         return this;
     }
 }

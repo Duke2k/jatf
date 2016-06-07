@@ -69,6 +69,7 @@ public abstract class ArchitectureTestAbstractEvaluator {
         processAnnotationsForConventions(clazz, annotation);
         processAnnotationsForDependencies(clazz, annotation);
         processAnnotationsForPatterns(clazz, annotation);
+        processAnnotationsForSecurityTests(clazz, annotation);
         addClassByTestNames(clazz, annotation.testNames());
     }
 
@@ -168,6 +169,12 @@ public abstract class ArchitectureTestAbstractEvaluator {
     protected void processAnnotationsForPatterns(Class<?> annotatedClass, ArchitectureTest annotation) {
         Pattern[] patterns = annotation.patterns();
         addClassForPatterns(annotatedClass, patterns);
+    }
+
+    protected void processAnnotationsForSecurityTests(Class<?> annotatedClass, ArchitectureTest annotation) {
+        if (annotation.enforceSecurityTests()) {
+            addToSourceMap("FileUserRightsTest", annotatedClass);
+        }
     }
 
     protected void addClassForPatterns(Class<?> annotatedClass, Pattern[] patterns) {
