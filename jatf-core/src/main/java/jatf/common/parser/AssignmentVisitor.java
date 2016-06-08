@@ -64,10 +64,12 @@ public class AssignmentVisitor extends VoidVisitorAdapter<Object> {
             return target;
         }
 
+        @SuppressWarnings("unused")
         public Operator getOperator() {
             return operator;
         }
 
+        @SuppressWarnings("unused")
         public Expression getValue() {
             return value;
         }
