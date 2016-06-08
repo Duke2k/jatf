@@ -46,7 +46,8 @@ public abstract class ArchitectureTestRuleGenerator<M extends RuleBasedMarker, R
                 attributes.isOmitMetrics(),
                 attributes.isOmitConventions(),
                 attributes.getPatterns(),
-                attributes.getDependencies());
+                attributes.getDependencies(),
+                attributes.isEnforceSecurityTests());
         return new ArchitectureTestRule(classes, annotation);
     }
 

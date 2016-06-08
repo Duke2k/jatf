@@ -264,6 +264,8 @@ public class ArchitectureTestUtil {
                         Boolean.parseBoolean(fields.get("omitMetrics").get(0).toString());
                 ((ArchitectureTestMarker) marker).dependencies = convertToDependencyArray(fields.get("dependencies"));
                 ((ArchitectureTestMarker) marker).patterns = convertToPatternArray(fields.get("patterns"));
+                ((ArchitectureTestMarker) marker).enforceSecurityTests =
+                        Boolean.parseBoolean(fields.get("enforceSecurityTests").get(0).toString());
             } else if (marker instanceof MustBePureMarker) {
                 ((MustBePureMarker) marker).degree = Double.parseDouble(fields.get("degree").get(0).toString());
             } else if (marker instanceof MustExtendMarker) {
@@ -313,13 +315,15 @@ public class ArchitectureTestUtil {
             boolean omitMetrics,
             boolean omitConventions,
             Pattern[] patterns,
-            Dependency[] dependencies
+            Dependency[] dependencies,
+            boolean enforceSecurityTests
     ) {
         return createAnnotation(ArchitectureTestMarker.class, fieldsForArchitectureTestAnnotation(
                 omitMetrics,
                 omitConventions,
                 patterns,
-                dependencies
+                dependencies,
+                enforceSecurityTests
         ));
     }
 
@@ -362,13 +366,15 @@ public class ArchitectureTestUtil {
             boolean omitMetrics,
             boolean omitConventions,
             Pattern[] patterns,
-            Dependency[] dependencies
+            Dependency[] dependencies,
+            boolean enforceSecurityTests
     ) {
         Map<String, List<?>> fields = newHashMap();
         fields.put("omitMetrics", Collections.singletonList(omitMetrics));
         fields.put("omitConventions", Collections.singletonList(omitConventions));
         fields.put("patterns", Arrays.asList(patterns));
         fields.put("dependencies", Arrays.asList(dependencies));
+        fields.put("enforceSecurityTests", Collections.singletonList(enforceSecurityTests));
         return fields;
     }
 

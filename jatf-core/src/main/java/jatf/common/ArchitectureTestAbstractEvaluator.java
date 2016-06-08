@@ -174,6 +174,7 @@ public abstract class ArchitectureTestAbstractEvaluator {
     protected void processAnnotationsForSecurityTests(Class<?> annotatedClass, ArchitectureTest annotation) {
         if (annotation.enforceSecurityTests()) {
             addToSourceMap("FileUserRightsTest", annotatedClass);
+            addToSourceMap("SecureSqlStatementsTest", annotatedClass);
         }
     }
 

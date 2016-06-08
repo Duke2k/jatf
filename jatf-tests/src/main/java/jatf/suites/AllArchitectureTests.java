@@ -26,7 +26,8 @@ import org.junit.runners.Suite;
         ConventionTests.class,
         DependencyTests.class,
         MetricsTests.class,
-        PatternTests.class
+        PatternTests.class,
+        SecurityTests.class
 })
 public class AllArchitectureTests extends ArchitectureTestSuiteBase {
 

@@ -28,18 +28,21 @@ public class ArchitectureTestAttributes {
 
     private boolean omitConventions;
     private boolean omitMetrics;
+    private boolean enforceSecurityTests;
+
     private Set<Dependency> dependencies;
     private Set<Pattern> patterns;
     private Set<String> testNames;
 
     public ArchitectureTestAttributes() {
-        this(false, false);
+        this(false, false, true);
     }
 
     @Nonnull
-    private ArchitectureTestAttributes(boolean omitMetrics, boolean omitConventions) {
+    private ArchitectureTestAttributes(boolean omitMetrics, boolean omitConventions, boolean enforceSecurityTests) {
         this.omitMetrics = omitMetrics;
         this.omitConventions = omitConventions;
+        this.enforceSecurityTests = enforceSecurityTests;
         dependencies = newHashSet();
         patterns = newHashSet();
         testNames = newHashSet();
@@ -55,7 +58,7 @@ public class ArchitectureTestAttributes {
     @SuppressWarnings("unused")
     @Nonnull
     public static ArchitectureTestAttributes createWithDependencyOnly(@Nonnull Dependency dependency) {
-        ArchitectureTestAttributes attributes = new ArchitectureTestAttributes(true, true);
+        ArchitectureTestAttributes attributes = new ArchitectureTestAttributes(true, true, false);
         attributes.addDependency(dependency);
         return attributes;
     }
@@ -70,7 +73,7 @@ public class ArchitectureTestAttributes {
     @SuppressWarnings("unused")
     @Nonnull
     public static ArchitectureTestAttributes createWithSingleTestOnly(@Nonnull String testName) {
-        ArchitectureTestAttributes attributes = new ArchitectureTestAttributes(true, true);
+        ArchitectureTestAttributes attributes = new ArchitectureTestAttributes(true, true, false);
         attributes.addTestName(testName);
         return attributes;
     }
@@ -90,6 +93,9 @@ public class ArchitectureTestAttributes {
         }
         if (other.omitMetrics) {
             omitMetrics = true;
+        }
+        if (!other.enforceSecurityTests) {
+            enforceSecurityTests = false;
         }
         mergeExceptConventionsAndMetrics(other);
         return this;
@@ -111,6 +117,9 @@ public class ArchitectureTestAttributes {
         if (!other.omitMetrics) {
             omitMetrics = false;
         }
+        if (other.enforceSecurityTests) {
+            enforceSecurityTests = true;
+        }
         mergeExceptConventionsAndMetrics(other);
         return this;
     }
@@ -126,6 +135,10 @@ public class ArchitectureTestAttributes {
     @SuppressWarnings("unused")
     public void setOmitMetrics(boolean omitMetrics) {
         this.omitMetrics = omitMetrics;
+    }
+
+    public boolean isEnforceSecurityTests() {
+        return enforceSecurityTests;
     }
 
     public Dependency[] getDependencies() {
