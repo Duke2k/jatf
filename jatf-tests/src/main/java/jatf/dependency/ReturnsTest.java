@@ -16,6 +16,7 @@
 
 package jatf.dependency;
 
+import com.google.gson.Gson;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
@@ -24,11 +25,12 @@ import jatf.annotations.MustReturn;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(DataProviderRunner.class)
 public class ReturnsTest extends DependencyTestBase {
@@ -44,19 +46,30 @@ public class ReturnsTest extends DependencyTestBase {
     public void testReturns(Class<?> clazz) {
         for (Method method : clazz.getDeclaredMethods()) {
             if (method.getAnnotation(MustReturn.class) != null) {
-                testReturns(method, method.getAnnotation(MustReturn.class).type());
+                testReturns(method, method.getAnnotation(MustReturn.class).types());
             }
             if (method.getAnnotation(MustNotReturn.class) != null) {
-                testNotReturns(method, method.getAnnotation(MustNotReturn.class).type());
+                testNotReturns(method, method.getAnnotation(MustNotReturn.class).types());
             }
         }
     }
 
-    private void testReturns(Method method, Class<?> type) {
-        assertEquals(method.getName() + " does not return " + type.getName(), type, method.getReturnType());
+    private void testReturns(Method method, Class<?>[] types) {
+        assertTrue(method.getName() + " does not return one of" + new Gson().toJson(types), isReturnedBy(method, types));
     }
 
-    private void testNotReturns(Method method, Class<?> type) {
-        assertNotEquals(method.getName() + " returns " + type.getName(), type, method.getReturnType());
+    private void testNotReturns(Method method, Class<?>[] types) {
+        assertFalse(method.getName() + " returns one of" + new Gson().toJson(types), isReturnedBy(method, types));
+    }
+
+    private boolean isReturnedBy(@Nonnull Method method, @Nonnull Class<?>[] types) {
+        boolean result = false;
+        for (Class<?> type : types) {
+            if (type.equals(method.getReturnType())) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 }

@@ -22,7 +22,7 @@ import java.lang.annotation.Annotation;
 
 public class MustNotReturnMarker extends RuleBasedMarker<MustNotReturn> {
 
-    public Class<?> type;
+    public Class<?>[] types = new Class<?>[0];
 
     @Override
     public Class<MustNotReturn> annotationType() {
@@ -43,8 +43,8 @@ public class MustNotReturnMarker extends RuleBasedMarker<MustNotReturn> {
             }
 
             @Override
-            public Class<?> type() {
-                return type;
+            public Class<?>[] types() {
+                return types;
             }
         };
     }

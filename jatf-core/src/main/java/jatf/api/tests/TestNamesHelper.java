@@ -52,6 +52,8 @@ public class TestNamesHelper {
         testNames.add("StateTest");
         testNames.add("StrategyTest");
         testNames.add("TemplateMethodTest");
+        testNames.add("SecureSqlStatementsTest");
+        testNames.add("FileUserRightsTest");
         return testNames;
     }
 }

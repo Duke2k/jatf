@@ -89,13 +89,7 @@ Description: A Web 2.0 design with fluid width suitable for blogs and small webs
 <!-- start footer -->
 <div class="footer">
     <p class="legal">
-        &copy;2015 Samuel Eickelberg, . All Rights Reserved.
-        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
-        Design by
-        <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>
-        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
-        Icons by
-        <a href="http://famfamfam.com/">FAMFAMFAM</a>.
+        &copy;2016 Samuel Eickelberg. All Rights Reserved.
     </p>
 </div>
 <!-- end footer -->

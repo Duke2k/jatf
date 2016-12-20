@@ -132,7 +132,7 @@ public class ArchitectureTestUtil {
         return assertMessage(type) + ": " + details;
     }
 
-    public static void closeQuietly(Closeable closeable) {
+    public static void closeQuietly(@Nonnull Closeable closeable) {
         try {
             closeable.close();
         } catch (IOException ignored) {
@@ -175,8 +175,7 @@ public class ArchitectureTestUtil {
             targetFolderUrls = newHashSet();
             try {
                 File path = new File(ROOT_FOLDER);
-                report("Checking '" + path.getAbsolutePath() +
-                        "' for classes...");
+                report("Checking '" + path.getAbsolutePath() + "' for classes...");
                 traverseForTargetFolderUrlsIn(path.getAbsolutePath(), targetFolderUrls);
             } catch (MalformedURLException e) {
                 report("Failed to scan for targets paths:", e);
@@ -291,9 +290,9 @@ public class ArchitectureTestUtil {
                 //noinspection unchecked
                 ((MustNotHaveAnnotationMarker) marker).annotation = (Class<? extends Annotation>) fields.get("annotation").get(0);
             } else if (marker instanceof MustReturnMarker) {
-                ((MustReturnMarker) marker).type = (Class<?>) fields.get("type").get(0);
+                ((MustReturnMarker) marker).types = convertToTypeArray(fields.get("types"));
             } else if (marker instanceof MustNotReturnMarker) {
-                ((MustNotReturnMarker) marker).type = (Class<?>) fields.get("type").get(0);
+                ((MustNotReturnMarker) marker).types = convertToTypeArray(fields.get("types"));
             } else if (marker instanceof ExcludeMarker) {
                 ((ExcludeMarker) marker).tests = convertToArchitectureTestTypeArray(fields.get("tests"));
             }

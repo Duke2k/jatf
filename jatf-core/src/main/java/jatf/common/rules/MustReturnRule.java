@@ -29,7 +29,7 @@ public final class MustReturnRule extends MethodAnnotationBasedRule<MustReturnMa
         super(methods, new AlwaysTrue(), marker);
     }
 
-    public Class<?> type() {
-        return marker.type;
+    public Class<?>[] types() {
+        return marker.types;
     }
 }
