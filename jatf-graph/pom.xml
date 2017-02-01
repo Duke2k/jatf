@@ -34,12 +34,10 @@
     <developers>
         <developer>
             <name>Samuel Eickelberg</name>
+            <email>samuel.eickelberg@posteo.de</email>
         </developer>
     </developers>
     <contributors/>
-    <organization>
-        <name>Freie Universität Berlin and Anybet GmbH, Berlin, Germany</name>
-    </organization>
 
     <parent>
         <artifactId>jatf-project</artifactId>

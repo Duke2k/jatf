@@ -26,7 +26,7 @@ import static org.junit.Assert.assertNull;
 public class ArchitectureTestDataProviderTest {
 
     @Test
-    public void testDataProvider_Valid() {
+    public void dataProvider() {
         ArchitectureTestDataProvider dataProvider = new ArchitectureTestDataProvider();
         Set<String> testNames = getTestNames();
         for (String testName : testNames) {

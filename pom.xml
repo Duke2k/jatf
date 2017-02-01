@@ -35,12 +35,10 @@
     <developers>
         <developer>
             <name>Samuel Eickelberg</name>
+            <email>samuel.eickelberg@posteo.de</email>
         </developer>
     </developers>
-    <contributors />
-    <organization>
-        <name>Freie Universität Berlin and Anybet GmbH, Berlin, Germany</name>
-    </organization>
+
 	<modules>
         <module>jatf-core</module>
         <module>jatf-tests</module>
@@ -52,7 +50,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <jatf.version>1.0.5.1</jatf.version>
+        <jatf.version>1.0.5.2</jatf.version>
     </properties>
 
 </project>

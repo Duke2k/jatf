@@ -64,7 +64,7 @@ public class Connection extends Neo4jConfiguration {
         try {
             properties.load(inputStream);
         } catch (IOException e) {
-            log.error("Could not load properties file {0} due to {1}", PROPERTIES_FILE_NAME, e);
+            log.error("Could not load properties file {} due to {}", PROPERTIES_FILE_NAME, e);
         }
     }
 }

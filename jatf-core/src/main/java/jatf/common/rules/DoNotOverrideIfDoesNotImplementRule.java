@@ -17,14 +17,15 @@
 package jatf.common.rules;
 
 import jatf.api.rules.ClassAnnotationBasedRule;
-import jatf.common.rules.conditions.DoesNotImplement;
+import jatf.common.rules.conditions.Implements;
+import jatf.common.rules.conditions.Not;
 import jatf.common.rules.markers.MustNotOverrideMarker;
 
 @SuppressWarnings("unused")
-public final class DoNotOverrideIfDoesNotImplementRule extends ClassAnnotationBasedRule<MustNotOverrideMarker, DoesNotImplement> {
+public final class DoNotOverrideIfDoesNotImplementRule extends ClassAnnotationBasedRule<MustNotOverrideMarker, Not> {
 
     public DoNotOverrideIfDoesNotImplementRule(Class<?> notToBeImplemented, Class<?>[] classes, MustNotOverrideMarker marker) {
-        super(classes, new DoesNotImplement(notToBeImplemented), marker);
+        super(classes, new Not(new Implements(notToBeImplemented)), marker);
     }
 
     public String[] methodNames() {
