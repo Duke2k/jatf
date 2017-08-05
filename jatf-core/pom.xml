@@ -38,7 +38,7 @@
     <parent>
         <groupId>com.github.duke2k.jatf</groupId>
         <artifactId>jatf-project</artifactId>
-        <version>${jatf.version}</version>
+        <version>1.0.5.2</version>
     </parent>
     
     <dependencies>
