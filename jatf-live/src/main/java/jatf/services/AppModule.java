@@ -51,7 +51,7 @@ public class AppModule {
         // change, to force the browser to download new versions. This overrides Tapesty's default
         // (a random hexadecimal number), but may be further overriden by DevelopmentModule or
         // QaModule.
-        configuration.override(SymbolConstants.APPLICATION_VERSION, "1.0.4.2");
+        configuration.override(SymbolConstants.APPLICATION_VERSION, "1.0.5.2");
     }
 
     public static void contributeApplicationDefaults(
