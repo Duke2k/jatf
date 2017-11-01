@@ -15,42 +15,41 @@
  along with JATF.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.duke2k.jatf</groupId>
-    <artifactId>jatf-project</artifactId>
+				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.duke2k.jatf</groupId>
+	<artifactId>jatf-project</artifactId>
 
-    <packaging>pom</packaging>
+	<packaging>pom</packaging>
 
-    <name>Java Architecture Test Framework</name>
-    <version>${jatf.version}</version>
+	<name>Java Architecture Test Framework</name>
+	<version>${jatf.version}</version>
 
-    <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the root project, POM only.</description>
-    <url>https://github.com/Duke2k/jatf</url>
-    <licenses>
-        <license>
-            <name>GPLv3</name>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <name>Samuel Eickelberg</name>
-            <email>samuel.eickelberg@posteo.de</email>
-        </developer>
-    </developers>
+	<description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the
+		root project, POM only.
+	</description>
+	<url>https://github.com/Duke2k/jatf</url>
+	<licenses>
+		<license>
+			<name>GPLv3</name>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Samuel Eickelberg</name>
+			<email>samuel.eickelberg@posteo.de</email>
+		</developer>
+	</developers>
 
 	<modules>
-        <module>jatf-core</module>
-        <module>jatf-tests</module>
-        <module>jatf-live</module>
-        <module>jatf-rules</module>
-        <module>jatf-graph</module>
-    </modules>
+		<module>jatf-core</module>
+		<module>jatf-tests</module>
+		<module>jatf-rules</module>
+	</modules>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-        <jatf.version>1.0.5.2</jatf.version>
-    </properties>
-
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<jatf.version>1.0.6</jatf.version>
+	</properties>
 </project>

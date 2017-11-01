@@ -16,13 +16,13 @@
 
 package jatf.annotations;
 
-import jatf.common.IArchitectureTest;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import jatf.common.IArchitectureTest;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Exclude {
 
-    Class<? extends IArchitectureTest>[] tests() default {};
+	Class<? extends IArchitectureTest>[] tests() default {};
 }

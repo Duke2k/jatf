@@ -15,95 +15,97 @@
  along with JATF.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>jatf-tests</artifactId>
+				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>jatf-tests</artifactId>
 
-    <name>Java Architecture Test Framework - Tests</name>
+	<name>Java Architecture Test Framework - Tests</name>
 
-    <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the tests project, containing all the tests. Requires the jatf-core artifact.</description>
-    <url>https://github.com/Duke2k/jatf</url>
-    <licenses>
-        <license>
-            <name>GPLv3</name>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <name>Samuel Eickelberg</name>
-            <email>samuel.eickelberg@posteo.de</email>
-        </developer>
-    </developers>
+	<description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the
+		tests project, containing all the tests. Requires the jatf-core artifact.
+	</description>
+	<url>https://github.com/Duke2k/jatf</url>
+	<licenses>
+		<license>
+			<name>GPLv3</name>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Samuel Eickelberg</name>
+			<email>samuel.eickelberg@posteo.de</email>
+		</developer>
+	</developers>
 
-    <parent>
-        <groupId>com.github.duke2k.jatf</groupId>
-        <artifactId>jatf-project</artifactId>
-        <version>1.0.5.2</version>
-    </parent>
+	<parent>
+		<groupId>com.github.duke2k.jatf</groupId>
+		<artifactId>jatf-project</artifactId>
+		<version>1.0.6</version>
+	</parent>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <runSuites>**/All*Tests.class</runSuites>
-    </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<runSuites>**/All*Tests.class</runSuites>
+	</properties>
 
-    <dependencies>
-        <dependency>
+	<dependencies>
+		<dependency>
 			<groupId>com.github.duke2k.jatf</groupId>
 			<artifactId>jatf-core</artifactId>
 			<version>${project.version}</version>
-        </dependency>
-    </dependencies>
+		</dependency>
+	</dependencies>
 
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit4</artifactId>
-                        <version>2.18</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <skipTests>false</skipTests>
-                    <includes>
-                        <include>${runSuites}</include>
-                    </includes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.4</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit4</artifactId>
+						<version>2.18</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<skipTests>false</skipTests>
+					<includes>
+						<include>${runSuites}</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

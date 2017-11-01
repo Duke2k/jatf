@@ -16,10 +16,11 @@
 
 package jatf.api.constraints;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
+
+import javax.annotation.Nonnull;
 
 public interface Constraints extends Map<Constraint, String> {
 
-    String valueOf(@Nonnull Constraint constraint);
+	String valueOf(@Nonnull Constraint constraint);
 }

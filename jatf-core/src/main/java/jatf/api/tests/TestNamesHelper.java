@@ -16,44 +16,45 @@
 
 package jatf.api.tests;
 
-import javax.annotation.Nonnull;
+import static com.google.common.collect.Sets.newHashSet;
+
 import java.util.Set;
 
-import static com.google.common.collect.Sets.newHashSet;
+import javax.annotation.Nonnull;
 
 public class TestNamesHelper {
 
-    @Nonnull
-    public static Set<String> getTestNames() {
-        Set<String> testNames = newHashSet();
-        testNames.add("CamelCaseTest");
-        testNames.add("NoFinalModifierInLocalVariablesTest");
-        testNames.add("NoInnerClassesTest");
-        testNames.add("OrderingTest");
-        testNames.add("OverlyChainedMethodCallsTest");
-        testNames.add("AcyclicDependenciesPrincipleTest");
-        testNames.add("AnnotationTypeTest");
-        testNames.add("DangerousCastsTest");
-        testNames.add("ExtendsTest");
-        testNames.add("ImplementsTest");
-        testNames.add("InstabilityTest");
-        testNames.add("MethodPurityTest");
-        testNames.add("OverridesTest");
-        testNames.add("ReturnsTest");
-        testNames.add("ThrowsTest");
-        testNames.add("UncheckedCastsTest");
-        testNames.add("UsesTest");
-        testNames.add("CyclomaticComplexityTest");
-        testNames.add("HalsteadComplecityTest");
-        testNames.add("MethodLengthTest");
-        testNames.add("NumberOfMethodsPerClassTest");
-        testNames.add("AdapterTest");
-        testNames.add("SingletonTest");
-        testNames.add("StateTest");
-        testNames.add("StrategyTest");
-        testNames.add("TemplateMethodTest");
-        testNames.add("SecureSqlStatementsTest");
-        testNames.add("FileUserRightsTest");
-        return testNames;
-    }
+	@Nonnull
+	public static Set<String> getTestNames() {
+		Set<String> testNames = newHashSet();
+		testNames.add("CamelCaseTest");
+		testNames.add("NoFinalModifierInLocalVariablesTest");
+		testNames.add("NoInnerClassesTest");
+		testNames.add("OrderingTest");
+		testNames.add("OverlyChainedMethodCallsTest");
+		testNames.add("AcyclicDependenciesPrincipleTest");
+		testNames.add("AnnotationTypeTest");
+		testNames.add("DangerousCastsTest");
+		testNames.add("ExtendsTest");
+		testNames.add("ImplementsTest");
+		testNames.add("InstabilityTest");
+		testNames.add("MethodPurityTest");
+		testNames.add("OverridesTest");
+		testNames.add("ReturnsTest");
+		testNames.add("ThrowsTest");
+		testNames.add("UncheckedCastsTest");
+		testNames.add("UsesTest");
+		testNames.add("CyclomaticComplexityTest");
+		testNames.add("HalsteadComplecityTest");
+		testNames.add("MethodLengthTest");
+		testNames.add("NumberOfMethodsPerClassTest");
+		testNames.add("AdapterTest");
+		testNames.add("SingletonTest");
+		testNames.add("StateTest");
+		testNames.add("StrategyTest");
+		testNames.add("TemplateMethodTest");
+		testNames.add("SecureSqlStatementsTest");
+		testNames.add("FileUserRightsTest");
+		return testNames;
+	}
 }

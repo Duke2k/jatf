@@ -16,40 +16,41 @@
 
 package jatf.common.io;
 
-import javax.annotation.Nullable;
-import javax.tools.JavaFileObject;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 
+import javax.annotation.Nullable;
+import javax.tools.JavaFileObject;
+
 public class ClassFile {
 
-    private URI uri;
-    private JavaFileObject.Kind kind;
+	private URI uri;
+	private JavaFileObject.Kind kind;
 
-    protected ClassFile(URI uri, JavaFileObject.Kind kind) {
-        this.uri = uri;
-        this.kind = kind;
-    }
+	protected ClassFile(URI uri, JavaFileObject.Kind kind) {
+		this.uri = uri;
+		this.kind = kind;
+	}
 
-    public ClassFile(File classFile) {
-        this(classFile.toURI(), JavaFileObject.Kind.CLASS);
-    }
+	public ClassFile(File classFile) {
+		this(classFile.toURI(), JavaFileObject.Kind.CLASS);
+	}
 
-    @Nullable
-    public byte[] getByteContent() throws IOException {
-        if (kind.equals(JavaFileObject.Kind.CLASS)) {
-            try (InputStream inputStream = uri.toURL().openStream()) {
-                byte[] byteContent = new byte[inputStream.available()];
-                if (inputStream.read(byteContent) > 0) {
-                    return byteContent;
-                } else {
-                    return null;
-                }
-            }
-        } else {
-            return null;
-        }
-    }
+	@Nullable
+	public byte[] getByteContent() throws IOException {
+		if (kind.equals(JavaFileObject.Kind.CLASS)) {
+			try (InputStream inputStream = uri.toURL().openStream()) {
+				byte[] byteContent = new byte[inputStream.available()];
+				if (inputStream.read(byteContent) > 0) {
+					return byteContent;
+				} else {
+					return null;
+				}
+			}
+		} else {
+			return null;
+		}
+	}
 }

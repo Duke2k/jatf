@@ -16,42 +16,43 @@
 
 package jatf.api.tests;
 
+import static jatf.common.util.ArchitectureTestUtil.resetReflections;
+import static jatf.common.util.ArchitectureTestUtil.resetSourceFilesMap;
+
+import java.util.Set;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import jatf.api.constraints.Constraints;
 import jatf.common.ArchitectureTestDataProvider;
 import jatf.common.ArchitectureTestDefaultConstraints;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Set;
-
-import static jatf.common.util.ArchitectureTestUtil.resetReflections;
-import static jatf.common.util.ArchitectureTestUtil.resetSourceFilesMap;
-
 @SuppressWarnings("unused")
 public class TestsHelper {
 
-    private static ArchitectureTestDataProvider dataProvider;
+	private static ArchitectureTestDataProvider dataProvider;
 
-    public static void resetCodebaseForTests() {
-        resetReflections();
-        resetSourceFilesMap();
-    }
+	public static void resetCodebaseForTests() {
+		resetReflections();
+		resetSourceFilesMap();
+	}
 
-    @Nullable
-    public static Set<Class<?>> getClassesForTest(@Nonnull String testName) {
-        if (dataProvider == null) {
-            dataProvider = new ArchitectureTestDataProvider();
-        }
-        return dataProvider.getClassesFor(testName);
-    }
+	@Nullable
+	public static Set<Class<?>> getClassesForTest(@Nonnull String testName) {
+		if (dataProvider == null) {
+			dataProvider = new ArchitectureTestDataProvider();
+		}
+		return dataProvider.getClassesFor(testName);
+	}
 
-    @Nonnull
-    public static Class<? extends Constraints> getDefaultConstraintsType() {
-        return ArchitectureTestDefaultConstraints.class;
-    }
+	@Nonnull
+	public static Class<? extends Constraints> getDefaultConstraintsType() {
+		return ArchitectureTestDefaultConstraints.class;
+	}
 
-    @Nonnull
-    public static ArchitectureTestDefaultConstraints getDefaultConstraints() {
-        return new ArchitectureTestDefaultConstraints();
-    }
+	@Nonnull
+	public static ArchitectureTestDefaultConstraints getDefaultConstraints() {
+		return new ArchitectureTestDefaultConstraints();
+	}
 }

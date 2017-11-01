@@ -16,36 +16,36 @@
 
 package jatf.common.rules.markers;
 
-import jatf.annotations.MustNotReturn;
-
 import java.lang.annotation.Annotation;
+
+import jatf.annotations.MustNotReturn;
 
 public class MustNotReturnMarker extends RuleBasedMarker<MustNotReturn> {
 
-    public Class<?>[] types = new Class<?>[0];
+	public Class<?>[] types = new Class<?>[0];
 
-    @Override
-    public Class<MustNotReturn> annotationType() {
-        return MustNotReturn.class;
-    }
+	@Override
+	public Class<MustNotReturn> annotationType() {
+		return MustNotReturn.class;
+	}
 
-    @Override
-    public MustNotReturn createAnnotation() {
-        return new MustNotReturn() {
-            @Override
-            public String toString() {
-                return annotationType().getSimpleName();
-            }
+	@Override
+	public MustNotReturn createAnnotation() {
+		return new MustNotReturn() {
+			@Override
+			public String toString() {
+				return annotationType().getSimpleName();
+			}
 
-            @Override
-            public Class<? extends Annotation> annotationType() {
-                return MustNotReturn.class;
-            }
+			@Override
+			public Class<? extends Annotation> annotationType() {
+				return MustNotReturn.class;
+			}
 
-            @Override
-            public Class<?>[] types() {
-                return types;
-            }
-        };
-    }
+			@Override
+			public Class<?>[] types() {
+				return types;
+			}
+		};
+	}
 }

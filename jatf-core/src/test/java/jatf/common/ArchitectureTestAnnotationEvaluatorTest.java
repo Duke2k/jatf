@@ -16,31 +16,31 @@
 
 package jatf.common;
 
-import org.junit.Test;
-import org.reflections.Reflections;
-
-import java.util.Map;
-import java.util.Set;
-
 import static com.google.common.collect.Maps.newHashMap;
 import static jatf.common.util.ArchitectureTestUtil.buildReflections;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Map;
+import java.util.Set;
+
+import org.junit.Test;
+import org.reflections.Reflections;
+
 public class ArchitectureTestAnnotationEvaluatorTest {
 
-    @Test
-    public void testProcess() {
+	@Test
+	public void testProcess() {
 
-        // prepare
-        Reflections reflections = buildReflections();
-        ArchitectureTestAnnotationEvaluator evaluator = new ArchitectureTestAnnotationEvaluator(reflections);
+		// prepare
+		Reflections reflections = buildReflections();
+		ArchitectureTestAnnotationEvaluator evaluator = new ArchitectureTestAnnotationEvaluator(reflections);
 
-        // test
-        evaluator.process();
-        Map<String, Set<Class<?>>> targetMap = newHashMap();
-        evaluator.evaluateInto(targetMap);
+		// test
+		evaluator.process();
+		Map<String, Set<Class<?>>> targetMap = newHashMap();
+		evaluator.evaluateInto(targetMap);
 
-        // verify
-        assertEquals(targetMap.size(), 0);
-    }
+		// verify
+		assertEquals(targetMap.size(), 0);
+	}
 }

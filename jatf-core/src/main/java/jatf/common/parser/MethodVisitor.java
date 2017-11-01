@@ -1,84 +1,90 @@
-/**
- * This file is part of JATF.
- *
- * JATF is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3 of the License.
- *
- * JATF is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with JATF.  If not, see <http://www.gnu.org/licenses/>.
+/*
+  This file is part of JATF.
+  <p>
+  JATF is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, version 3 of the License.
+  <p>
+  JATF is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  <p>
+  You should have received a copy of the GNU General Public License
+  along with JATF.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package jatf.common.parser;
 
-import japa.parser.ast.body.MethodDeclaration;
-import japa.parser.ast.body.Parameter;
-import japa.parser.ast.stmt.BlockStmt;
-import japa.parser.ast.stmt.Statement;
-import japa.parser.ast.visitor.VoidVisitorAdapter;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import com.github.javaparser.Position;
+import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.Statement;
+import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+
 public class MethodVisitor extends VoidVisitorAdapter<Object> {
 
-    private Map<String, List<Statement>> statementsByMethodName = newHashMap();
-    private Map<String, List<Parameter>> parametersByMethodName = newHashMap();
-    private Map<String, BlockStmt> methodBodyByName = newHashMap();
-    private List<String> methodNames = newArrayList();
-    private Map<String, Integer> modifiersByName = newHashMap();
-    private Map<String, Integer> positionsByName = newHashMap();
+	private Map<String, List<Statement>> statementsByMethodName = newHashMap();
+	private Map<String, List<Parameter>> parametersByMethodName = newHashMap();
+	private Map<String, BlockStmt> methodBodyByName = newHashMap();
+	private List<String> methodNames = newArrayList();
+	private Map<String, EnumSet<Modifier>> modifiersByName = newHashMap();
+	private Map<String, Position> positionsByName = newHashMap();
 
-    private boolean sorted = false;
+	private boolean sorted = false;
 
-    @Override
-    public void visit(MethodDeclaration methodDeclaration, Object arguments) {
-        methodNames.add(methodDeclaration.getName());
-        positionsByName.put(methodDeclaration.getName(), methodDeclaration.getBeginLine());
-        modifiersByName.put(methodDeclaration.getName(), methodDeclaration.getModifiers());
-        if (methodDeclaration.getBody() != null && methodDeclaration.getBody().getStmts() != null) {
-            statementsByMethodName.put(methodDeclaration.getName(), methodDeclaration.getBody().getStmts());
-        }
-        parametersByMethodName.put(methodDeclaration.getName(), methodDeclaration.getParameters());
-        methodBodyByName.put(methodDeclaration.getName(), methodDeclaration.getBody());
-    }
+	@Override
+	public void visit(MethodDeclaration methodDeclaration, Object arguments) {
+		methodNames.add(methodDeclaration.getName().asString());
+		if (methodDeclaration.getBegin().isPresent()) {
+			positionsByName.put(methodDeclaration.getName().asString(), methodDeclaration.getBegin().get());
+		}
+		modifiersByName.put(methodDeclaration.getName().asString(), methodDeclaration.getModifiers());
+		if (methodDeclaration.getBody() != null && methodDeclaration.getBody().isPresent()) {
+			statementsByMethodName.put(methodDeclaration.getName().asString(), methodDeclaration.getBody().get().getStatements());
+		}
+		parametersByMethodName.put(methodDeclaration.getName().asString(), methodDeclaration.getParameters());
+		methodBodyByName.put(methodDeclaration.getName().asString(), methodDeclaration.getBody().get());
+	}
 
-    @Nullable
-    public List<Statement> getStatementsInMethod(@Nonnull String methodName) {
-        return statementsByMethodName.get(methodName);
-    }
+	@Nullable
+	public List<Statement> getStatementsInMethod(@Nonnull String methodName) {
+		return statementsByMethodName.get(methodName);
+	}
 
-    @Nullable
-    public List<Parameter> getParametersOfMethod(@Nonnull String methodName) {
-        return parametersByMethodName.get(methodName);
-    }
+	@Nullable
+	public List<Parameter> getParametersOfMethod(@Nonnull String methodName) {
+		return parametersByMethodName.get(methodName);
+	}
 
-    @Nullable
-    public BlockStmt getMethodBody(@Nonnull String methodName) {
-        return methodBodyByName.get(methodName);
-    }
+	@Nullable
+	public BlockStmt getMethodBody(@Nonnull String methodName) {
+		return methodBodyByName.get(methodName);
+	}
 
-    @Nonnull
-    public List<String> getMethodNames() {
-        if (!sorted) {
-            Collections.sort(methodNames, (method1Name, method2Name) -> positionsByName.get(method1Name).compareTo(positionsByName.get(method2Name)));
-            sorted = true;
-        }
-        return methodNames;
-    }
+	@Nonnull
+	public List<String> getMethodNames() {
+		if (!sorted) {
+			methodNames.sort(Comparator.comparing(methodName -> positionsByName.get(methodName)));
+			sorted = true;
+		}
+		return methodNames;
+	}
 
-    public int getModifierFor(@Nonnull String name) {
-        return modifiersByName.get(name);
-    }
+	public EnumSet<Modifier> getModifierFor(@Nonnull String name) {
+		return modifiersByName.get(name);
+	}
 }

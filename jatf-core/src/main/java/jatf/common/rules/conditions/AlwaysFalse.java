@@ -1,15 +1,15 @@
 /**
  * This file is part of JATF.
- *
+ * <p>
  * JATF is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, version 3 of the License.
- *
+ * <p>
  * JATF is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with JATF.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,16 +20,16 @@ import jatf.api.rules.Condition;
 
 public final class AlwaysFalse extends Condition<Class<?>> {
 
-    public AlwaysFalse() {
-        this(null);
-    }
+	public AlwaysFalse() {
+		this(null);
+	}
 
-    private AlwaysFalse(Class<?> type) {
-        super(type);
-    }
+	private AlwaysFalse(Class<?> type) {
+		super(type);
+	}
 
-    @Override
-    public boolean firesFor(Class<?> type) {
-        return false;
-    }
+	@Override
+	public boolean firesFor(Class<?> type) {
+		return false;
+	}
 }
