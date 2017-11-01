@@ -28,10 +28,6 @@ import javax.tools.SimpleJavaFileObject;
 
 public class SourceFile extends SimpleJavaFileObject {
 
-	protected SourceFile(URI uri, Kind kind) {
-		super(uri, kind);
-	}
-
 	public SourceFile(File sourceFile) {
 		this(sourceFile.toURI(), Kind.SOURCE);
 	}
@@ -50,5 +46,9 @@ public class SourceFile extends SimpleJavaFileObject {
 		}
 		CharSequence result = stringBuilder.toString();
 		return result.length() == 0 ? null : result;
+	}
+
+	private SourceFile(URI uri, Kind kind) {
+		super(uri, kind);
 	}
 }

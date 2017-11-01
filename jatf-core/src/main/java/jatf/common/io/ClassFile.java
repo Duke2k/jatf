@@ -29,11 +29,6 @@ public class ClassFile {
 	private URI uri;
 	private JavaFileObject.Kind kind;
 
-	protected ClassFile(URI uri, JavaFileObject.Kind kind) {
-		this.uri = uri;
-		this.kind = kind;
-	}
-
 	public ClassFile(File classFile) {
 		this(classFile.toURI(), JavaFileObject.Kind.CLASS);
 	}
@@ -52,5 +47,10 @@ public class ClassFile {
 		} else {
 			return null;
 		}
+	}
+
+	private ClassFile(URI uri, JavaFileObject.Kind kind) {
+		this.uri = uri;
+		this.kind = kind;
 	}
 }
