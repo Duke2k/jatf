@@ -23,7 +23,7 @@
 	<packaging>pom</packaging>
 
 	<name>Java Architecture Test Framework</name>
-	<version>${jatf.version}</version>
+	<version>1.0.6</version>
 
 	<description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the
 		root project, POM only.
@@ -50,6 +50,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<jatf.version>1.0.6</jatf.version>
+		<jatf.version>${project.version}</jatf.version>
 	</properties>
 </project>
