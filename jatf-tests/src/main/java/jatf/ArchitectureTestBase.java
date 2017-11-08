@@ -22,6 +22,7 @@ import static jatf.common.ArchitectureTestRunListener.report;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 
@@ -49,15 +50,6 @@ public abstract class ArchitectureTestBase implements IArchitectureTest {
 	}
 
 	/**
-	 * This method initializes the dataProvider field, if necessary.
-	 */
-	public static void initializeDataProvider() {
-		if (dataProvider == null) {
-			dataProvider = new ArchitectureTestDataProvider();
-		}
-	}
-
-	/**
 	 * @param test - test class, for which the applicable classes should be returned
 	 * @return Set of classes for the given test
 	 */
@@ -65,10 +57,10 @@ public abstract class ArchitectureTestBase implements IArchitectureTest {
 	protected static Set<Class<?>> provideClassesFor(@Nonnull Class<? extends ArchitectureTestBase> test) {
 		initializeDataProvider();
 		Set<Class<?>> result = dataProvider.getClassesFor(test.getSimpleName());
-		if (result == null) {
+		if (Objects.isNull(result)) {
 			result = newHashSet();
 		}
-		if (result.size() == 0) {
+		if (result.isEmpty()) {
 			result.add(test);
 		}
 		return result;
@@ -91,6 +83,15 @@ public abstract class ArchitectureTestBase implements IArchitectureTest {
 	}
 
 	/**
+	 * This method initializes the dataProvider field, if necessary.
+	 */
+	private static void initializeDataProvider() {
+		if (dataProvider == null) {
+			dataProvider = new ArchitectureTestDataProvider();
+		}
+	}
+
+	/**
 	 * This generic method returns the annotation determined by its desired type, if any. Here is the point where a
 	 * rule wins over an actual annotation: First, the rules are queried for possible annotations of the desired type,
 	 * and if there is none, a possible actual annotation of the desired type is returned.
@@ -102,7 +103,7 @@ public abstract class ArchitectureTestBase implements IArchitectureTest {
 	@Nullable
 	protected <A extends Annotation> A getAnnotationFor(@Nonnull Class<?> clazz, Class<A> desiredAnnotationType) {
 		Annotation annotation = dataProvider.getAnnotationFor(clazz, desiredAnnotationType);
-		if (annotation != null) {
+		if (Objects.nonNull(annotation)) {
 			//noinspection unchecked
 			return (A) annotation;
 		}

@@ -341,8 +341,7 @@ public class TokenVisitor extends VoidVisitorAdapter<Object> {
 	public void visit(FieldAccessExpr n, Object arg) {
 		n.getScope().accept(this, arg);
 		tokens.add(".");
-		//noinspection deprecation
-		tokens.add(n.getField().asString());
+		tokens.add(n.getNameAsString());
 	}
 
 	public void visit(InstanceOfExpr n, Object arg) {
@@ -443,7 +442,7 @@ public class TokenVisitor extends VoidVisitorAdapter<Object> {
 		if (n.getTypeParameters() != null) {
 			tokens.add(" ");
 		}
-		tokens.add(n.getName().asString());
+		tokens.add(n.getNameAsString());
 
 		tokens.add("(");
 		if (n.getParameters() != null) {
