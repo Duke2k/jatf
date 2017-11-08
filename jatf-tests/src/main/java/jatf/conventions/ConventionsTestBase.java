@@ -17,6 +17,7 @@
 package jatf.conventions;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.Assert.assertTrue;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -54,7 +55,25 @@ public abstract class ConventionsTestBase extends ArchitectureTestBase {
 	}
 
 	private void assertSameOrder(List<EnumSet<Modifier>> modifier, List<EnumSet<Modifier>> modifierOrder) {
-		// TODO: Complete rewrite.
+		int modifierOrderPointer = 0;
+		for (EnumSet<Modifier> m : modifier) {
+			int currentOrderIndex = 0;
+			for (EnumSet<Modifier> mo : modifierOrder) {
+				if (!containsAll(mo, m) && currentOrderIndex++ > modifierOrderPointer) {
+					modifierOrderPointer++;
+				}
+			}
+		}
+		assertTrue(modifierOrderPointer <= modifierOrder.size());
+	}
 
+	private boolean containsAll(EnumSet<?> containing, EnumSet<?> contained) {
+		final boolean[] contains = {true};
+		contained.forEach(item -> {
+			if (!containing.contains(item)) {
+				contains[0] = false;
+			}
+		});
+		return contains[0];
 	}
 }
