@@ -16,31 +16,96 @@
 
 package jatf.common;
 
-import static com.google.common.collect.Maps.newHashMap;
-import static jatf.common.util.ArchitectureTestUtil.buildReflections;
-import static org.junit.Assert.assertEquals;
-
-import java.util.Map;
-import java.util.Set;
-
+import jatf.annotations.MustExtend;
+import jatf.api.rules.ArchitectureTestRuleGenerator;
+import jatf.api.rules.ClassAnnotationBasedRule;
+import jatf.common.rules.ArchitectureTestRule;
+import jatf.common.rules.conditions.AlwaysTrue;
+import jatf.common.rules.markers.ArchitectureTestMarker;
+import jatf.common.rules.markers.RuleBasedMarker;
 import org.junit.Test;
 import org.reflections.Reflections;
 
-public class ArchitectureTestRuleEvaluatorTest {
+import javax.annotation.Nonnull;
+import java.lang.annotation.Annotation;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 
-	@Test
-	public void testProcess() {
+import static com.google.common.collect.Maps.newHashMap;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-		// prepare
-		Reflections reflections = buildReflections();
-		ArchitectureTestRuleEvaluator evaluator = new ArchitectureTestRuleEvaluator(reflections);
+public class ArchitectureTestRuleEvaluatorTest extends AbstractArchitectureTestEvaluatorTest {
 
-		// test
-		evaluator.process();
-		Map<String, Set<Class<?>>> targetMap = newHashMap();
-		evaluator.evaluateInto(targetMap);
+  @Test
+  public void evaluateInto_Mocked() {
 
-		// verify
-		assertEquals(targetMap.size(), 0);
-	}
+    // prepare
+    Reflections reflections = mock(Reflections.class);
+    when(reflections.getSubTypesOf(ArchitectureTestRuleGenerator.class)).thenReturn(Collections.singleton(TestRuleGenerator.class));
+    ArchitectureTestRuleEvaluator evaluator = new ArchitectureTestRuleEvaluator(reflections);
+    Map<String, Set<Class<?>>> targetMap = newHashMap();
+
+    // test
+    evaluator.evaluateInto(targetMap);
+
+    // verify
+    verify(targetMap, TestClass.class);
+  }
+
+  static class TestClass extends TestExtendClass {
+  }
+
+  static abstract class TestExtendClass {
+  }
+
+  static class TestClassMarker extends RuleBasedMarker<MustExtend> {
+    @Override
+    public Class<MustExtend> annotationType() {
+      return MustExtend.class;
+    }
+
+    @Override
+    public MustExtend createAnnotation() {
+      return new MustExtend() {
+
+        @Override
+        public String toString() {
+          return annotationType().getSimpleName();
+        }
+
+        @Override
+        public Class<? extends Annotation> annotationType() {
+          return MustExtend.class;
+        }
+
+        @Override
+        public Class<?> type() {
+          return TestExtendClass.class;
+        }
+      };
+    }
+  }
+
+  static class TestRule extends ClassAnnotationBasedRule<TestClassMarker, AlwaysTrue> {
+    TestRule(Class<?>[] classes, TestClassMarker marker) {
+      super(classes, new AlwaysTrue(), marker);
+    }
+  }
+
+  static class TestRuleGenerator extends ArchitectureTestRuleGenerator<TestClassMarker, TestRule> {
+
+    @Nonnull
+    @Override
+    public TestRule generateRule() {
+      return new TestRule(new Class[]{TestClass.class}, new TestClassMarker());
+    }
+
+    @Nonnull
+    @Override
+    public ArchitectureTestRule generateArchitectureTestRuleFor(@Nonnull Class<?>[] classes) {
+      return new ArchitectureTestRule(new Class[]{TestClass.class}, new ArchitectureTestMarker());
+    }
+  }
 }

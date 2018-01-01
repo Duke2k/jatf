@@ -16,17 +16,17 @@
 
 package jatf.common;
 
-import static jatf.api.tests.TestNamesHelper.getTestNames;
-import static org.junit.Assert.assertNull;
+import org.junit.Test;
 
 import java.util.Set;
 
-import org.junit.Test;
+import static jatf.api.tests.TestNamesHelper.getTestNames;
+import static org.junit.Assert.assertNull;
 
 public class ArchitectureTestDataProviderTest {
 
 	@Test
-	public void dataProvider() {
+	public void dataProvider_Real() {
 		ArchitectureTestDataProvider dataProvider = new ArchitectureTestDataProvider();
 		Set<String> testNames = getTestNames();
 		for (String testName : testNames) {

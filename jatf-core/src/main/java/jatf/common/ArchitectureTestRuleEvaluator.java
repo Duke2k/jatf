@@ -16,26 +16,23 @@
 
 package jatf.common;
 
-import static com.google.common.collect.Maps.newHashMap;
-import static com.google.common.collect.Sets.newHashSet;
-import static jatf.common.ArchitectureTestRunListener.report;
-
-import java.lang.annotation.Annotation;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.reflections.Reflections;
-
 import jatf.annotations.ArchitectureTest;
 import jatf.api.rules.ArchitectureTestRuleGenerator;
 import jatf.common.rules.AnnotationBasedRule;
 import jatf.common.rules.ArchitectureTestRule;
 import jatf.common.rules.markers.ArchitectureTestMarker;
 import jatf.common.rules.markers.RuleBasedMarker;
+import org.reflections.Reflections;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.lang.annotation.Annotation;
+import java.util.Map;
+import java.util.Set;
+
+import static com.google.common.collect.Maps.newHashMap;
+import static com.google.common.collect.Sets.newHashSet;
+import static jatf.common.ArchitectureTestRunListener.report;
 
 @SuppressWarnings("WeakerAccess")
 public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvaluator {
@@ -121,7 +118,9 @@ public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvalu
 		Set<RuleBasedMarker> markerSet = markerMap.get(clazz);
 		Set<Annotation> annotationSet = newHashSet();
 		if (markerSet != null) {
-			annotationSet.addAll(markerSet.stream().map(RuleBasedMarker::createAnnotation).collect(Collectors.toList()));
+			for (RuleBasedMarker marker : markerSet) {
+				annotationSet.add(marker.createAnnotation());
+			}
 		}
 		return annotationSet;
 	}
