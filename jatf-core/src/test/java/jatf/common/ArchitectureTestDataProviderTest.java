@@ -16,22 +16,56 @@
 
 package jatf.common;
 
-import org.junit.Test;
+import static jatf.api.tests.TestNamesHelper.getTestNames;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import java.util.Set;
 
-import static jatf.api.tests.TestNamesHelper.getTestNames;
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
+import org.junit.Test;
 
 public class ArchitectureTestDataProviderTest {
 
-  @Test
-  public void dataProvider_Real() {
-    ArchitectureTestDataProvider dataProvider = new ArchitectureTestDataProvider();
-    Set<String> testNames = getTestNames();
-    for (String testName : testNames) {
-      Set<Class<?>> classes = dataProvider.getClassesFor(testName);
-      // FIXME: Cross-dependency from other tests: We have 3 classes being considered by the dataProvider. Mock?
-      // assertEquals(3, classes.size());
-    }
-  }
+	@Test
+	public void getClassesFor_DefaultTestNames() {
+		// prepare
+		ArchitectureTestDataProvider dataProvider = new ArchitectureTestDataProvider();
+		Set<String> testNames = getTestNames();
+		for (String testName : testNames) {
+
+			// test
+			Set<Class<?>> classes = dataProvider.getClassesFor(testName);
+			// Possible cross-dependency from other tests: We have 3 inner classes to be considered; ArchitectureTestDataProvider
+			// can't be mocked appropriately.
+			if (classes != null) {
+
+				// verify
+				assertEquals(3, classes.size());
+				assertThat(classes, containsClassNamed("TestClass"));
+				assertThat(classes, containsClassNamed("TestClass1"));
+				assertThat(classes, containsClassNamed("TestClass2"));
+			}
+		}
+	}
+
+	private TypeSafeMatcher<Set<Class<?>>> containsClassNamed(String className) {
+		return new TypeSafeMatcher<Set<Class<?>>>() {
+			@Override
+			protected boolean matchesSafely(Set<Class<?>> classes) {
+				for (Class<?> clazz : classes) {
+					if (clazz.getSimpleName().equalsIgnoreCase(className)) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			@Override
+			public void describeTo(Description description) {
+				description.appendText("Class named '" + className + "' not present.");
+			}
+		};
+	}
 }
