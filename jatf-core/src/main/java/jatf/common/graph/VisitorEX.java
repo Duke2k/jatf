@@ -1,23 +1,22 @@
+/*
+  This file is part of JATF.
+  <p>
+  JATF is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, version 3 of the License.
+  <p>
+  JATF is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  <p>
+  You should have received a copy of the GNU General Public License
+  along with JATF.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package jatf.common.graph;
 
-/**
- * A graph visitor interface that can throw an exception during a visit
- * callback.
- *
- * @param <T>
- * @param <E>
- * @author Scott.Stark@jboss.org
- * @version $Revision$
- */
 interface VisitorEX<T, E extends Exception> {
-	/**
-	 * Called by the graph traversal methods when a vertex is first visited.
-	 *
-	 * @param g -
-	 *          the graph
-	 * @param v -
-	 *          the vertex being visited.
-	 * @throws E exception for any error
-	 */
-	void visit(Graph<T> g, Vertex<T> v) throws E;
+
+  void visit(Graph<T> g, Vertex<T> v) throws E;
 }

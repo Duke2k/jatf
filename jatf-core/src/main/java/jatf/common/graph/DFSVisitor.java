@@ -1,34 +1,24 @@
+/*
+  This file is part of JATF.
+  <p>
+  JATF is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, version 3 of the License.
+  <p>
+  JATF is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  <p>
+  You should have received a copy of the GNU General Public License
+  along with JATF.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package jatf.common.graph;
 
-/**
- * A spanning tree visitor callback interface
- *
- * @param <T>
- * @author Scott.Stark@jboss.org
- * @version $Revision$
- * @see jatf.common.graph.Graph#dfsSpanningTree(jatf.common.graph.Vertex, jatf.common.graph.DFSVisitor)
- */
 interface DFSVisitor<T> {
-	/**
-	 * Called by the graph traversal methods when a vertex is first visited.
-	 *
-	 * @param g -
-	 *          the graph
-	 * @param v -
-	 *          the vertex being visited.
-	 */
-	public void visit(Graph<T> g, Vertex<T> v);
 
-	/**
-	 * Used dfsSpanningTree to notify the visitor of each outgoing edge to an
-	 * unvisited vertex.
-	 *
-	 * @param g -
-	 *          the graph
-	 * @param v -
-	 *          the vertex being visited
-	 * @param e -
-	 *          the outgoing edge from v
-	 */
-	public void visit(Graph<T> g, Vertex<T> v, Edge<T> e);
+  void visit(Graph<T> g, Vertex<T> v);
+
+  void visit(Graph<T> g, Vertex<T> v, Edge<T> e);
 }

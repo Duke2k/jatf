@@ -1,104 +1,70 @@
+/*
+  This file is part of JATF.
+  <p>
+  JATF is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, version 3 of the License.
+  <p>
+  JATF is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  <p>
+  You should have received a copy of the GNU General Public License
+  along with JATF.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package jatf.common.graph;
 
-/**
- * A directed, weighted edge in a graph
- *
- * @param <T>
- * @author Scott.Stark@jboss.org
- * @version $Revision$
- */
 public class Edge<T> {
-	private Vertex<T> from;
 
-	private Vertex<T> to;
+  private Vertex<T> from;
+  private Vertex<T> to;
+  private int cost;
+  private boolean mark;
 
-	private int cost;
+  @SuppressWarnings("UnusedDeclaration")
+  public Edge(Vertex<T> from, Vertex<T> to) {
+    this(from, to, 0);
+  }
 
-	private boolean mark;
+  Edge(Vertex<T> from, Vertex<T> to, int cost) {
+    this.from = from;
+    this.to = to;
+    this.cost = cost;
+    mark = false;
+  }
 
-	/**
-	 * Create a zero cost edge between from and to
-	 *
-	 * @param from the starting vertex
-	 * @param to   the ending vertex
-	 */
-	@SuppressWarnings("UnusedDeclaration")
-	public Edge(Vertex<T> from, Vertex<T> to) {
-		this(from, to, 0);
-	}
+  public Vertex<T> getTo() {
+    return to;
+  }
 
-	/**
-	 * Create an edge between from and to with the given cost.
-	 *
-	 * @param from the starting vertex
-	 * @param to   the ending vertex
-	 * @param cost the cost of the edge
-	 */
-	public Edge(Vertex<T> from, Vertex<T> to, int cost) {
-		this.from = from;
-		this.to = to;
-		this.cost = cost;
-		mark = false;
-	}
+  public Vertex<T> getFrom() {
+    return from;
+  }
 
-	/**
-	 * Get the ending vertex
-	 *
-	 * @return ending vertex
-	 */
-	public Vertex<T> getTo() {
-		return to;
-	}
+  public int getCost() {
+    return cost;
+  }
 
-	/**
-	 * Get the starting vertex
-	 *
-	 * @return starting vertex
-	 */
-	public Vertex<T> getFrom() {
-		return from;
-	}
+  public void mark() {
+    mark = true;
+  }
 
-	/**
-	 * Get the cost of the edge
-	 *
-	 * @return cost of the edge
-	 */
-	public int getCost() {
-		return cost;
-	}
+  @SuppressWarnings("UnusedDeclaration")
+  public boolean isMarked() {
+    return mark;
+  }
 
-	/**
-	 * Set the mark flag of the edge
-	 */
-	public void mark() {
-		mark = true;
-	}
-
-	/**
-	 * Get the edge mark flag
-	 *
-	 * @return edge mark flag
-	 */
-	@SuppressWarnings("UnusedDeclaration")
-	public boolean isMarked() {
-		return mark;
-	}
-
-	/**
-	 * String rep of edge
-	 *
-	 * @return string rep with from/to vertex names and cost
-	 */
-	public String toString() {
-		@SuppressWarnings("StringBufferReplaceableByString")
-		StringBuilder tmp = new StringBuilder("Edge[from: ");
-		tmp.append(from.getName());
-		tmp.append(",to: ");
-		tmp.append(to.getName());
-		tmp.append(", cost: ");
-		tmp.append(cost);
-		tmp.append("]");
-		return tmp.toString();
-	}
+  public String toString() {
+    @SuppressWarnings("StringBufferReplaceableByString")
+    StringBuilder tmp = new StringBuilder("Edge[from: ");
+    tmp.append(from.getName());
+    tmp.append(",to: ");
+    tmp.append(to.getName());
+    tmp.append(", cost: ");
+    tmp.append(cost);
+    tmp.append("]");
+    return tmp.toString();
+  }
 }
