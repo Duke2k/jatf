@@ -16,20 +16,16 @@
 
 package jatf.metrics;
 
-import static jatf.common.ArchitectureTestConstraints.MAX_NUMBER_OF_METHODS_PER_CLASS;
-import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Set;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import jatf.common.parser.MethodVisitor;
+import java.util.Set;
+
+import static jatf.common.ArchitectureTestConstraints.MAX_NUMBER_OF_METHODS_PER_CLASS;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(DataProviderRunner.class)
 public class NumberOfMethodsPerClassTest extends MetricsTestBase {
@@ -43,9 +39,7 @@ public class NumberOfMethodsPerClassTest extends MetricsTestBase {
 	@Test
 	@UseDataProvider(DATA_PROVIDER_NAME)
 	public void testNumberOfMethods(Class<?> clazz) {
-		MethodVisitor methodVisitor = new MethodVisitor();
-		parseWithVoidVisitor(clazz, methodVisitor);
-		int methodCount = methodVisitor.getMethodNames().size();
+    int methodCount = clazz.getDeclaredMethods().length;
 		assertTrue("Number of methods threshold violated in " + clazz.getName() + ": " + methodCount + " methods.",
 				methodCount <= MAX_NUMBER_OF_METHODS_PER_CLASS);
 	}
