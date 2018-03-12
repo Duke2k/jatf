@@ -51,14 +51,15 @@
 		<module>jatf-core</module>
 		<module>jatf-tests</module>
 		<module>jatf-rules</module>
+		<module>jatf-web</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<jatf.version>${project.version}</jatf.version>
-		<spring-boot.version>${parent.version}</spring-boot.version>
-        <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
-        <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+		<spring-boot.version>2.0.0.RELEASE</spring-boot.version>
+		<maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
+		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
 	</properties>
 </project>
