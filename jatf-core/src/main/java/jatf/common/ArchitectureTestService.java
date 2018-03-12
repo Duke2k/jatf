@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 
 import jatf.api.constraints.ConstraintsService;
+import jatf.api.tests.TestNamesHelper;
 
 @Service
 public class ArchitectureTestService {
@@ -28,8 +29,12 @@ public class ArchitectureTestService {
 	}
 
 	public void runTests(@Nonnull String testName, @Nonnull RunNotifier notifier) throws ClassNotFoundException, InitializationError {
-		Set<Class<?>> classesToTest = dataProvider.getClassesFor(testName);
 		DataProviderRunner runner = new DataProviderRunner(Class.forName(testName));
 		runner.run(notifier);
+	}
+
+	@Nonnull
+	public Set<String> getTestNames() {
+		return TestNamesHelper.getTestNames();
 	}
 }

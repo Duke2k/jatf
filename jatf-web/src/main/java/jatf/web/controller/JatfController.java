@@ -18,15 +18,35 @@ package jatf.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jatf.api.constraints.ConstraintsService;
+import jatf.common.ArchitectureTestService;
+import junit.framework.TestResult;
 
 @RestController
 @RequestMapping(produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class JatfController {
 
-	@Autowired
+	private ArchitectureTestService architectureTestService;
 	private ConstraintsService constraintsService;
+
+	@Autowired
+	public JatfController(ArchitectureTestService architectureTestService, ConstraintsService constraintsService) {
+		this.architectureTestService = architectureTestService;
+		this.constraintsService = constraintsService;
+	}
+
+	@RequestMapping(path = JatfRoutes.RUN_TESTS, method = RequestMethod.PUT)
+	public TestResult runTests(@RequestBody Class<?> clazz,
+														 @RequestParam(value = JatfRoutes.PARAM_TESTS_TO_CLASSES_MAP) String testsToClassesJson) {
+		TestResult testResult = new TestResult();
+		// TODO
+
+		return testResult;
+	}
 }
