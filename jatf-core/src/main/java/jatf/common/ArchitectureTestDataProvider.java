@@ -31,17 +31,30 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.reflections.Reflections;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 
+import jatf.api.constraints.Constraint;
+import jatf.api.constraints.Constraints;
+
+@Component
 public class ArchitectureTestDataProvider {
 
 	private static final String TESTMAP_SNAPSHOT_JSON_FILENAME = "testMapping-%s.json";
 
+	private Constraints constraints;
 	private ArchitectureTestRuleEvaluator ruleEvaluator;
 	private Map<String, Set<Class<?>>> testClassesMap;
 
 	public ArchitectureTestDataProvider() {
+		this(new ArchitectureTestDefaultConstraints());
+	}
+
+	@Autowired
+	ArchitectureTestDataProvider(Constraints constraints) {
+		this.constraints = constraints;
 		initializeInstance();
 	}
 
@@ -67,9 +80,9 @@ public class ArchitectureTestDataProvider {
 	}
 
 	private void writeTestMappingSnapshot() {
-		if (ArchitectureTestConstraints.WRITE_TESTMAP_SNAPSHOT_JSON_TO_ROOT_FOLDER) {
+		if (Boolean.valueOf(constraints.valueOf(Constraint.WRITE_TESTMAP_SNAPSHOT_JSON_TO_ROOT_FOLDER))) {
 			File jsonFile = new File(
-					ArchitectureTestConstraints.ROOT_FOLDER,
+					constraints.valueOf(Constraint.ROOT_FOLDER),
 					String.format(TESTMAP_SNAPSHOT_JSON_FILENAME, System.currentTimeMillis())
 			);
 			try {

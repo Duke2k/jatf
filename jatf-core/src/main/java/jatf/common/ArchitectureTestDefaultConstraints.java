@@ -16,14 +16,10 @@
 
 package jatf.common;
 
-import java.util.HashMap;
-
-import javax.annotation.Nonnull;
-
 import jatf.api.constraints.Constraint;
-import jatf.api.constraints.Constraints;
+import jatf.api.constraints.HashMapBasedConstraints;
 
-public class ArchitectureTestDefaultConstraints extends HashMap<Constraint, String> implements Constraints {
+public class ArchitectureTestDefaultConstraints extends HashMapBasedConstraints {
 
 	public ArchitectureTestDefaultConstraints() {
 		put(Constraint.INSTABILITY_LOOSE, "0.8");
@@ -38,12 +34,5 @@ public class ArchitectureTestDefaultConstraints extends HashMap<Constraint, Stri
 		put(Constraint.ROOT_FOLDER, ".");
 		put(Constraint.SCOPES, "jatf");
 		put(Constraint.WRITE_TESTMAP_SNAPSHOT_JSON_TO_ROOT_FOLDER, "false");
-	}
-
-	@Override
-	@Nonnull
-	public String valueOf(@Nonnull Constraint constraint) {
-		String result = get(constraint);
-		return result == null ? "" : result;
 	}
 }

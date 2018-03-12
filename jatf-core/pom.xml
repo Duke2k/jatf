@@ -87,8 +87,14 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>net.sourceforge.jtds</groupId>
-			<artifactId>jtds</artifactId>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -99,15 +105,35 @@
 
 	<profiles>
 		<profile>
-			<id>db-mssql-local</id>
+			<id>db-h2-mem</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<db.driver>net.sourceforge.jtds.jdbc.Driver</db.driver>
-				<db.url>
-					jdbc:jtds:sqlserver://localhost:1433;DatabaseName=${project.artifactId}-db
-				</db.url>
+				<db.url>jdbc:h2:mem:${project.artifactId}-db</db.url>
+				<db.driver>org.h2.Driver</db.driver>
+				<db.hibernate.dialect>org.hibernate.dialect.H2Dialect</db.hibernate.dialect>
+			</properties>
+		</profile>
+		<profile>
+			<id>db-h2-file</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<db.url>jdbc:h2:file:d:/temp/${project.artifactId}-db;AUTO_SERVER=TRUE;</db.url>
+				<db.driver>org.h2.Driver</db.driver>
+				<db.hibernate.dialect>org.hibernate.dialect.H2Dialect</db.hibernate.dialect>
+			</properties>
+		</profile>
+		<profile>
+			<id>db-mssql-local</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<db.driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</db.driver>
+				<db.url>jdbc:sqlserver://localhost\\MSSQLSERVER:1433;databaseName=${project.artifactId}-db</db.url>
 				<hibernate.dialect>org.hibernate.dialect.SQLServerDialect</hibernate.dialect>
 			</properties>
 		</profile>
