@@ -17,14 +17,16 @@
 package jatf.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jatf.api.constraints.ConstraintsService;
 
 @RestController
+@RequestMapping(produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class JatfController {
 
 	@Autowired
 	private ConstraintsService constraintsService;
-
 }

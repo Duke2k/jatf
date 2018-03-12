@@ -24,7 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"jatf.api.constraints", "jatf.persistence"})
+@ComponentScan({"jatf.api.constraints", "jatf.common", "jatf.persistence"})
 @EntityScan("jatf.persistence")
 @EnableJpaRepositories("jatf.persistence")
 public class JatfWebApplication extends SpringBootServletInitializer {

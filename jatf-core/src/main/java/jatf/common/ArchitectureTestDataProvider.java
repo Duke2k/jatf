@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -66,6 +67,14 @@ public class ArchitectureTestDataProvider {
 	@Nullable
 	public <A extends Annotation> Annotation getAnnotationFor(Class<?> clazz, Class<A> annotationType) {
 		return ruleEvaluator.getAnnotationFor(clazz, annotationType);
+	}
+
+	public void addClassToTest(@Nonnull String testName, @Nonnull Class<?> clazz) {
+		if (testClassesMap.get(testName) == null) {
+			testClassesMap.put(testName, Collections.singleton(clazz));
+		} else {
+			testClassesMap.get(testName).add(clazz);
+		}
 	}
 
 	private void initializeInstance() {
