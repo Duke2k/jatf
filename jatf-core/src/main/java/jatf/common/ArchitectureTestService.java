@@ -24,12 +24,10 @@ public class ArchitectureTestService {
 		dataProvider = new ArchitectureTestDataProvider(constraintsService.getConstraints());
 	}
 
-	public void addClassToTest(@Nonnull String testName, @Nonnull Class<?> clazz) {
+	public void runTest(@Nonnull String testName, @Nonnull Class<?> clazz) throws ClassNotFoundException, InitializationError {
 		dataProvider.addClassToTest(testName, clazz);
-	}
-
-	public void runTests(@Nonnull String testName, @Nonnull RunNotifier notifier) throws ClassNotFoundException, InitializationError {
 		DataProviderRunner runner = new DataProviderRunner(Class.forName(testName));
+		RunNotifier notifier = new RunNotifier();
 		runner.run(notifier);
 	}
 

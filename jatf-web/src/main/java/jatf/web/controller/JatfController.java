@@ -16,6 +16,9 @@
 
 package jatf.web.controller;
 
+import java.util.Set;
+
+import org.junit.runners.model.InitializationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
 
 import jatf.api.constraints.ConstraintsService;
 import jatf.common.ArchitectureTestService;
@@ -41,12 +46,21 @@ public class JatfController {
 		this.constraintsService = constraintsService;
 	}
 
-	@RequestMapping(path = JatfRoutes.RUN_TESTS, method = RequestMethod.PUT)
+	@RequestMapping(path = JatfRoutes.PATH_RUN_TESTS, method = RequestMethod.PUT)
 	public TestResult runTests(@RequestBody Class<?> clazz,
-														 @RequestParam(value = JatfRoutes.PARAM_TESTS_TO_CLASSES_MAP) String testsToClassesJson) {
+														 @RequestParam(value = JatfRoutes.PARAM_TEST_NAMES) String testNamesJson)
+			throws InitializationError, ClassNotFoundException {
 		TestResult testResult = new TestResult();
-		// TODO
-
+		Gson gson = new Gson();
+		String[] testNames = gson.fromJson(testNamesJson, String[].class);
+		Set<String> availableTestNames = architectureTestService.getTestNames();
+		for (String testName : testNames) {
+			if (availableTestNames.contains(testName)) {
+				architectureTestService.runTest(testName, clazz);
+			} else {
+				throw new IllegalArgumentException(testName + " is an invalid test name");
+			}
+		}
 		return testResult;
 	}
 }
