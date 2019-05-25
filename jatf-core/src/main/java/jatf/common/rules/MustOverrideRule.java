@@ -23,11 +23,11 @@ import jatf.common.rules.markers.MustOverrideMarker;
 @SuppressWarnings("unused")
 public final class MustOverrideRule extends ClassAnnotationBasedRule<MustOverrideMarker, AlwaysTrue> {
 
-	public MustOverrideRule(Class<?>[] classes, MustOverrideMarker marker) {
-		super(classes, new AlwaysTrue(), marker);
-	}
+  public MustOverrideRule(Class<?>[] classes, MustOverrideMarker marker) {
+    super(classes, new AlwaysTrue(), marker);
+  }
 
-	public String[] methodNames() {
-		return marker.methodNames;
-	}
+  public String[] methodNames() {
+    return marker.methodNames;
+  }
 }

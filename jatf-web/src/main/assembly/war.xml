@@ -16,30 +16,30 @@
 -->
 
 <assembly xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-					xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
-					xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
-	<id>war</id>
-	<formats>
-		<format>zip</format>
-	</formats>
-	<includeBaseDirectory>false</includeBaseDirectory>
-	<includeSiteDirectory>false</includeSiteDirectory>
-	<fileSets>
-		<fileSet>
-			<directory>${project.basedir}/src/main/resources</directory>
-			<outputDirectory>/conf/SERVICES_CONFIG/${project.name}</outputDirectory>
-			<includes>
-				<include>*.properties</include>
-				<include>*.xml</include>
-			</includes>
-			<filtered>true</filtered>
-		</fileSet>
-	</fileSets>
-	<files>
-		<file>
-			<source>${project.build.directory}/${project.name}-${project.version}.war</source>
-			<outputDirectory>/webapps</outputDirectory>
-			<destName>jatf-web.war</destName>
-		</file>
-	</files>
+          xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+  <id>war</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <includeSiteDirectory>false</includeSiteDirectory>
+  <fileSets>
+    <fileSet>
+      <directory>${project.basedir}/src/main/resources</directory>
+      <outputDirectory>/conf/SERVICES_CONFIG/${project.name}</outputDirectory>
+      <includes>
+        <include>*.properties</include>
+        <include>*.xml</include>
+      </includes>
+      <filtered>true</filtered>
+    </fileSet>
+  </fileSets>
+  <files>
+    <file>
+      <source>${project.build.directory}/${project.name}-${project.version}.war</source>
+      <outputDirectory>/webapps</outputDirectory>
+      <destName>jatf-web.war</destName>
+    </file>
+  </files>
 </assembly>

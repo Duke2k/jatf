@@ -12,10 +12,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class RestErrorHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(value = {IllegalArgumentException.class, IllegalStateException.class})
-	protected ResponseEntity<Object> handleBadRequest(RuntimeException e, WebRequest request) {
-		String body = StringUtils.defaultIfBlank(e.getMessage(),
-				"Invalid call to service, parameters and / or body correct?");
-		return handleExceptionInternal(e, body, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
-	}
+  @ExceptionHandler(value = {IllegalArgumentException.class, IllegalStateException.class})
+  protected ResponseEntity<Object> handleBadRequest(RuntimeException e, WebRequest request) {
+    String body = StringUtils.defaultIfBlank(e.getMessage(),
+        "Invalid call to service, parameters and / or body correct?");
+    return handleExceptionInternal(e, body, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+  }
 }

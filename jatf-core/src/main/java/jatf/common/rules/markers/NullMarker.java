@@ -20,13 +20,13 @@ import java.lang.annotation.Annotation;
 
 public class NullMarker extends RuleBasedMarker {
 
-	@Override
-	public Class annotationType() {
-		return null;
-	}
+  @Override
+  public Class annotationType() {
+    return null;
+  }
 
-	@Override
-	public Annotation createAnnotation() {
-		return null;
-	}
+  @Override
+  public Annotation createAnnotation() {
+    return null;
+  }
 }

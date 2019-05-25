@@ -20,7 +20,7 @@ import java.lang.annotation.Annotation;
 
 public abstract class RuleBasedMarker<A extends Annotation> {
 
-	public abstract Class<A> annotationType();
+  public abstract Class<A> annotationType();
 
-	public abstract A createAnnotation();
+  public abstract A createAnnotation();
 }

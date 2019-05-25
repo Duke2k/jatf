@@ -15,51 +15,51 @@
  along with JATF.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.github.duke2k.jatf</groupId>
-	<artifactId>jatf-project</artifactId>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.duke2k.jatf</groupId>
+  <artifactId>jatf-project</artifactId>
 
-	<packaging>pom</packaging>
+  <packaging>pom</packaging>
 
-	<name>Java Architecture Test Framework</name>
-	<version>1.0.7-SNAPSHOT</version>
+  <name>Java Architecture Test Framework</name>
+  <version>1.0.7-SNAPSHOT</version>
 
-	<description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the
-		root project, POM only.
-	</description>
-	<url>https://github.com/Duke2k/jatf</url>
-	<licenses>
-		<license>
-			<name>GPLv3</name>
-		</license>
-	</licenses>
-	<developers>
-		<developer>
-			<name>Samuel Eickelberg</name>
-			<email>samuel.eickelberg@posteo.de</email>
-		</developer>
-	</developers>
+  <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the
+    root project, POM only.
+  </description>
+  <url>https://github.com/Duke2k/jatf</url>
+  <licenses>
+    <license>
+      <name>GPLv3</name>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Samuel Eickelberg</name>
+      <email>samuel.eickelberg@posteo.de</email>
+    </developer>
+  </developers>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.0.RELEASE</version>
-	</parent>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.5.RELEASE</version>
+  </parent>
 
-	<modules>
-		<module>jatf-core</module>
-		<module>jatf-tests</module>
-		<module>jatf-rules</module>
-		<module>jatf-web</module>
-	</modules>
+  <modules>
+    <module>jatf-core</module>
+    <module>jatf-tests</module>
+    <module>jatf-rules</module>
+    <module>jatf-web</module>
+  </modules>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-		<jatf.version>${project.version}</jatf.version>
-		<spring-boot.version>2.0.0.RELEASE</spring-boot.version>
-		<maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
-		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
-	</properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <jatf.version>${project.version}</jatf.version>
+    <spring-boot.version>2.1.5.RELEASE</spring-boot.version>
+    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+    <maven-jar-plugin.version>3.1.2</maven-jar-plugin.version>
+  </properties>
 </project>

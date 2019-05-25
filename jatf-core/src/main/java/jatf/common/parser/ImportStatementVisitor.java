@@ -17,28 +17,27 @@
 package jatf.common.parser;
 
 
-import static com.google.common.collect.Sets.newHashSet;
-
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-
 import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
+import javax.annotation.Nonnull;
+import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
+
 public class ImportStatementVisitor extends VoidVisitorAdapter<Object> {
 
-	private Set<String> importStatements = newHashSet();
+  private Set<String> importStatements = newHashSet();
 
-	@Override
-	public void visit(ImportDeclaration importDeclaration, Object arguments) {
-		if (importDeclaration.getName().getQualifier().isPresent()) {
-			importStatements.add(importDeclaration.getName().getQualifier().get().asString());
-		}
-	}
+  @Override
+  public void visit(ImportDeclaration importDeclaration, Object arguments) {
+    if (importDeclaration.getName().getQualifier().isPresent()) {
+      importStatements.add(importDeclaration.getName().getQualifier().get().asString());
+    }
+  }
 
-	@Nonnull
-	public Set<String> getImportStatements() {
-		return importStatements;
-	}
+  @Nonnull
+  public Set<String> getImportStatements() {
+    return importStatements;
+  }
 }

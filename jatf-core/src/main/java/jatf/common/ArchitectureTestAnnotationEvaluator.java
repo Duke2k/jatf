@@ -16,31 +16,29 @@
 
 package jatf.common;
 
-import static com.google.common.collect.Sets.newHashSet;
-
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-
+import jatf.annotations.ArchitectureTest;
 import org.reflections.Reflections;
 
-import jatf.annotations.ArchitectureTest;
+import javax.annotation.Nonnull;
+import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
 
 @SuppressWarnings("WeakerAccess")
 public class ArchitectureTestAnnotationEvaluator extends ArchitectureTestAbstractEvaluator {
 
-	public ArchitectureTestAnnotationEvaluator(@Nonnull Reflections reflections) {
-		super(reflections);
-	}
+  public ArchitectureTestAnnotationEvaluator(@Nonnull Reflections reflections) {
+    super(reflections);
+  }
 
-	@Override
-	protected void process() {
-		Set<Class<?>> annotatedClasses = newHashSet();
-		Set<Class<?>> set = reflections.getTypesAnnotatedWith(ArchitectureTest.class);
-		annotatedClasses.addAll(set);
-		for (Class<?> annotatedClass : annotatedClasses) {
-			ArchitectureTest annotation = annotatedClass.getAnnotation(ArchitectureTest.class);
-			addAnnotatedClass(annotatedClass, annotation);
-		}
-	}
+  @Override
+  protected void process() {
+    Set<Class<?>> annotatedClasses = newHashSet();
+    Set<Class<?>> set = reflections.getTypesAnnotatedWith(ArchitectureTest.class);
+    annotatedClasses.addAll(set);
+    for (Class<?> annotatedClass : annotatedClasses) {
+      ArchitectureTest annotation = annotatedClass.getAnnotation(ArchitectureTest.class);
+      addAnnotatedClass(annotatedClass, annotation);
+    }
+  }
 }

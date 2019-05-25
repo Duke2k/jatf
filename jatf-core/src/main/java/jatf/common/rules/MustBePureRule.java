@@ -16,20 +16,20 @@
 
 package jatf.common.rules;
 
-import java.lang.reflect.Method;
-
 import jatf.api.rules.MethodAnnotationBasedRule;
 import jatf.common.rules.conditions.AlwaysTrue;
 import jatf.common.rules.markers.MustBePureMarker;
 
+import java.lang.reflect.Method;
+
 @SuppressWarnings("unused")
 public final class MustBePureRule extends MethodAnnotationBasedRule<MustBePureMarker, AlwaysTrue> {
 
-	public MustBePureRule(Method[] methods, MustBePureMarker marker) {
-		super(methods, new AlwaysTrue(), marker);
-	}
+  public MustBePureRule(Method[] methods, MustBePureMarker marker) {
+    super(methods, new AlwaysTrue(), marker);
+  }
 
-	public double degree() {
-		return marker.degree;
-	}
+  public double degree() {
+    return marker.degree;
+  }
 }

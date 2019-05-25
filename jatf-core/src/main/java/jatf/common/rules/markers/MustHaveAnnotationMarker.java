@@ -16,37 +16,37 @@
 
 package jatf.common.rules.markers;
 
-import java.lang.annotation.Annotation;
-
 import jatf.annotations.MustHaveAnnotation;
+
+import java.lang.annotation.Annotation;
 
 public class MustHaveAnnotationMarker extends RuleBasedMarker<MustHaveAnnotation> {
 
-	public Class<? extends Annotation> annotation;
+  public Class<? extends Annotation> annotation;
 
-	@Override
-	public Class<MustHaveAnnotation> annotationType() {
-		return MustHaveAnnotation.class;
-	}
+  @Override
+  public Class<MustHaveAnnotation> annotationType() {
+    return MustHaveAnnotation.class;
+  }
 
-	@Override
-	public MustHaveAnnotation createAnnotation() {
-		return new MustHaveAnnotation() {
+  @Override
+  public MustHaveAnnotation createAnnotation() {
+    return new MustHaveAnnotation() {
 
-			@Override
-			public String toString() {
-				return annotationType().getSimpleName();
-			}
+      @Override
+      public String toString() {
+        return annotationType().getSimpleName();
+      }
 
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return MustHaveAnnotation.class;
-			}
+      @Override
+      public Class<? extends Annotation> annotationType() {
+        return MustHaveAnnotation.class;
+      }
 
-			@Override
-			public Class<? extends Annotation> annotation() {
-				return annotation;
-			}
-		};
-	}
+      @Override
+      public Class<? extends Annotation> annotation() {
+        return annotation;
+      }
+    };
+  }
 }

@@ -21,12 +21,12 @@ import jatf.api.rules.Condition;
 @SuppressWarnings("unused")
 public final class Extends extends Condition<Class<?>> {
 
-	public Extends(Class<?> type) {
-		super(type);
-	}
+  public Extends(Class<?> type) {
+    super(type);
+  }
 
-	@Override
-	public boolean firesFor(Class<?> clazz) {
-		return clazz.getSuperclass().equals(type);
-	}
+  @Override
+  public boolean firesFor(Class<?> clazz) {
+    return clazz.getSuperclass().equals(type);
+  }
 }

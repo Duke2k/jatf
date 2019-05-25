@@ -30,17 +30,17 @@ import static org.junit.Assert.assertTrue;
 @RunWith(DataProviderRunner.class)
 public class NumberOfMethodsPerClassTest extends MetricsTestBase {
 
-	@DataProvider
-	public static Object[][] provideClassesToTest() {
-		Set<Class<?>> classesToTest = provideClassesFor(NumberOfMethodsPerClassTest.class);
-		return getProvider(classesToTest);
-	}
+  @DataProvider
+  public static Object[][] provideClassesToTest() {
+    Set<Class<?>> classesToTest = provideClassesFor(NumberOfMethodsPerClassTest.class);
+    return getProvider(classesToTest);
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void testNumberOfMethods(Class<?> clazz) {
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void testNumberOfMethods(Class<?> clazz) {
     int methodCount = clazz.getDeclaredMethods().length;
-		assertTrue("Number of methods threshold violated in " + clazz.getName() + ": " + methodCount + " methods.",
-				methodCount <= MAX_NUMBER_OF_METHODS_PER_CLASS);
-	}
+    assertTrue("Number of methods threshold violated in " + clazz.getName() + ": " + methodCount + " methods.",
+        methodCount <= MAX_NUMBER_OF_METHODS_PER_CLASS);
+  }
 }

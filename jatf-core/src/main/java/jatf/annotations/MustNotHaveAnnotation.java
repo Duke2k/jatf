@@ -23,5 +23,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MustNotHaveAnnotation {
 
-	Class<? extends Annotation> annotation();
+  Class<? extends Annotation> annotation();
 }

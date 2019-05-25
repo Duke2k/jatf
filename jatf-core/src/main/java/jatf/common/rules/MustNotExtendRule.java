@@ -23,11 +23,11 @@ import jatf.common.rules.markers.MustNotExtendMarker;
 @SuppressWarnings("WeakerAccess")
 public final class MustNotExtendRule extends ClassAnnotationBasedRule<MustNotExtendMarker, AlwaysTrue> {
 
-	public MustNotExtendRule(Class<?>[] classes, MustNotExtendMarker marker) {
-		super(classes, new AlwaysTrue(), marker);
-	}
+  public MustNotExtendRule(Class<?>[] classes, MustNotExtendMarker marker) {
+    super(classes, new AlwaysTrue(), marker);
+  }
 
-	public Class<?> type() {
-		return marker.type;
-	}
+  public Class<?> type() {
+    return marker.type;
+  }
 }

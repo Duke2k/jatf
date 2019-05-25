@@ -31,7 +31,7 @@ import jatf.common.rules.markers.NullMarker;
 @SuppressWarnings("unused")
 public final class NoFinalModifierInLocalVariablesRule extends ClassAnnotationBasedRule<NullMarker, Not> {
 
-	public NoFinalModifierInLocalVariablesRule(Class<?>[] classes) {
-		super(classes, new Not(new HasAnnotation(ArchitectureTest.class)), new NullMarker());
-	}
+  public NoFinalModifierInLocalVariablesRule(Class<?>[] classes) {
+    super(classes, new Not(new HasAnnotation(ArchitectureTest.class)), new NullMarker());
+  }
 }

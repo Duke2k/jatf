@@ -16,44 +16,42 @@
 
 package jatf.metrics;
 
-import static jatf.common.ArchitectureTestConstraints.MAX_HALSTEAD_DELIVERED_BUGS;
-import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
-import static org.junit.Assert.assertTrue;
+import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.common.parser.TokenVisitor;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
-
-import jatf.common.parser.TokenVisitor;
+import static jatf.common.ArchitectureTestConstraints.MAX_HALSTEAD_DELIVERED_BUGS;
+import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(DataProviderRunner.class)
 public class HalsteadComplexityTest extends MetricsTestBase {
 
-	@DataProvider
-	public static Object[][] provideClassesToTest() {
-		Set<Class<?>> classesToTest = provideClassesFor(HalsteadComplexityTest.class);
-		return getProvider(classesToTest);
-	}
+  @DataProvider
+  public static Object[][] provideClassesToTest() {
+    Set<Class<?>> classesToTest = provideClassesFor(HalsteadComplexityTest.class);
+    return getProvider(classesToTest);
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void testHalsteadComplexity(Class<?> clazz) {
-		TokenVisitor tokenVisitor = new TokenVisitor();
-		parseWithVoidVisitor(clazz, tokenVisitor);
-		List<String> halsteadLength = tokenVisitor.getTokens();
-		if (halsteadLength.size() > 0) {
-			List<String> halsteadVocabulary = tokenVisitor.getUniqueTokens();
-			double halsteadVolume =
-					(double) halsteadLength.size() * (Math.log((double) halsteadVocabulary.size()) / Math.log(2));
-			double halsteadDeliveredBugs = halsteadVolume / 3000d;
-			assertTrue("Halstead complexity threshold violated in class " + clazz.getName(),
-					halsteadDeliveredBugs <= MAX_HALSTEAD_DELIVERED_BUGS);
-		}
-	}
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void testHalsteadComplexity(Class<?> clazz) {
+    TokenVisitor tokenVisitor = new TokenVisitor();
+    parseWithVoidVisitor(clazz, tokenVisitor);
+    List<String> halsteadLength = tokenVisitor.getTokens();
+    if (halsteadLength.size() > 0) {
+      List<String> halsteadVocabulary = tokenVisitor.getUniqueTokens();
+      double halsteadVolume =
+          (double) halsteadLength.size() * (Math.log((double) halsteadVocabulary.size()) / Math.log(2));
+      double halsteadDeliveredBugs = halsteadVolume / 3000d;
+      assertTrue("Halstead complexity threshold violated in class " + clazz.getName(),
+          halsteadDeliveredBugs <= MAX_HALSTEAD_DELIVERED_BUGS);
+    }
+  }
 }

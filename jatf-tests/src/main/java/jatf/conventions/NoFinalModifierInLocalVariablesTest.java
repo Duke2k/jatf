@@ -16,71 +16,68 @@
 
 package jatf.conventions;
 
-import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
-import static org.junit.Assert.assertFalse;
-
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
-
 import jatf.common.parser.DeclarationVisitor;
 import jatf.common.parser.MethodVisitor;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Set;
+
+import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(DataProviderRunner.class)
 public class NoFinalModifierInLocalVariablesTest extends ConventionsTestBase {
 
-	@DataProvider
-	public static Object[][] provideClassesToTest() {
-		Set<Class<?>> classesToTest = provideClassesFor(NoFinalModifierInLocalVariablesTest.class);
-		return getProvider(classesToTest);
-	}
+  @DataProvider
+  public static Object[][] provideClassesToTest() {
+    Set<Class<?>> classesToTest = provideClassesFor(NoFinalModifierInLocalVariablesTest.class);
+    return getProvider(classesToTest);
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void testNoFinalModifierInLocalVariables(Class<?> clazz) {
-		MethodVisitor methodVisitor = new MethodVisitor();
-		parseWithVoidVisitor(clazz, methodVisitor);
-		for (String methodName : methodVisitor.getMethodNames()) {
-			BlockStmt body = methodVisitor.getMethodBody(methodName);
-			if (body != null) {
-				DeclarationVisitor declarationVisitor = new DeclarationVisitor();
-				parseWithVoidVisitor(body, declarationVisitor);
-				for (String variableName : declarationVisitor.getTypeNames()) {
-					assertFalse("Local variable " + variableName + " in method " + methodName + " should not be final",
-							declarationVisitor.getModifierFor(variableName).contains(Modifier.FINAL));
-				}
-			}
-			List<Parameter> parameterList = methodVisitor.getParametersOfMethod(methodName);
-			if (parameterList != null) {
-				for (Parameter parameter : parameterList) {
-					if (!isUsedInAnonymousClass(parameter, body)) {
-						assertFalse("Method parameter " + parameter.getNameAsString() + " in method " + methodName + " should not be final",
-								parameter.getModifiers().contains(Modifier.FINAL));
-					}
-				}
-			}
-		}
-	}
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void testNoFinalModifierInLocalVariables(Class<?> clazz) {
+    MethodVisitor methodVisitor = new MethodVisitor();
+    parseWithVoidVisitor(clazz, methodVisitor);
+    for (String methodName : methodVisitor.getMethodNames()) {
+      BlockStmt body = methodVisitor.getMethodBody(methodName);
+      if (body != null) {
+        DeclarationVisitor declarationVisitor = new DeclarationVisitor();
+        parseWithVoidVisitor(body, declarationVisitor);
+        for (String variableName : declarationVisitor.getTypeNames()) {
+          assertFalse("Local variable " + variableName + " in method " + methodName + " should not be final",
+              declarationVisitor.getModifierFor(variableName).contains(Modifier.FINAL));
+        }
+      }
+      List<Parameter> parameterList = methodVisitor.getParametersOfMethod(methodName);
+      if (parameterList != null) {
+        for (Parameter parameter : parameterList) {
+          if (!isUsedInAnonymousClass(parameter, body)) {
+            assertFalse("Method parameter " + parameter.getNameAsString() + " in method " + methodName + " should not be final",
+                parameter.getModifiers().contains(Modifier.FINAL));
+          }
+        }
+      }
+    }
+  }
 
-	private boolean isUsedInAnonymousClass(@Nonnull Parameter parameter, @Nullable BlockStmt body) {
-		//noinspection RedundantIfStatement
-		if (body != null) {
-			// TODO
+  private boolean isUsedInAnonymousClass(@Nonnull Parameter parameter, @Nullable BlockStmt body) {
+    //noinspection RedundantIfStatement
+    if (body != null) {
+      // TODO
 
-			return true;
-		}
-		return false;
-	}
+      return true;
+    }
+    return false;
+  }
 }

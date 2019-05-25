@@ -24,11 +24,11 @@ import jatf.common.rules.markers.MustNotOverrideMarker;
 @SuppressWarnings("unused")
 public final class DoNotOverrideIfDoesNotImplementRule extends ClassAnnotationBasedRule<MustNotOverrideMarker, Not> {
 
-	public DoNotOverrideIfDoesNotImplementRule(Class<?> notToBeImplemented, Class<?>[] classes, MustNotOverrideMarker marker) {
-		super(classes, new Not(new Implements(notToBeImplemented)), marker);
-	}
+  public DoNotOverrideIfDoesNotImplementRule(Class<?> notToBeImplemented, Class<?>[] classes, MustNotOverrideMarker marker) {
+    super(classes, new Not(new Implements(notToBeImplemented)), marker);
+  }
 
-	public String[] methodNames() {
-		return marker.methodNames;
-	}
+  public String[] methodNames() {
+    return marker.methodNames;
+  }
 }

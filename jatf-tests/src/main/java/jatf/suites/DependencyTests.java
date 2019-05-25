@@ -16,11 +16,6 @@
 
 package jatf.suites;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 import jatf.dependency.AcyclicDependenciesPrincipleTest;
 import jatf.dependency.AnnotationTypeTest;
 import jatf.dependency.DangerousCastsTest;
@@ -33,33 +28,37 @@ import jatf.dependency.ReturnsTest;
 import jatf.dependency.ThrowsTest;
 import jatf.dependency.UncheckedCastsTest;
 import jatf.dependency.UsesTest;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-		AcyclicDependenciesPrincipleTest.class,
-		AnnotationTypeTest.class,
-		DangerousCastsTest.class,
-		ExtendsTest.class,
-		ImplementsTest.class,
-		InstabilityTest.class,
-		MethodPurityTest.class,
-		OverridesTest.class,
-		ThrowsTest.class,
-		UncheckedCastsTest.class,
-		UsesTest.class,
-		ReturnsTest.class
+    AcyclicDependenciesPrincipleTest.class,
+    AnnotationTypeTest.class,
+    DangerousCastsTest.class,
+    ExtendsTest.class,
+    ImplementsTest.class,
+    InstabilityTest.class,
+    MethodPurityTest.class,
+    OverridesTest.class,
+    ThrowsTest.class,
+    UncheckedCastsTest.class,
+    UsesTest.class,
+    ReturnsTest.class
 })
 public class DependencyTests extends ArchitectureTestSuiteBase {
 
-	private static long startTime;
+  private static long startTime;
 
-	@BeforeClass
-	public static void startUpSuite() {
-		startTime = System.currentTimeMillis();
-	}
+  @BeforeClass
+  public static void startUpSuite() {
+    startTime = System.currentTimeMillis();
+  }
 
-	@AfterClass
-	public static void endSuite() {
-		endSuite(DependencyTests.class, startTime);
-	}
+  @AfterClass
+  public static void endSuite() {
+    endSuite(DependencyTests.class, startTime);
+  }
 }

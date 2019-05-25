@@ -23,11 +23,11 @@ import jatf.common.rules.markers.MustNotImplementMarker;
 @SuppressWarnings("WeakerAccess")
 public final class MustNotImplementRule extends ClassAnnotationBasedRule<MustNotImplementMarker, AlwaysTrue> {
 
-	public MustNotImplementRule(Class<?>[] classes, MustNotImplementMarker marker) {
-		super(classes, new AlwaysTrue(), marker);
-	}
+  public MustNotImplementRule(Class<?>[] classes, MustNotImplementMarker marker) {
+    super(classes, new AlwaysTrue(), marker);
+  }
 
-	public Class<?>[] interfaces() {
-		return marker.interfaces;
-	}
+  public Class<?>[] interfaces() {
+    return marker.interfaces;
+  }
 }

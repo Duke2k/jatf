@@ -23,23 +23,23 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-		ConventionTests.class,
-		DependencyTests.class,
-		MetricsTests.class,
-		PatternTests.class,
-		SecurityTests.class
+    ConventionTests.class,
+    DependencyTests.class,
+    MetricsTests.class,
+    PatternTests.class,
+    SecurityTests.class
 })
 public class AllArchitectureTests extends ArchitectureTestSuiteBase {
 
-	private static long startTime;
+  private static long startTime;
 
-	@BeforeClass
-	public static void startUpSuite() {
-		startTime = System.currentTimeMillis();
-	}
+  @BeforeClass
+  public static void startUpSuite() {
+    startTime = System.currentTimeMillis();
+  }
 
-	@AfterClass
-	public static void endSuite() {
-		endSuite(AllArchitectureTests.class, startTime);
-	}
+  @AfterClass
+  public static void endSuite() {
+    endSuite(AllArchitectureTests.class, startTime);
+  }
 }

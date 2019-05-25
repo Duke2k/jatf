@@ -16,20 +16,20 @@
 
 package jatf.common.rules;
 
-import java.lang.reflect.Method;
-
 import jatf.api.rules.MethodAnnotationBasedRule;
 import jatf.common.rules.conditions.AlwaysTrue;
 import jatf.common.rules.markers.MustReturnMarker;
 
+import java.lang.reflect.Method;
+
 @SuppressWarnings("unused")
 public final class MustReturnRule extends MethodAnnotationBasedRule<MustReturnMarker, AlwaysTrue> {
 
-	public MustReturnRule(Method[] methods, MustReturnMarker marker) {
-		super(methods, new AlwaysTrue(), marker);
-	}
+  public MustReturnRule(Method[] methods, MustReturnMarker marker) {
+    super(methods, new AlwaysTrue(), marker);
+  }
 
-	public Class<?>[] types() {
-		return marker.types;
-	}
+  public Class<?>[] types() {
+    return marker.types;
+  }
 }

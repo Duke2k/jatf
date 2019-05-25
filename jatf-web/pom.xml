@@ -1,70 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This file is part of JATF.
+
+ JATF is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, version 3 of the License.
+
+ JATF is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with JATF.  If not, see <http://www.gnu.org/licenses/>.
+-->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-				 xmlns="http://maven.apache.org/POM/4.0.0"
-				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<artifactId>jatf-project</artifactId>
-		<groupId>com.github.duke2k.jatf</groupId>
-		<version>1.0.7-SNAPSHOT</version>
-	</parent>
-	<modelVersion>4.0.0</modelVersion>
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>jatf-project</artifactId>
+    <groupId>com.github.duke2k.jatf</groupId>
+    <version>1.0.7-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
 
-	<artifactId>jatf-web</artifactId>
-	<packaging>war</packaging>
+  <artifactId>jatf-web</artifactId>
+  <packaging>war</packaging>
 
-	<name>Java Architecture Test Framework - Web Service</name>
-	<description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the
-		rule generators project, containing default, "best practice" rule generators for any class provided.
-	</description>
-	<url>https://github.com/Duke2k/jatf</url>
-	<licenses>
-		<license>
-			<name>GPLv3</name>
-		</license>
-	</licenses>
-	<developers>
-		<developer>
-			<name>Samuel Eickelberg</name>
-			<email>samuel.eickelberg@posteo.de</email>
-		</developer>
-	</developers>
-	<contributors/>
+  <name>Java Architecture Test Framework - Web Service</name>
+  <description>The Java Architecture Test Framework (JATF) allows static code analysis within unit tests. This is the
+    rule generators project, containing default, "best practice" rule generators for any class provided.
+  </description>
+  <url>https://github.com/Duke2k/jatf</url>
+  <licenses>
+    <license>
+      <name>GPLv3</name>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Samuel Eickelberg</name>
+      <email>samuel.eickelberg@posteo.de</email>
+    </developer>
+  </developers>
+  <contributors/>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.github.duke2k.jatf</groupId>
-			<artifactId>jatf-rules</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring-boot.version}</version>
-		</dependency>
-	</dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>com.github.duke2k.jatf</groupId>
+      <artifactId>jatf-rules</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>${spring-boot.version}</version>
+    </dependency>
+  </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.coderplus.maven.plugins</groupId>
-				<artifactId>copy-rename-maven-plugin</artifactId>
-				<version>1.0</version>
-				<executions>
-					<execution>
-						<id>copy-and-rename-file</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<sourceFile>
-								target/${project.artifactId}-${project.version}.war
-							</sourceFile>
-							<destinationFile>target/${project.artifactId}.war</destinationFile>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.coderplus.maven.plugins</groupId>
+        <artifactId>copy-rename-maven-plugin</artifactId>
+        <version>1.0</version>
+        <executions>
+          <execution>
+            <id>copy-and-rename-file</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <sourceFile>
+                target/${project.artifactId}-${project.version}.war
+              </sourceFile>
+              <destinationFile>target/${project.artifactId}.war</destinationFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

@@ -20,16 +20,16 @@ import jatf.api.rules.Condition;
 
 public final class AlwaysTrue extends Condition<Class<?>> {
 
-	public AlwaysTrue() {
-		this(null);
-	}
+  public AlwaysTrue() {
+    this(null);
+  }
 
-	public AlwaysTrue(Class<?> type) {
-		super(type);
-	}
+  public AlwaysTrue(Class<?> type) {
+    super(type);
+  }
 
-	@Override
-	public boolean firesFor(Class<?> type) {
-		return true;
-	}
+  @Override
+  public boolean firesFor(Class<?> type) {
+    return true;
+  }
 }

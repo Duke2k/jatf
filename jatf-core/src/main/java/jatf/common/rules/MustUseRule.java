@@ -22,11 +22,11 @@ import jatf.common.rules.markers.MustUseMarker;
 
 public final class MustUseRule extends ClassAnnotationBasedRule<MustUseMarker, AlwaysTrue> {
 
-	public MustUseRule(Class<?>[] classes, MustUseMarker marker) {
-		super(classes, new AlwaysTrue(), marker);
-	}
+  public MustUseRule(Class<?>[] classes, MustUseMarker marker) {
+    super(classes, new AlwaysTrue(), marker);
+  }
 
-	public Class<?>[] types() {
-		return marker.types;
-	}
+  public Class<?>[] types() {
+    return marker.types;
+  }
 }

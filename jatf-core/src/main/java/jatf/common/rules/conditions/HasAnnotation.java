@@ -16,33 +16,32 @@
 
 package jatf.common.rules.conditions;
 
-import java.lang.annotation.Annotation;
+import jatf.api.rules.Condition;
 
 import javax.annotation.Nonnull;
-
-import jatf.api.rules.Condition;
+import java.lang.annotation.Annotation;
 
 public final class HasAnnotation extends Condition<Class<?>> {
 
-	@SuppressWarnings("unused")
-	public HasAnnotation(@Nonnull Annotation annotation) {
-		super(annotation.annotationType());
-	}
+  @SuppressWarnings("unused")
+  public HasAnnotation(@Nonnull Annotation annotation) {
+    super(annotation.annotationType());
+  }
 
-	public HasAnnotation(@Nonnull Class<? extends Annotation> annotationType) {
-		super(annotationType);
-	}
+  public HasAnnotation(@Nonnull Class<? extends Annotation> annotationType) {
+    super(annotationType);
+  }
 
-	@Override
-	public boolean firesFor(Class<?> type) {
-		Annotation[] annotations = type.getAnnotations();
-		if (annotations != null) {
-			for (Annotation annotation : annotations) {
-				if (annotation.annotationType().equals(this.type)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+  @Override
+  public boolean firesFor(Class<?> type) {
+    Annotation[] annotations = type.getAnnotations();
+    if (annotations != null) {
+      for (Annotation annotation : annotations) {
+        if (annotation.annotationType().equals(this.type)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 }

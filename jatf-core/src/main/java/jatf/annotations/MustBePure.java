@@ -25,5 +25,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface MustBePure {
 
-	double degree() default 0.5;
+  double degree() default 0.5;
 }

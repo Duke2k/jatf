@@ -22,5 +22,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MustExtend {
 
-	Class<?> type() default Object.class;
+  Class<?> type() default Object.class;
 }

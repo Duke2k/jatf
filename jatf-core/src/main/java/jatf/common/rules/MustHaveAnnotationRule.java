@@ -16,20 +16,20 @@
 
 package jatf.common.rules;
 
-import java.lang.annotation.Annotation;
-
 import jatf.api.rules.ClassAnnotationBasedRule;
 import jatf.common.rules.conditions.AlwaysTrue;
 import jatf.common.rules.markers.MustHaveAnnotationMarker;
 
+import java.lang.annotation.Annotation;
+
 @SuppressWarnings("unused")
 public final class MustHaveAnnotationRule extends ClassAnnotationBasedRule<MustHaveAnnotationMarker, AlwaysTrue> {
 
-	public MustHaveAnnotationRule(Class<?>[] classes, MustHaveAnnotationMarker marker) {
-		super(classes, new AlwaysTrue(), marker);
-	}
+  public MustHaveAnnotationRule(Class<?>[] classes, MustHaveAnnotationMarker marker) {
+    super(classes, new AlwaysTrue(), marker);
+  }
 
-	public Class<? extends Annotation> annotation() {
-		return marker.annotation;
-	}
+  public Class<? extends Annotation> annotation() {
+    return marker.annotation;
+  }
 }

@@ -16,37 +16,37 @@
 
 package jatf.common.rules.markers;
 
-import java.lang.annotation.Annotation;
-
 import jatf.annotations.MustImplement;
+
+import java.lang.annotation.Annotation;
 
 public class MustImplementMarker extends RuleBasedMarker<MustImplement> {
 
-	public Class<?>[] interfaces = new Class<?>[0];
+  public Class<?>[] interfaces = new Class<?>[0];
 
-	@Override
-	public Class<MustImplement> annotationType() {
-		return MustImplement.class;
-	}
+  @Override
+  public Class<MustImplement> annotationType() {
+    return MustImplement.class;
+  }
 
-	@Override
-	public MustImplement createAnnotation() {
-		return new MustImplement() {
+  @Override
+  public MustImplement createAnnotation() {
+    return new MustImplement() {
 
-			@Override
-			public String toString() {
-				return annotationType().getSimpleName();
-			}
+      @Override
+      public String toString() {
+        return annotationType().getSimpleName();
+      }
 
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return MustImplement.class;
-			}
+      @Override
+      public Class<? extends Annotation> annotationType() {
+        return MustImplement.class;
+      }
 
-			@Override
-			public Class<?>[] interfaces() {
-				return interfaces;
-			}
-		};
-	}
+      @Override
+      public Class<?>[] interfaces() {
+        return interfaces;
+      }
+    };
+  }
 }

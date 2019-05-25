@@ -16,15 +16,15 @@
 
 package jatf.suites;
 
+import jatf.common.ArchitectureTestRunListener;
+
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
-import jatf.common.ArchitectureTestRunListener;
-
 public abstract class ArchitectureTestSuiteBase {
 
-	protected static void endSuite(@Nonnull Class<? extends ArchitectureTestSuiteBase> suiteClass, @Nonnegative long startTime) {
-		long endTime = System.currentTimeMillis();
-		ArchitectureTestRunListener.report(suiteClass.getSimpleName() + " finished in " + (endTime - startTime) + " ms.");
-	}
+  protected static void endSuite(@Nonnull Class<? extends ArchitectureTestSuiteBase> suiteClass, @Nonnegative long startTime) {
+    long endTime = System.currentTimeMillis();
+    ArchitectureTestRunListener.report(suiteClass.getSimpleName() + " finished in " + (endTime - startTime) + " ms.");
+  }
 }

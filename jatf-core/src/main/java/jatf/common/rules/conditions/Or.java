@@ -22,18 +22,18 @@ import jatf.api.rules.Condition;
 @SuppressWarnings("unused")
 public final class Or extends CombinedCondition<Class<?>> {
 
-	@SafeVarargs
-	public Or(Class<?> type, Condition<Class<?>>... conditions) {
-		super(type, conditions);
-	}
+  @SafeVarargs
+  public Or(Class<?> type, Condition<Class<?>>... conditions) {
+    super(type, conditions);
+  }
 
-	@Override
-	public boolean firesFor(Class<?> type) {
-		for (Condition<Class<?>> condition : conditions) {
-			if (condition.firesFor(type)) {
-				return true;
-			}
-		}
-		return false;
-	}
+  @Override
+  public boolean firesFor(Class<?> type) {
+    for (Condition<Class<?>> condition : conditions) {
+      if (condition.firesFor(type)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

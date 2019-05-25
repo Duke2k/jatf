@@ -16,55 +16,53 @@
 
 package jatf.dependency;
 
-import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.annotations.MustNotOverride;
+import jatf.annotations.MustOverride;
+import jatf.common.parser.MethodVisitor;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
-
-import jatf.annotations.MustNotOverride;
-import jatf.annotations.MustOverride;
-import jatf.common.parser.MethodVisitor;
+import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(DataProviderRunner.class)
 public class OverridesTest extends DependencyTestBase {
 
-	@DataProvider
-	public static Object[][] provideClassesToTest() {
-		Set<Class<?>> classesToTest = provideClassesFor(OverridesTest.class);
-		return getProvider(classesToTest);
-	}
+  @DataProvider
+  public static Object[][] provideClassesToTest() {
+    Set<Class<?>> classesToTest = provideClassesFor(OverridesTest.class);
+    return getProvider(classesToTest);
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void testOverrides(Class<?> clazz) {
-		MustOverride mustOverride = getAnnotationFor(clazz, MustOverride.class);
-		if (mustOverride != null) {
-			MethodVisitor methodVisitor = new MethodVisitor();
-			parseWithVoidVisitor(clazz, methodVisitor);
-			List<String> foundMethodNames = methodVisitor.getMethodNames();
-			for (String methodName : mustOverride.methodNames()) {
-				assertTrue("Method " + methodName + " must be overridden in " + clazz,
-						foundMethodNames.contains(methodName));
-			}
-		}
-		MustNotOverride mustNotOverride = getAnnotationFor(clazz, MustNotOverride.class);
-		if (mustNotOverride != null) {
-			MethodVisitor methodVisitor = new MethodVisitor();
-			parseWithVoidVisitor(clazz, methodVisitor);
-			List<String> foundMethodNames = methodVisitor.getMethodNames();
-			for (String methodName : mustNotOverride.methodNames()) {
-				assertFalse("Method " + methodName + " must not be overridden in " + clazz,
-						foundMethodNames.contains(methodName));
-			}
-		}
-	}
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void testOverrides(Class<?> clazz) {
+    MustOverride mustOverride = getAnnotationFor(clazz, MustOverride.class);
+    if (mustOverride != null) {
+      MethodVisitor methodVisitor = new MethodVisitor();
+      parseWithVoidVisitor(clazz, methodVisitor);
+      List<String> foundMethodNames = methodVisitor.getMethodNames();
+      for (String methodName : mustOverride.methodNames()) {
+        assertTrue("Method " + methodName + " must be overridden in " + clazz,
+            foundMethodNames.contains(methodName));
+      }
+    }
+    MustNotOverride mustNotOverride = getAnnotationFor(clazz, MustNotOverride.class);
+    if (mustNotOverride != null) {
+      MethodVisitor methodVisitor = new MethodVisitor();
+      parseWithVoidVisitor(clazz, methodVisitor);
+      List<String> foundMethodNames = methodVisitor.getMethodNames();
+      for (String methodName : mustNotOverride.methodNames()) {
+        assertFalse("Method " + methodName + " must not be overridden in " + clazz,
+            foundMethodNames.contains(methodName));
+      }
+    }
+  }
 }

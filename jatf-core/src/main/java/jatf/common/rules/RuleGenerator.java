@@ -16,16 +16,16 @@
 
 package jatf.common.rules;
 
-import javax.annotation.Nonnull;
-
 import jatf.api.rules.Condition;
 import jatf.common.rules.markers.RuleBasedMarker;
 
+import javax.annotation.Nonnull;
+
 public interface RuleGenerator<M extends RuleBasedMarker, R extends AnnotationBasedRule<M, ? extends Condition<Class<?>>>> {
 
-	@Nonnull
-	ArchitectureTestRule generateArchitectureTestRuleFor(@Nonnull Class<?>[] classes);
+  @Nonnull
+  ArchitectureTestRule generateArchitectureTestRuleFor(@Nonnull Class<?>[] classes);
 
-	@Nonnull
-	R generateRule();
+  @Nonnull
+  R generateRule();
 }

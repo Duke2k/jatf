@@ -29,7 +29,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("jatf.persistence")
 public class JatfWebApplication extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
-		SpringApplication.run(JatfWebApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(JatfWebApplication.class, args);
+  }
 }

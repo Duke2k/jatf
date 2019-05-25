@@ -16,19 +16,18 @@
 
 package jatf.pattern;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Set;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * This test checks if methods in the abstract super class are abstract there, and implemented in the class under test.
@@ -38,39 +37,39 @@ import com.tngtech.java.junit.dataprovider.UseDataProvider;
 @RunWith(DataProviderRunner.class)
 public class TemplateMethodTest extends PatternTestBase {
 
-	@DataProvider
-	public static Object[][] provideClassesToTest() {
-		Set<Class<?>> classesToTest = provideClassesFor(TemplateMethodTest.class);
-		return getProvider(classesToTest);
-	}
+  @DataProvider
+  public static Object[][] provideClassesToTest() {
+    Set<Class<?>> classesToTest = provideClassesFor(TemplateMethodTest.class);
+    return getProvider(classesToTest);
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void testForTemplateMethodPattern(Class<?> clazz) {
-		Method[] methodsInConcreteClass = clazz.getMethods();
-		Class<?> superClass = clazz.getSuperclass();
-		assertTrue("No abstract super class present for " + clazz.getName(), Modifier.isAbstract(superClass.getModifiers()));
-		Method[] methodsInAbstractClass = superClass.getMethods();
-		for (Method method : methodsInAbstractClass) {
-			int modifiers = method.getModifiers();
-			if (Modifier.isAbstract(modifiers) && Modifier.isPublic(modifiers)) {
-				Method correspondingConcreteMethod = findMemberBy(method.getName(), methodsInConcreteClass);
-				assertTrue("No corresponding concrete method for " + method.getName() + " present in " + clazz.getName(),
-						correspondingConcreteMethod != null);
-				assertTrue("Concrete method " + correspondingConcreteMethod.getName() + " is not public",
-						Modifier.isPublic(correspondingConcreteMethod.getModifiers()));
-				Class<?>[] parameterTypes = method.getParameterTypes();
-				Class<?> returnType = method.getReturnType();
-				assertEquals("Return types of method " + method + " and its inheritance(s) do not match",
-						returnType, correspondingConcreteMethod.getReturnType());
-				Class<?>[] concreteMethodParameterTypes = correspondingConcreteMethod.getParameterTypes();
-				if (parameterTypes.length == concreteMethodParameterTypes.length) {
-					for (int i = 0; i < parameterTypes.length; i++) {
-						assertEquals("Parameter types of method " + method + " and its inheritance(s) do not match",
-								parameterTypes[i], concreteMethodParameterTypes[i]);
-					}
-				}
-			}
-		}
-	}
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void testForTemplateMethodPattern(Class<?> clazz) {
+    Method[] methodsInConcreteClass = clazz.getMethods();
+    Class<?> superClass = clazz.getSuperclass();
+    assertTrue("No abstract super class present for " + clazz.getName(), Modifier.isAbstract(superClass.getModifiers()));
+    Method[] methodsInAbstractClass = superClass.getMethods();
+    for (Method method : methodsInAbstractClass) {
+      int modifiers = method.getModifiers();
+      if (Modifier.isAbstract(modifiers) && Modifier.isPublic(modifiers)) {
+        Method correspondingConcreteMethod = findMemberBy(method.getName(), methodsInConcreteClass);
+        assertTrue("No corresponding concrete method for " + method.getName() + " present in " + clazz.getName(),
+            correspondingConcreteMethod != null);
+        assertTrue("Concrete method " + correspondingConcreteMethod.getName() + " is not public",
+            Modifier.isPublic(correspondingConcreteMethod.getModifiers()));
+        Class<?>[] parameterTypes = method.getParameterTypes();
+        Class<?> returnType = method.getReturnType();
+        assertEquals("Return types of method " + method + " and its inheritance(s) do not match",
+            returnType, correspondingConcreteMethod.getReturnType());
+        Class<?>[] concreteMethodParameterTypes = correspondingConcreteMethod.getParameterTypes();
+        if (parameterTypes.length == concreteMethodParameterTypes.length) {
+          for (int i = 0; i < parameterTypes.length; i++) {
+            assertEquals("Parameter types of method " + method + " and its inheritance(s) do not match",
+                parameterTypes[i], concreteMethodParameterTypes[i]);
+          }
+        }
+      }
+    }
+  }
 }

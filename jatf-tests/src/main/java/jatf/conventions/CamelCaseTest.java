@@ -16,75 +16,73 @@
 
 package jatf.conventions;
 
-import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
-import static org.junit.Assert.assertTrue;
+import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.common.parser.DeclarationVisitor;
+import jatf.common.parser.MethodVisitor;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
-
-import jatf.common.parser.DeclarationVisitor;
-import jatf.common.parser.MethodVisitor;
+import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(DataProviderRunner.class)
 public class CamelCaseTest extends ConventionsTestBase {
 
-	@SuppressWarnings("WeakerAccess")
-	public static final Pattern CLASS_CAMEL_CASE_PATTERN =
-			Pattern.compile(properties.getProperty("namePattern.for.classes"));
+  @SuppressWarnings("WeakerAccess")
+  public static final Pattern CLASS_CAMEL_CASE_PATTERN =
+      Pattern.compile(properties.getProperty("namePattern.for.classes"));
 
-	@SuppressWarnings("WeakerAccess")
-	public static final Pattern METHOD_CAMEL_CASE_PATTERN =
-			Pattern.compile(properties.getProperty("namePattern.for.methods"));
+  @SuppressWarnings("WeakerAccess")
+  public static final Pattern METHOD_CAMEL_CASE_PATTERN =
+      Pattern.compile(properties.getProperty("namePattern.for.methods"));
 
-	@SuppressWarnings("WeakerAccess")
-	public static final Pattern FIELD_CAMEL_CASE_PATTERN =
-			Pattern.compile(properties.getProperty("namePattern.for.fields"));
+  @SuppressWarnings("WeakerAccess")
+  public static final Pattern FIELD_CAMEL_CASE_PATTERN =
+      Pattern.compile(properties.getProperty("namePattern.for.fields"));
 
-	@SuppressWarnings("WeakerAccess")
-	public static final Pattern CONST_CAMEL_CASE_PATTERN =
-			Pattern.compile(properties.getProperty("namePattern.for.constants"));
+  @SuppressWarnings("WeakerAccess")
+  public static final Pattern CONST_CAMEL_CASE_PATTERN =
+      Pattern.compile(properties.getProperty("namePattern.for.constants"));
 
-	@DataProvider
-	public static Object[][] provideClassesToTest() {
-		Set<Class<?>> classesToTest = provideClassesFor(CamelCaseTest.class);
-		return getProvider(classesToTest);
-	}
+  @DataProvider
+  public static Object[][] provideClassesToTest() {
+    Set<Class<?>> classesToTest = provideClassesFor(CamelCaseTest.class);
+    return getProvider(classesToTest);
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void testClassNaming(Class<?> clazz) {
-		assertTrue("Class " + clazz.getSimpleName() + "(" + clazz.getName() + ") does not match " + CLASS_CAMEL_CASE_PATTERN,
-				CLASS_CAMEL_CASE_PATTERN.matcher(clazz.getSimpleName()).matches());
-	}
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void testClassNaming(Class<?> clazz) {
+    assertTrue("Class " + clazz.getSimpleName() + "(" + clazz.getName() + ") does not match " + CLASS_CAMEL_CASE_PATTERN,
+        CLASS_CAMEL_CASE_PATTERN.matcher(clazz.getSimpleName()).matches());
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void testMethodNaming(Class<?> clazz) {
-		MethodVisitor methodVisitor = new MethodVisitor();
-		parseWithVoidVisitor(clazz, methodVisitor);
-		for (String methodName : methodVisitor.getMethodNames()) {
-			assertTrue("Method " + methodName + " in class " + clazz.getName() + " does not match " + METHOD_CAMEL_CASE_PATTERN,
-					METHOD_CAMEL_CASE_PATTERN.matcher(methodName).matches());
-		}
-	}
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void testMethodNaming(Class<?> clazz) {
+    MethodVisitor methodVisitor = new MethodVisitor();
+    parseWithVoidVisitor(clazz, methodVisitor);
+    for (String methodName : methodVisitor.getMethodNames()) {
+      assertTrue("Method " + methodName + " in class " + clazz.getName() + " does not match " + METHOD_CAMEL_CASE_PATTERN,
+          METHOD_CAMEL_CASE_PATTERN.matcher(methodName).matches());
+    }
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void testFieldNaming(Class<?> clazz) {
-		DeclarationVisitor declarationVisitor = new DeclarationVisitor();
-		parseWithVoidVisitor(clazz, declarationVisitor);
-		for (String fieldName : declarationVisitor.getTypeNames()) {
-			assertTrue("Field " + fieldName + " in class " + clazz.getName() +
-							" does not match " + FIELD_CAMEL_CASE_PATTERN + " or " + CONST_CAMEL_CASE_PATTERN,
-					CONST_CAMEL_CASE_PATTERN.matcher(fieldName).matches() ||
-							FIELD_CAMEL_CASE_PATTERN.matcher(fieldName).matches());
-		}
-	}
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void testFieldNaming(Class<?> clazz) {
+    DeclarationVisitor declarationVisitor = new DeclarationVisitor();
+    parseWithVoidVisitor(clazz, declarationVisitor);
+    for (String fieldName : declarationVisitor.getTypeNames()) {
+      assertTrue("Field " + fieldName + " in class " + clazz.getName() +
+              " does not match " + FIELD_CAMEL_CASE_PATTERN + " or " + CONST_CAMEL_CASE_PATTERN,
+          CONST_CAMEL_CASE_PATTERN.matcher(fieldName).matches() ||
+              FIELD_CAMEL_CASE_PATTERN.matcher(fieldName).matches());
+    }
+  }
 }

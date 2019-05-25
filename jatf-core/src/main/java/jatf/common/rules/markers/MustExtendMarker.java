@@ -16,37 +16,37 @@
 
 package jatf.common.rules.markers;
 
-import java.lang.annotation.Annotation;
-
 import jatf.annotations.MustExtend;
+
+import java.lang.annotation.Annotation;
 
 public class MustExtendMarker extends RuleBasedMarker<MustExtend> {
 
-	public Class<?> type = Object.class;
+  public Class<?> type = Object.class;
 
-	@Override
-	public Class<MustExtend> annotationType() {
-		return MustExtend.class;
-	}
+  @Override
+  public Class<MustExtend> annotationType() {
+    return MustExtend.class;
+  }
 
-	@Override
-	public MustExtend createAnnotation() {
-		return new MustExtend() {
+  @Override
+  public MustExtend createAnnotation() {
+    return new MustExtend() {
 
-			@Override
-			public String toString() {
-				return annotationType().getSimpleName();
-			}
+      @Override
+      public String toString() {
+        return annotationType().getSimpleName();
+      }
 
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return MustExtend.class;
-			}
+      @Override
+      public Class<? extends Annotation> annotationType() {
+        return MustExtend.class;
+      }
 
-			@Override
-			public Class<?> type() {
-				return type;
-			}
-		};
-	}
+      @Override
+      public Class<?> type() {
+        return type;
+      }
+    };
+  }
 }

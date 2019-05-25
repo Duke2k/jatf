@@ -16,27 +16,26 @@
 
 package jatf.common;
 
-import java.util.logging.Logger;
-
+import jatf.common.util.LogUtil;
 import org.junit.runner.notification.RunListener;
 
-import jatf.common.util.LogUtil;
+import java.util.logging.Logger;
 
 public class ArchitectureTestRunListener extends RunListener {
 
-	@SuppressWarnings("WeakerAccess")
-	public static final String PREFIX = "";
+  @SuppressWarnings("WeakerAccess")
+  public static final String PREFIX = "";
 
-	private static Logger log = LogUtil.getLogger(ArchitectureTestRunListener.class);
+  private static Logger log = LogUtil.getLogger(ArchitectureTestRunListener.class);
 
-	public static void report(String message, Object... items) {
-		StringBuilder stringBuilder = new StringBuilder(PREFIX);
-		stringBuilder.append(message);
-		for (Object item : items) {
-			stringBuilder.append(System.getProperty("line.separator"));
-			stringBuilder.append(PREFIX);
-			stringBuilder.append(item);
-		}
-		log.info(stringBuilder.toString());
-	}
+  public static void report(String message, Object... items) {
+    StringBuilder stringBuilder = new StringBuilder(PREFIX);
+    stringBuilder.append(message);
+    for (Object item : items) {
+      stringBuilder.append(System.getProperty("line.separator"));
+      stringBuilder.append(PREFIX);
+      stringBuilder.append(item);
+    }
+    log.info(stringBuilder.toString());
+  }
 }

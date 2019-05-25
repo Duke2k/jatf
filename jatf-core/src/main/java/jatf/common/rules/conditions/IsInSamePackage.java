@@ -21,12 +21,12 @@ import jatf.api.rules.Condition;
 @SuppressWarnings("unused")
 public final class IsInSamePackage extends Condition<Class<?>> {
 
-	public IsInSamePackage(Class<?> type) {
-		super(type);
-	}
+  public IsInSamePackage(Class<?> type) {
+    super(type);
+  }
 
-	@Override
-	public boolean firesFor(Class<?> type) {
-		return this.type.getPackage().equals(type.getPackage());
-	}
+  @Override
+  public boolean firesFor(Class<?> type) {
+    return this.type.getPackage().equals(type.getPackage());
+  }
 }

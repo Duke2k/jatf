@@ -16,56 +16,56 @@
 
 package jatf.common;
 
-import static jatf.api.tests.TestNamesHelper.getTestNames;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-
-import java.util.Set;
-
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 
+import java.util.Set;
+
+import static jatf.api.tests.TestNamesHelper.getTestNames;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
 public class ArchitectureTestDataProviderTest {
 
-	@Test
-	public void getClassesFor_DefaultTestNames() {
-		// prepare
-		ArchitectureTestDataProvider dataProvider = new ArchitectureTestDataProvider();
-		Set<String> testNames = getTestNames();
-		for (String testName : testNames) {
+  @Test
+  public void getClassesFor_DefaultTestNames() {
+    // prepare
+    ArchitectureTestDataProvider dataProvider = new ArchitectureTestDataProvider();
+    Set<String> testNames = getTestNames();
+    for (String testName : testNames) {
 
-			// test
-			Set<Class<?>> classes = dataProvider.getClassesFor(testName);
-			// Possible cross-dependency from other tests: We have 3 inner classes to be considered; ArchitectureTestDataProvider
-			// can't be mocked appropriately.
-			if (classes != null) {
+      // test
+      Set<Class<?>> classes = dataProvider.getClassesFor(testName);
+      // Possible cross-dependency from other tests: We have 3 inner classes to be considered; ArchitectureTestDataProvider
+      // can't be mocked appropriately.
+      if (classes != null) {
 
-				// verify
-				assertEquals(3, classes.size());
-				assertThat(classes, containsClassNamed("TestClass"));
-				assertThat(classes, containsClassNamed("TestClass1"));
-				assertThat(classes, containsClassNamed("TestClass2"));
-			}
-		}
-	}
+        // verify
+        assertEquals(3, classes.size());
+        assertThat(classes, containsClassNamed("TestClass"));
+        assertThat(classes, containsClassNamed("TestClass1"));
+        assertThat(classes, containsClassNamed("TestClass2"));
+      }
+    }
+  }
 
-	private TypeSafeMatcher<Set<Class<?>>> containsClassNamed(String className) {
-		return new TypeSafeMatcher<Set<Class<?>>>() {
-			@Override
-			protected boolean matchesSafely(Set<Class<?>> classes) {
-				for (Class<?> clazz : classes) {
-					if (clazz.getSimpleName().equalsIgnoreCase(className)) {
-						return true;
-					}
-				}
-				return false;
-			}
+  private TypeSafeMatcher<Set<Class<?>>> containsClassNamed(String className) {
+    return new TypeSafeMatcher<Set<Class<?>>>() {
+      @Override
+      protected boolean matchesSafely(Set<Class<?>> classes) {
+        for (Class<?> clazz : classes) {
+          if (clazz.getSimpleName().equalsIgnoreCase(className)) {
+            return true;
+          }
+        }
+        return false;
+      }
 
-			@Override
-			public void describeTo(Description description) {
-				description.appendText("Class named '" + className + "' not present.");
-			}
-		};
-	}
+      @Override
+      public void describeTo(Description description) {
+        description.appendText("Class named '" + className + "' not present.");
+      }
+    };
+  }
 }

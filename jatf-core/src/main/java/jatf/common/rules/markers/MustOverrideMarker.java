@@ -16,37 +16,37 @@
 
 package jatf.common.rules.markers;
 
-import java.lang.annotation.Annotation;
-
 import jatf.annotations.MustOverride;
+
+import java.lang.annotation.Annotation;
 
 public class MustOverrideMarker extends RuleBasedMarker<MustOverride> {
 
-	public String[] methodNames = new String[0];
+  public String[] methodNames = new String[0];
 
-	@Override
-	public Class<MustOverride> annotationType() {
-		return MustOverride.class;
-	}
+  @Override
+  public Class<MustOverride> annotationType() {
+    return MustOverride.class;
+  }
 
-	@Override
-	public MustOverride createAnnotation() {
-		return new MustOverride() {
+  @Override
+  public MustOverride createAnnotation() {
+    return new MustOverride() {
 
-			@Override
-			public String toString() {
-				return annotationType().getSimpleName();
-			}
+      @Override
+      public String toString() {
+        return annotationType().getSimpleName();
+      }
 
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return MustOverride.class;
-			}
+      @Override
+      public Class<? extends Annotation> annotationType() {
+        return MustOverride.class;
+      }
 
-			@Override
-			public String[] methodNames() {
-				return methodNames;
-			}
-		};
-	}
+      @Override
+      public String[] methodNames() {
+        return methodNames;
+      }
+    };
+  }
 }

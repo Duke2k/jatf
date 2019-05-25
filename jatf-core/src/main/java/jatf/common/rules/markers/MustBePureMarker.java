@@ -16,39 +16,39 @@
 
 package jatf.common.rules.markers;
 
-import static jatf.common.ArchitectureTestConstraints.MIN_DEGREE_OF_PURITY;
+import jatf.annotations.MustBePure;
 
 import java.lang.annotation.Annotation;
 
-import jatf.annotations.MustBePure;
+import static jatf.common.ArchitectureTestConstraints.MIN_DEGREE_OF_PURITY;
 
 public class MustBePureMarker extends RuleBasedMarker<MustBePure> {
 
-	public double degree = MIN_DEGREE_OF_PURITY;
+  public double degree = MIN_DEGREE_OF_PURITY;
 
-	@Override
-	public Class<MustBePure> annotationType() {
-		return MustBePure.class;
-	}
+  @Override
+  public Class<MustBePure> annotationType() {
+    return MustBePure.class;
+  }
 
-	@Override
-	public MustBePure createAnnotation() {
-		return new MustBePure() {
+  @Override
+  public MustBePure createAnnotation() {
+    return new MustBePure() {
 
-			@Override
-			public String toString() {
-				return annotationType().getSimpleName();
-			}
+      @Override
+      public String toString() {
+        return annotationType().getSimpleName();
+      }
 
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return MustBePure.class;
-			}
+      @Override
+      public Class<? extends Annotation> annotationType() {
+        return MustBePure.class;
+      }
 
-			@Override
-			public double degree() {
-				return degree;
-			}
-		};
-	}
+      @Override
+      public double degree() {
+        return degree;
+      }
+    };
+  }
 }

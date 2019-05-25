@@ -16,22 +16,22 @@
 
 package jatf.common.rules.conditions;
 
-import java.util.regex.Pattern;
-
 import jatf.api.rules.Condition;
+
+import java.util.regex.Pattern;
 
 public final class ClassNamePatternMatches extends Condition<Class<?>> {
 
-	private Pattern pattern;
+  private Pattern pattern;
 
-	@SuppressWarnings("unused")
-	public ClassNamePatternMatches(Class<?> type, String pattern) {
-		super(type);
-		this.pattern = Pattern.compile(pattern);
-	}
+  @SuppressWarnings("unused")
+  public ClassNamePatternMatches(Class<?> type, String pattern) {
+    super(type);
+    this.pattern = Pattern.compile(pattern);
+  }
 
-	@Override
-	public boolean firesFor(Class<?> type) {
-		return pattern.matcher(type.getSimpleName()).matches();
-	}
+  @Override
+  public boolean firesFor(Class<?> type) {
+    return pattern.matcher(type.getSimpleName()).matches();
+  }
 }

@@ -16,24 +16,24 @@
 
 package jatf.api.rules;
 
-import javax.annotation.Nonnull;
-
 import jatf.common.rules.AnnotationBasedRule;
 import jatf.common.rules.markers.RuleBasedMarker;
 
+import javax.annotation.Nonnull;
+
 public abstract class ClassAnnotationBasedRule<M extends RuleBasedMarker, C extends Condition<Class<?>>> extends AnnotationBasedRule<M, C> {
 
-	protected ClassAnnotationBasedRule(Class<?>[] classes, C condition, M marker) {
-		super(condition, marker);
-		for (Class<?> clazz : classes) {
-			addClassIfConditionFires(clazz);
-		}
-	}
+  protected ClassAnnotationBasedRule(Class<?>[] classes, C condition, M marker) {
+    super(condition, marker);
+    for (Class<?> clazz : classes) {
+      addClassIfConditionFires(clazz);
+    }
+  }
 
-	@SuppressWarnings("WeakerAccess")
-	public void addClassIfConditionFires(@Nonnull Class<?> clazz) {
-		if (condition.firesFor(clazz)) {
-			classes.add(clazz);
-		}
-	}
+  @SuppressWarnings("WeakerAccess")
+  public void addClassIfConditionFires(@Nonnull Class<?> clazz) {
+    if (condition.firesFor(clazz)) {
+      classes.add(clazz);
+    }
+  }
 }

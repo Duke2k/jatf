@@ -37,91 +37,91 @@ import static jatf.common.ArchitectureTestRunListener.report;
 @SuppressWarnings("WeakerAccess")
 public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvaluator {
 
-	private Map<Class<?>, Set<RuleBasedMarker>> markerMap;
+  private Map<Class<?>, Set<RuleBasedMarker>> markerMap;
 
-	public ArchitectureTestRuleEvaluator(@Nonnull Reflections reflections) {
-		super(reflections);
-		markerMap = newHashMap();
-	}
+  public ArchitectureTestRuleEvaluator(@Nonnull Reflections reflections) {
+    super(reflections);
+    markerMap = newHashMap();
+  }
 
-	@Nullable
-	private static <T> T findFirst(@Nonnull Class<T> type, @Nonnull Set<?> set) {
-		for (Object item : set) {
-			if (item.getClass().equals(type)) {
-				//noinspection unchecked
-				return (T) item;
-			}
-		}
-		return null;
-	}
+  @Nullable
+  private static <T> T findFirst(@Nonnull Class<T> type, @Nonnull Set<?> set) {
+    for (Object item : set) {
+      if (item.getClass().equals(type)) {
+        //noinspection unchecked
+        return (T) item;
+      }
+    }
+    return null;
+  }
 
-	@Nullable
-	public Annotation getAnnotationFor(@Nonnull Class<?> clazz, @Nonnull Class<? extends Annotation> annotationType) {
-		String annotationName = annotationType.getSimpleName();
-		Set<Annotation> annotations = getAnnotationsFor(clazz);
-		for (Annotation annotation : annotations) {
-			if (annotation.toString().equals(annotationName)) {
-				return annotation;
-			}
-		}
-		return null;
-	}
+  @Nullable
+  public Annotation getAnnotationFor(@Nonnull Class<?> clazz, @Nonnull Class<? extends Annotation> annotationType) {
+    String annotationName = annotationType.getSimpleName();
+    Set<Annotation> annotations = getAnnotationsFor(clazz);
+    for (Annotation annotation : annotations) {
+      if (annotation.toString().equals(annotationName)) {
+        return annotation;
+      }
+    }
+    return null;
+  }
 
-	@Override
-	protected void process() {
-		Set<Class<? extends ArchitectureTestRuleGenerator>> ruleGeneratorTypes =
-				reflections.getSubTypesOf(ArchitectureTestRuleGenerator.class);
-		for (Class<? extends ArchitectureTestRuleGenerator> ruleGeneratorType : ruleGeneratorTypes) {
-			ArchitectureTestRuleGenerator ruleGenerator = null;
-			try {
-				ruleGenerator = ruleGeneratorType.newInstance();
-				AnnotationBasedRule rule1 = ruleGenerator.generateRule();
-				RuleBasedMarker marker1 = rule1.getMarker();
-				for (Class<?> clazz : rule1.getClasses()) {
-					Set<RuleBasedMarker> markerSet = markerMap.get(clazz);
-					if (markerSet == null) {
-						markerSet = newHashSet();
-					}
-					markerSet.add(marker1);
-				}
-				ArchitectureTestRule rule2 = ruleGenerator.generateArchitectureTestRule();
-				ArchitectureTestMarker marker2 = rule2.getMarker();
-				for (Class<?> clazz : rule2.getClasses()) {
-					Set<RuleBasedMarker> markerSet = markerMap.get(clazz);
-					if (markerSet == null) {
-						markerSet = newHashSet();
-					}
-					ArchitectureTestMarker old = findFirst(ArchitectureTestMarker.class, markerSet);
-					if (old != null) {
-						marker2 = marker2.merge(old);
-						markerSet.remove(old);
-					}
-					markerSet.add(marker2);
-					markerMap.put(clazz, markerSet);
-				}
-			} catch (Exception e) {
-				report("Failed to instantiate rule generator" +
-						(ruleGenerator != null ? " " + ruleGenerator.getClass().getName() : "") + ".", e);
-			}
-		}
-		for (Class<?> clazz : markerMap.keySet()) {
-			ArchitectureTestMarker marker = findFirst(ArchitectureTestMarker.class, markerMap.get(clazz));
-			if (marker != null) {
-				ArchitectureTest annotation = marker.createAnnotation();
-				addAnnotatedClass(clazz, annotation);
-			}
-		}
-	}
+  @Override
+  protected void process() {
+    Set<Class<? extends ArchitectureTestRuleGenerator>> ruleGeneratorTypes =
+        reflections.getSubTypesOf(ArchitectureTestRuleGenerator.class);
+    for (Class<? extends ArchitectureTestRuleGenerator> ruleGeneratorType : ruleGeneratorTypes) {
+      ArchitectureTestRuleGenerator ruleGenerator = null;
+      try {
+        ruleGenerator = ruleGeneratorType.newInstance();
+        AnnotationBasedRule rule1 = ruleGenerator.generateRule();
+        RuleBasedMarker marker1 = rule1.getMarker();
+        for (Class<?> clazz : rule1.getClasses()) {
+          Set<RuleBasedMarker> markerSet = markerMap.get(clazz);
+          if (markerSet == null) {
+            markerSet = newHashSet();
+          }
+          markerSet.add(marker1);
+        }
+        ArchitectureTestRule rule2 = ruleGenerator.generateArchitectureTestRule();
+        ArchitectureTestMarker marker2 = rule2.getMarker();
+        for (Class<?> clazz : rule2.getClasses()) {
+          Set<RuleBasedMarker> markerSet = markerMap.get(clazz);
+          if (markerSet == null) {
+            markerSet = newHashSet();
+          }
+          ArchitectureTestMarker old = findFirst(ArchitectureTestMarker.class, markerSet);
+          if (old != null) {
+            marker2 = marker2.merge(old);
+            markerSet.remove(old);
+          }
+          markerSet.add(marker2);
+          markerMap.put(clazz, markerSet);
+        }
+      } catch (Exception e) {
+        report("Failed to instantiate rule generator" +
+            (ruleGenerator != null ? " " + ruleGenerator.getClass().getName() : "") + ".", e);
+      }
+    }
+    for (Class<?> clazz : markerMap.keySet()) {
+      ArchitectureTestMarker marker = findFirst(ArchitectureTestMarker.class, markerMap.get(clazz));
+      if (marker != null) {
+        ArchitectureTest annotation = marker.createAnnotation();
+        addAnnotatedClass(clazz, annotation);
+      }
+    }
+  }
 
-	@Nonnull
-	private Set<Annotation> getAnnotationsFor(@Nonnull Class<?> clazz) {
-		Set<RuleBasedMarker> markerSet = markerMap.get(clazz);
-		Set<Annotation> annotationSet = newHashSet();
-		if (markerSet != null) {
-			for (RuleBasedMarker marker : markerSet) {
-				annotationSet.add(marker.createAnnotation());
-			}
-		}
-		return annotationSet;
-	}
+  @Nonnull
+  private Set<Annotation> getAnnotationsFor(@Nonnull Class<?> clazz) {
+    Set<RuleBasedMarker> markerSet = markerMap.get(clazz);
+    Set<Annotation> annotationSet = newHashSet();
+    if (markerSet != null) {
+      for (RuleBasedMarker marker : markerSet) {
+        annotationSet.add(marker.createAnnotation());
+      }
+    }
+    return annotationSet;
+  }
 }

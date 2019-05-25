@@ -16,13 +16,6 @@
 
 package jatf.api.rules;
 
-import static com.google.common.collect.Sets.newHashSet;
-import static jatf.common.util.ArchitectureTestUtil.createArchitectureTestAnnotation;
-
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-
 import jatf.common.rules.AnnotationBasedRule;
 import jatf.common.rules.ArchitectureTestAttributes;
 import jatf.common.rules.ArchitectureTestRule;
@@ -30,48 +23,54 @@ import jatf.common.rules.RuleGenerator;
 import jatf.common.rules.markers.ArchitectureTestMarker;
 import jatf.common.rules.markers.RuleBasedMarker;
 
+import javax.annotation.Nonnull;
+import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
+import static jatf.common.util.ArchitectureTestUtil.createArchitectureTestAnnotation;
+
 public abstract class ArchitectureTestRuleGenerator<M extends RuleBasedMarker, R extends AnnotationBasedRule<M, ? extends Condition<Class<?>>>> implements RuleGenerator<M, R> {
 
-	private ArchitectureTestAttributes attributes;
-	private Set<Class<?>> classes;
+  private ArchitectureTestAttributes attributes;
+  private Set<Class<?>> classes;
 
-	public ArchitectureTestRuleGenerator() {
-		classes = newHashSet();
-		attributes = new ArchitectureTestAttributes();
-	}
+  public ArchitectureTestRuleGenerator() {
+    classes = newHashSet();
+    attributes = new ArchitectureTestAttributes();
+  }
 
-	@Nonnull
-	@Override
-	public ArchitectureTestRule generateArchitectureTestRuleFor(@Nonnull Class<?>[] classes) {
-		ArchitectureTestMarker annotation = createArchitectureTestAnnotation(
-				attributes.isOmitMetrics(),
-				attributes.isOmitConventions(),
-				attributes.getPatterns(),
-				attributes.getDependencies(),
-				attributes.isEnforceSecurityTests());
-		return new ArchitectureTestRule(classes, annotation);
-	}
+  @Nonnull
+  @Override
+  public ArchitectureTestRule generateArchitectureTestRuleFor(@Nonnull Class<?>[] classes) {
+    ArchitectureTestMarker annotation = createArchitectureTestAnnotation(
+        attributes.isOmitMetrics(),
+        attributes.isOmitConventions(),
+        attributes.getPatterns(),
+        attributes.getDependencies(),
+        attributes.isEnforceSecurityTests());
+    return new ArchitectureTestRule(classes, annotation);
+  }
 
-	@Nonnull
-	public ArchitectureTestRule generateArchitectureTestRule() {
-		return generateArchitectureTestRuleFor(classes.toArray(new Class<?>[classes.size()]));
-	}
+  @Nonnull
+  public ArchitectureTestRule generateArchitectureTestRule() {
+    return generateArchitectureTestRuleFor(classes.toArray(new Class<?>[classes.size()]));
+  }
 
-	@SuppressWarnings("unused")
-	public ArchitectureTestAttributes getAttributes() {
-		return attributes;
-	}
+  @SuppressWarnings("unused")
+  public ArchitectureTestAttributes getAttributes() {
+    return attributes;
+  }
 
-	@SuppressWarnings("unused")
-	public void setAttributes(ArchitectureTestAttributes attributes) {
-		this.attributes = attributes;
-	}
+  @SuppressWarnings("unused")
+  public void setAttributes(ArchitectureTestAttributes attributes) {
+    this.attributes = attributes;
+  }
 
-	public Class<?>[] getClasses() {
-		return classes.toArray(new Class<?>[classes.size()]);
-	}
+  public Class<?>[] getClasses() {
+    return classes.toArray(new Class<?>[classes.size()]);
+  }
 
-	public void setClasses(Set<Class<?>> classes) {
-		this.classes = classes;
-	}
+  public void setClasses(Set<Class<?>> classes) {
+    this.classes = classes;
+  }
 }

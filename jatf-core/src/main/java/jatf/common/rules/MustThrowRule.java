@@ -16,20 +16,20 @@
 
 package jatf.common.rules;
 
-import java.lang.reflect.Method;
-
 import jatf.api.rules.MethodAnnotationBasedRule;
 import jatf.common.rules.conditions.AlwaysTrue;
 import jatf.common.rules.markers.MustThrowMarker;
 
+import java.lang.reflect.Method;
+
 @SuppressWarnings("unused")
 public final class MustThrowRule extends MethodAnnotationBasedRule<MustThrowMarker, AlwaysTrue> {
 
-	public MustThrowRule(Method[] methods, MustThrowMarker marker) {
-		super(methods, new AlwaysTrue(), marker);
-	}
+  public MustThrowRule(Method[] methods, MustThrowMarker marker) {
+    super(methods, new AlwaysTrue(), marker);
+  }
 
-	public Class<? extends Throwable>[] throwables() {
-		return marker.throwables;
-	}
+  public Class<? extends Throwable>[] throwables() {
+    return marker.throwables;
+  }
 }

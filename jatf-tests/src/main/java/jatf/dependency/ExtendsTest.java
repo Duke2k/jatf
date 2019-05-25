@@ -16,61 +16,59 @@
 
 package jatf.dependency;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Set;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
-
 import jatf.annotations.MustExtend;
 import jatf.annotations.MustNotExtend;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.Set;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(DataProviderRunner.class)
 public class ExtendsTest extends DependencyTestBase {
 
-	@DataProvider
-	public static Object[][] provideClassesToTest() {
-		Set<Class<?>> classesToTest = provideClassesFor(ExtendsTest.class);
-		return getProvider(classesToTest);
-	}
+  @DataProvider
+  public static Object[][] provideClassesToTest() {
+    Set<Class<?>> classesToTest = provideClassesFor(ExtendsTest.class);
+    return getProvider(classesToTest);
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void testExtends(Class<?> clazz) {
-		MustExtend mustExtendAnnotation = getAnnotationFor(clazz, MustExtend.class);
-		MustNotExtend mustNotExtendAnnotation = getAnnotationFor(clazz, MustNotExtend.class);
-		Class<?> mustExtend = null;
-		Class<?> mustNotExtend = null;
-		if (mustExtendAnnotation != null) {
-			mustExtend = mustExtendAnnotation.type();
-		}
-		if (mustNotExtendAnnotation != null) {
-			mustNotExtend = mustNotExtendAnnotation.type();
-		}
-		if (mustExtend != null && mustNotExtend != null) {
-			assertFalse("The same type is provided in both @MustExtend and @MustNotExtend.", mustExtend.equals(mustNotExtend));
-		}
-		if (mustExtend != null && !mustExtend.equals(Object.class)) {
-			testExtends(clazz, mustExtend);
-		}
-		if (mustNotExtend != null && !mustNotExtend.equals(Object.class)) {
-			testDoesNotExtend(clazz, mustNotExtend);
-		}
-	}
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void testExtends(Class<?> clazz) {
+    MustExtend mustExtendAnnotation = getAnnotationFor(clazz, MustExtend.class);
+    MustNotExtend mustNotExtendAnnotation = getAnnotationFor(clazz, MustNotExtend.class);
+    Class<?> mustExtend = null;
+    Class<?> mustNotExtend = null;
+    if (mustExtendAnnotation != null) {
+      mustExtend = mustExtendAnnotation.type();
+    }
+    if (mustNotExtendAnnotation != null) {
+      mustNotExtend = mustNotExtendAnnotation.type();
+    }
+    if (mustExtend != null && mustNotExtend != null) {
+      assertFalse("The same type is provided in both @MustExtend and @MustNotExtend.", mustExtend.equals(mustNotExtend));
+    }
+    if (mustExtend != null && !mustExtend.equals(Object.class)) {
+      testExtends(clazz, mustExtend);
+    }
+    if (mustNotExtend != null && !mustNotExtend.equals(Object.class)) {
+      testDoesNotExtend(clazz, mustNotExtend);
+    }
+  }
 
-	@SuppressWarnings("WeakerAccess")
-	protected void testDoesNotExtend(Class<?> clazz, Class<?> classNotToExtend) {
-		assertFalse(clazz.getSuperclass().equals(classNotToExtend));
-	}
+  @SuppressWarnings("WeakerAccess")
+  protected void testDoesNotExtend(Class<?> clazz, Class<?> classNotToExtend) {
+    assertFalse(clazz.getSuperclass().equals(classNotToExtend));
+  }
 
-	@SuppressWarnings("WeakerAccess")
-	protected void testExtends(Class<?> clazz, Class<?> classToExtend) {
-		assertTrue(clazz.getSuperclass().equals(classToExtend));
-	}
+  @SuppressWarnings("WeakerAccess")
+  protected void testExtends(Class<?> clazz, Class<?> classToExtend) {
+    assertTrue(clazz.getSuperclass().equals(classToExtend));
+  }
 }

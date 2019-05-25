@@ -16,35 +16,34 @@
 
 package jatf.common.parser;
 
-import static com.google.common.collect.Maps.newHashMap;
-
-import java.util.Collection;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.github.javaparser.ast.expr.CastExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.Map;
+
+import static com.google.common.collect.Maps.newHashMap;
+
 public class CastExpressionVisitor extends VoidVisitorAdapter<Object> {
 
-	private Map<Type, Expression> castExpressions = newHashMap();
+  private Map<Type, Expression> castExpressions = newHashMap();
 
-	@Override
-	public void visit(CastExpr castExpr, Object arguments) {
-		castExpressions.put(castExpr.getType(), castExpr.getExpression());
-	}
+  @Override
+  public void visit(CastExpr castExpr, Object arguments) {
+    castExpressions.put(castExpr.getType(), castExpr.getExpression());
+  }
 
-	@Nonnull
-	public Collection<Expression> getCastExpressions() {
-		return castExpressions.values();
-	}
+  @Nonnull
+  public Collection<Expression> getCastExpressions() {
+    return castExpressions.values();
+  }
 
-	@Nullable
-	public Expression getCastExpressionBy(@Nonnull Type type) {
-		return castExpressions.get(type);
-	}
+  @Nullable
+  public Expression getCastExpressionBy(@Nonnull Type type) {
+    return castExpressions.get(type);
+  }
 }

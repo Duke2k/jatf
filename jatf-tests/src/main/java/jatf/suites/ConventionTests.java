@@ -16,36 +16,35 @@
 
 package jatf.suites;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 import jatf.conventions.CamelCaseTest;
 import jatf.conventions.NoFinalModifierInLocalVariablesTest;
 import jatf.conventions.NoInnerClassesTest;
 import jatf.conventions.OrderingTest;
 import jatf.conventions.OverlyChainedMethodCallsTest;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-		CamelCaseTest.class,
-		NoInnerClassesTest.class,
-		OrderingTest.class,
-		OverlyChainedMethodCallsTest.class,
-		NoFinalModifierInLocalVariablesTest.class
+    CamelCaseTest.class,
+    NoInnerClassesTest.class,
+    OrderingTest.class,
+    OverlyChainedMethodCallsTest.class,
+    NoFinalModifierInLocalVariablesTest.class
 })
 public class ConventionTests extends ArchitectureTestSuiteBase {
 
-	private static long startTime;
+  private static long startTime;
 
-	@BeforeClass
-	public static void startUpSuite() {
-		startTime = System.currentTimeMillis();
-	}
+  @BeforeClass
+  public static void startUpSuite() {
+    startTime = System.currentTimeMillis();
+  }
 
-	@AfterClass
-	public static void endSuite() {
-		endSuite(ConventionTests.class, startTime);
-	}
+  @AfterClass
+  public static void endSuite() {
+    endSuite(ConventionTests.class, startTime);
+  }
 }

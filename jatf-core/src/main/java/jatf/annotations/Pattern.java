@@ -17,10 +17,10 @@
 package jatf.annotations;
 
 public enum Pattern {
-	undefined,
-	singleton,
-	adapter,
-	templateMethod,
-	state,
-	strategy
+  undefined,
+  singleton,
+  adapter,
+  templateMethod,
+  state,
+  strategy
 }

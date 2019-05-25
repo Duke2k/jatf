@@ -23,11 +23,11 @@ import jatf.common.rules.markers.MustNotUseMarker;
 @SuppressWarnings("WeakerAccess")
 public final class MustNotUseRule extends ClassAnnotationBasedRule<MustNotUseMarker, AlwaysTrue> {
 
-	public MustNotUseRule(Class<?>[] classes, MustNotUseMarker marker) {
-		super(classes, new AlwaysTrue(), marker);
-	}
+  public MustNotUseRule(Class<?>[] classes, MustNotUseMarker marker) {
+    super(classes, new AlwaysTrue(), marker);
+  }
 
-	public Class<?>[] types() {
-		return marker.types;
-	}
+  public Class<?>[] types() {
+    return marker.types;
+  }
 }

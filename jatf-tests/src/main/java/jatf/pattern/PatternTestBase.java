@@ -16,32 +16,31 @@
 
 package jatf.pattern;
 
-import java.lang.reflect.Member;
+import jatf.ArchitectureTestBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import jatf.ArchitectureTestBase;
+import java.lang.reflect.Member;
 
 public abstract class PatternTestBase extends ArchitectureTestBase {
 
-	/**
-	 * This generic method finds a member in the given array by its name, or null if it doesn't exist. It is used in
-	 * several pattern tests.
-	 *
-	 * @param name    - name of the member to be found
-	 * @param members - array of members to be searched in
-	 * @return the member found by its name, or null if it doesn't exist
-	 */
-	@Nullable
-	protected <M extends Member> M findMemberBy(@Nonnull String name, @Nonnull M[] members) {
-		M result = null;
-		for (M member : members) {
-			if (member.getName().equals(name)) {
-				result = member;
-				break;
-			}
-		}
-		return result;
-	}
+  /**
+   * This generic method finds a member in the given array by its name, or null if it doesn't exist. It is used in
+   * several pattern tests.
+   *
+   * @param name    - name of the member to be found
+   * @param members - array of members to be searched in
+   * @return the member found by its name, or null if it doesn't exist
+   */
+  @Nullable
+  protected <M extends Member> M findMemberBy(@Nonnull String name, @Nonnull M[] members) {
+    M result = null;
+    for (M member : members) {
+      if (member.getName().equals(name)) {
+        result = member;
+        break;
+      }
+    }
+    return result;
+  }
 }

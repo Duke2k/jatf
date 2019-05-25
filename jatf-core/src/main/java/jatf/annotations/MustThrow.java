@@ -25,5 +25,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface MustThrow {
 
-	Class<? extends Throwable>[] throwables() default {};
+  Class<? extends Throwable>[] throwables() default {};
 }

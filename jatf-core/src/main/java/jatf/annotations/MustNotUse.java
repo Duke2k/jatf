@@ -22,5 +22,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MustNotUse {
 
-	Class<?>[] types() default {};
+  Class<?>[] types() default {};
 }

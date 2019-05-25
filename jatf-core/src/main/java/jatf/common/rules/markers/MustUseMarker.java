@@ -16,37 +16,37 @@
 
 package jatf.common.rules.markers;
 
-import java.lang.annotation.Annotation;
-
 import jatf.annotations.MustUse;
+
+import java.lang.annotation.Annotation;
 
 public class MustUseMarker extends RuleBasedMarker<MustUse> {
 
-	public Class<?>[] types = new Class<?>[0];
+  public Class<?>[] types = new Class<?>[0];
 
-	@Override
-	public Class<MustUse> annotationType() {
-		return MustUse.class;
-	}
+  @Override
+  public Class<MustUse> annotationType() {
+    return MustUse.class;
+  }
 
-	@Override
-	public MustUse createAnnotation() {
-		return new MustUse() {
+  @Override
+  public MustUse createAnnotation() {
+    return new MustUse() {
 
-			@Override
-			public String toString() {
-				return annotationType().getSimpleName();
-			}
+      @Override
+      public String toString() {
+        return annotationType().getSimpleName();
+      }
 
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return MustUse.class;
-			}
+      @Override
+      public Class<? extends Annotation> annotationType() {
+        return MustUse.class;
+      }
 
-			@Override
-			public Class<?>[] types() {
-				return types;
-			}
-		};
-	}
+      @Override
+      public Class<?>[] types() {
+        return types;
+      }
+    };
+  }
 }

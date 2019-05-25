@@ -16,26 +16,25 @@
 
 package jatf.rulegenerators;
 
+import jatf.common.rules.ArchitectureTestRule;
+import jatf.common.rules.MustUseRule;
+import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import org.junit.Test;
-
-import jatf.common.rules.ArchitectureTestRule;
-import jatf.common.rules.MustUseRule;
-
 public class EmptyMustUseRuleGeneratorTest {
 
-	@Test
-	public void emptyMustUseRuleGenerator_Valid() {
-		EmptyMustUseRuleGenerator generator = new EmptyMustUseRuleGenerator();
-		Class<?>[] classes = new Class[0];
-		ArchitectureTestRule rule1 = generator.generateArchitectureTestRuleFor(classes);
-		assertEquals(rule1.patterns().length, 0);
-		assertEquals(rule1.dependencies().length, 0);
-		assertFalse(rule1.omitConventions());
-		assertFalse(rule1.omitMetrics());
-		MustUseRule rule2 = generator.generateRule();
-		assertEquals(rule2.types().length, 0);
-	}
+  @Test
+  public void emptyMustUseRuleGenerator_Valid() {
+    EmptyMustUseRuleGenerator generator = new EmptyMustUseRuleGenerator();
+    Class<?>[] classes = new Class[0];
+    ArchitectureTestRule rule1 = generator.generateArchitectureTestRuleFor(classes);
+    assertEquals(rule1.patterns().length, 0);
+    assertEquals(rule1.dependencies().length, 0);
+    assertFalse(rule1.omitConventions());
+    assertFalse(rule1.omitMetrics());
+    MustUseRule rule2 = generator.generateRule();
+    assertEquals(rule2.types().length, 0);
+  }
 }

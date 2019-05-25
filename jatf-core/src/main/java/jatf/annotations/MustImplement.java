@@ -22,5 +22,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MustImplement {
 
-	Class<?>[] interfaces() default {};
+  Class<?>[] interfaces() default {};
 }

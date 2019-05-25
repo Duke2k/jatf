@@ -16,38 +16,38 @@
 
 package jatf.common.rules.markers;
 
-import java.lang.annotation.Annotation;
-
 import jatf.annotations.MustThrow;
+
+import java.lang.annotation.Annotation;
 
 public class MustThrowMarker extends RuleBasedMarker<MustThrow> {
 
-	@SuppressWarnings("UnusedDeclaration")
-	public Class<? extends Throwable>[] throwables;
+  @SuppressWarnings("UnusedDeclaration")
+  public Class<? extends Throwable>[] throwables;
 
-	@Override
-	public Class<MustThrow> annotationType() {
-		return MustThrow.class;
-	}
+  @Override
+  public Class<MustThrow> annotationType() {
+    return MustThrow.class;
+  }
 
-	@Override
-	public MustThrow createAnnotation() {
-		return new MustThrow() {
+  @Override
+  public MustThrow createAnnotation() {
+    return new MustThrow() {
 
-			@Override
-			public String toString() {
-				return annotationType().getSimpleName();
-			}
+      @Override
+      public String toString() {
+        return annotationType().getSimpleName();
+      }
 
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return MustThrow.class;
-			}
+      @Override
+      public Class<? extends Annotation> annotationType() {
+        return MustThrow.class;
+      }
 
-			@Override
-			public Class<? extends Throwable>[] throwables() {
-				return throwables;
-			}
-		};
-	}
+      @Override
+      public Class<? extends Throwable>[] throwables() {
+        return throwables;
+      }
+    };
+  }
 }

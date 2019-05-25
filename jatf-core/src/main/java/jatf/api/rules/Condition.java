@@ -18,20 +18,20 @@ package jatf.api.rules;
 
 public abstract class Condition<T> {
 
-	protected T type;
+  protected T type;
 
-	public Condition(T type) {
-		this.type = type;
-	}
+  public Condition(T type) {
+    this.type = type;
+  }
 
-	public abstract boolean firesFor(T type);
+  public abstract boolean firesFor(T type);
 
-	@SuppressWarnings("unused")
-	public boolean fires() {
-		return firesFor(type);
-	}
+  @SuppressWarnings("unused")
+  public boolean fires() {
+    return firesFor(type);
+  }
 
-	public T getType() {
-		return type;
-	}
+  public T getType() {
+    return type;
+  }
 }

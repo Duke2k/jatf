@@ -16,34 +16,33 @@
 
 package jatf.suites;
 
+import jatf.metrics.CyclomaticComplexityTest;
+import jatf.metrics.HalsteadComplexityTest;
+import jatf.metrics.MethodLengthTest;
+import jatf.metrics.NumberOfMethodsPerClassTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import jatf.metrics.CyclomaticComplexityTest;
-import jatf.metrics.HalsteadComplexityTest;
-import jatf.metrics.MethodLengthTest;
-import jatf.metrics.NumberOfMethodsPerClassTest;
-
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-		CyclomaticComplexityTest.class,
-		HalsteadComplexityTest.class,
-		MethodLengthTest.class,
-		NumberOfMethodsPerClassTest.class
+    CyclomaticComplexityTest.class,
+    HalsteadComplexityTest.class,
+    MethodLengthTest.class,
+    NumberOfMethodsPerClassTest.class
 })
 public class MetricsTests extends ArchitectureTestSuiteBase {
 
-	private static long startTime;
+  private static long startTime;
 
-	@BeforeClass
-	public static void startUpSuite() {
-		startTime = System.currentTimeMillis();
-	}
+  @BeforeClass
+  public static void startUpSuite() {
+    startTime = System.currentTimeMillis();
+  }
 
-	@AfterClass
-	public static void endSuite() {
-		endSuite(MetricsTests.class, startTime);
-	}
+  @AfterClass
+  public static void endSuite() {
+    endSuite(MetricsTests.class, startTime);
+  }
 }

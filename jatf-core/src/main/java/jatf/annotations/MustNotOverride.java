@@ -22,5 +22,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MustNotOverride {
 
-	String[] methodNames() default {};
+  String[] methodNames() default {};
 }

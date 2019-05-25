@@ -25,5 +25,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface MustNotReturn {
 
-	Class<?>[] types() default {};
+  Class<?>[] types() default {};
 }

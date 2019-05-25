@@ -16,36 +16,35 @@
 
 package jatf.suites;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 import jatf.pattern.AdapterTest;
 import jatf.pattern.SingletonTest;
 import jatf.pattern.StateTest;
 import jatf.pattern.StrategyTest;
 import jatf.pattern.TemplateMethodTest;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-		AdapterTest.class,
-		SingletonTest.class,
-		StateTest.class,
-		StrategyTest.class,
-		TemplateMethodTest.class
+    AdapterTest.class,
+    SingletonTest.class,
+    StateTest.class,
+    StrategyTest.class,
+    TemplateMethodTest.class
 })
 public class PatternTests extends ArchitectureTestSuiteBase {
 
-	private static long startTime;
+  private static long startTime;
 
-	@BeforeClass
-	public static void startUpSuite() {
-		startTime = System.currentTimeMillis();
-	}
+  @BeforeClass
+  public static void startUpSuite() {
+    startTime = System.currentTimeMillis();
+  }
 
-	@AfterClass
-	public static void endSuite() {
-		endSuite(PatternTests.class, startTime);
-	}
+  @AfterClass
+  public static void endSuite() {
+    endSuite(PatternTests.class, startTime);
+  }
 }

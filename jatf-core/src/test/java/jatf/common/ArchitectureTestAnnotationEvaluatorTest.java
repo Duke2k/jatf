@@ -16,59 +16,58 @@
 
 package jatf.common;
 
-import static com.google.common.collect.Maps.newHashMap;
-import static jatf.common.util.ArchitectureTestUtil.buildReflections;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import jatf.annotations.ArchitectureTest;
+import org.junit.Test;
+import org.reflections.Reflections;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.Test;
-import org.reflections.Reflections;
-
-import jatf.annotations.ArchitectureTest;
+import static com.google.common.collect.Maps.newHashMap;
+import static jatf.common.util.ArchitectureTestUtil.buildReflections;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ArchitectureTestAnnotationEvaluatorTest extends AbstractArchitectureTestEvaluatorTest {
 
-	@Test
-	public void evaluateInto_Real() {
-		// prepare
-		Reflections reflections = buildReflections();
-		ArchitectureTestAnnotationEvaluator evaluator = new ArchitectureTestAnnotationEvaluator(reflections);
-		Map<String, Set<Class<?>>> targetMap = newHashMap();
+  @Test
+  public void evaluateInto_Real() {
+    // prepare
+    Reflections reflections = buildReflections();
+    ArchitectureTestAnnotationEvaluator evaluator = new ArchitectureTestAnnotationEvaluator(reflections);
+    Map<String, Set<Class<?>>> targetMap = newHashMap();
 
-		// test
-		evaluator.evaluateInto(targetMap);
+    // test
+    evaluator.evaluateInto(targetMap);
 
-		// verify
-		verify(targetMap, TestClass1.class, TestClass2.class);
-	}
+    // verify
+    verify(targetMap, TestClass1.class, TestClass2.class);
+  }
 
-	@Test
-	public void evaluateInto_Mocked() {
-		// prepare
-		Reflections reflections = mock(Reflections.class);
-		Set<Class<?>> classes = new HashSet<>(2);
-		classes.add(TestClass1.class);
-		classes.add(TestClass2.class);
-		when(reflections.getTypesAnnotatedWith(ArchitectureTest.class)).thenReturn(classes);
-		ArchitectureTestAnnotationEvaluator evaluator = new ArchitectureTestAnnotationEvaluator(reflections);
-		Map<String, Set<Class<?>>> targetMap = newHashMap();
+  @Test
+  public void evaluateInto_Mocked() {
+    // prepare
+    Reflections reflections = mock(Reflections.class);
+    Set<Class<?>> classes = new HashSet<>(2);
+    classes.add(TestClass1.class);
+    classes.add(TestClass2.class);
+    when(reflections.getTypesAnnotatedWith(ArchitectureTest.class)).thenReturn(classes);
+    ArchitectureTestAnnotationEvaluator evaluator = new ArchitectureTestAnnotationEvaluator(reflections);
+    Map<String, Set<Class<?>>> targetMap = newHashMap();
 
-		// test
-		evaluator.evaluateInto(targetMap);
+    // test
+    evaluator.evaluateInto(targetMap);
 
-		// verify
-		verify(targetMap);
-	}
+    // verify
+    verify(targetMap);
+  }
 
-	@ArchitectureTest
-	private static class TestClass1 {
-	}
+  @ArchitectureTest
+  private static class TestClass1 {
+  }
 
-	@ArchitectureTest
-	private static class TestClass2 {
-	}
+  @ArchitectureTest
+  private static class TestClass2 {
+  }
 }

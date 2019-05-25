@@ -16,37 +16,37 @@
 
 package jatf.common.rules.markers;
 
-import java.lang.annotation.Annotation;
-
 import jatf.annotations.MustNotImplement;
+
+import java.lang.annotation.Annotation;
 
 public class MustNotImplementMarker extends RuleBasedMarker<MustNotImplement> {
 
-	public Class<?>[] interfaces = new Class<?>[0];
+  public Class<?>[] interfaces = new Class<?>[0];
 
-	@Override
-	public Class<MustNotImplement> annotationType() {
-		return MustNotImplement.class;
-	}
+  @Override
+  public Class<MustNotImplement> annotationType() {
+    return MustNotImplement.class;
+  }
 
-	@Override
-	public MustNotImplement createAnnotation() {
-		return new MustNotImplement() {
+  @Override
+  public MustNotImplement createAnnotation() {
+    return new MustNotImplement() {
 
-			@Override
-			public String toString() {
-				return annotationType().getSimpleName();
-			}
+      @Override
+      public String toString() {
+        return annotationType().getSimpleName();
+      }
 
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return MustNotImplement.class;
-			}
+      @Override
+      public Class<? extends Annotation> annotationType() {
+        return MustNotImplement.class;
+      }
 
-			@Override
-			public Class<?>[] interfaces() {
-				return interfaces;
-			}
-		};
-	}
+      @Override
+      public Class<?>[] interfaces() {
+        return interfaces;
+      }
+    };
+  }
 }

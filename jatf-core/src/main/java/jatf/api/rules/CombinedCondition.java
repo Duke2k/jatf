@@ -16,19 +16,19 @@
 
 package jatf.api.rules;
 
-import static com.google.common.collect.Sets.newHashSet;
-
 import java.util.Arrays;
 import java.util.Set;
 
+import static com.google.common.collect.Sets.newHashSet;
+
 public abstract class CombinedCondition<T> extends Condition<T> {
 
-	protected Set<Condition<Class<?>>> conditions;
+  protected Set<Condition<Class<?>>> conditions;
 
-	@SafeVarargs
-	public CombinedCondition(T type, Condition<Class<?>>... conditions) {
-		super(type);
-		this.conditions = newHashSet();
-		this.conditions.addAll(Arrays.asList(conditions));
-	}
+  @SafeVarargs
+  public CombinedCondition(T type, Condition<Class<?>>... conditions) {
+    super(type);
+    this.conditions = newHashSet();
+    this.conditions.addAll(Arrays.asList(conditions));
+  }
 }

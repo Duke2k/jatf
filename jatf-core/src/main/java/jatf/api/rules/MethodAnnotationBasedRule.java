@@ -16,37 +16,36 @@
 
 package jatf.api.rules;
 
-import static com.google.common.collect.Sets.newHashSet;
-
-import java.lang.reflect.Method;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-
 import jatf.common.rules.AnnotationBasedRule;
 import jatf.common.rules.markers.RuleBasedMarker;
 
+import javax.annotation.Nonnull;
+import java.lang.reflect.Method;
+import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
+
 public abstract class MethodAnnotationBasedRule<M extends RuleBasedMarker, C extends Condition<Class<?>>> extends AnnotationBasedRule<M, C> {
 
-	protected Set<Method> methods;
+  protected Set<Method> methods;
 
-	protected MethodAnnotationBasedRule(Method[] methods, C condition, M marker) {
-		super(condition, marker);
-		this.methods = newHashSet();
-		for (Method method : methods) {
-			addMethodIfConditionFires(method);
-		}
-	}
+  protected MethodAnnotationBasedRule(Method[] methods, C condition, M marker) {
+    super(condition, marker);
+    this.methods = newHashSet();
+    for (Method method : methods) {
+      addMethodIfConditionFires(method);
+    }
+  }
 
-	@SuppressWarnings("WeakerAccess")
-	public void addMethodIfConditionFires(@Nonnull Method method) {
-		if (condition.firesFor(method.getDeclaringClass())) {
-			methods.add(method);
-			classes.add(method.getDeclaringClass());
-		}
-	}
+  @SuppressWarnings("WeakerAccess")
+  public void addMethodIfConditionFires(@Nonnull Method method) {
+    if (condition.firesFor(method.getDeclaringClass())) {
+      methods.add(method);
+      classes.add(method.getDeclaringClass());
+    }
+  }
 
-	public Method[] getMethods() {
-		return methods.toArray(new Method[methods.size()]);
-	}
+  public Method[] getMethods() {
+    return methods.toArray(new Method[methods.size()]);
+  }
 }

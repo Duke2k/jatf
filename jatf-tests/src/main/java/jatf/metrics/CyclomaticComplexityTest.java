@@ -16,25 +16,23 @@
 
 package jatf.metrics;
 
-import static jatf.common.ArchitectureTestConstraints.MAXIMUM_CCN;
-import static jatf.common.util.ArchitectureTestUtil.findSourceFileFor;
-import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
-import static org.junit.Assert.assertTrue;
+import com.github.javaparser.ast.stmt.Statement;
+import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.common.parser.MethodVisitor;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.github.javaparser.ast.stmt.Statement;
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
-
-import jatf.common.parser.MethodVisitor;
+import static jatf.common.ArchitectureTestConstraints.MAXIMUM_CCN;
+import static jatf.common.util.ArchitectureTestUtil.findSourceFileFor;
+import static jatf.common.util.ArchitectureTestUtil.parseWithVoidVisitor;
+import static org.junit.Assert.assertTrue;
 
 /**
  * CCN is also known as McCabe Metric. It is simply counting 'if', 'for', 'while' statements etc. in a method.
@@ -43,36 +41,36 @@ import jatf.common.parser.MethodVisitor;
 @RunWith(DataProviderRunner.class)
 public class CyclomaticComplexityTest extends MetricsTestBase {
 
-	private final List<String> keywords = Arrays.asList("if", "for", "while", "case", "catch", "&&", "||", "?");
+  private final List<String> keywords = Arrays.asList("if", "for", "while", "case", "catch", "&&", "||", "?");
 
-	@DataProvider
-	public static Object[][] provideClassesToTest() {
-		Set<Class<?>> classesToTest = provideClassesFor(CyclomaticComplexityTest.class);
-		return getProvider(classesToTest);
-	}
+  @DataProvider
+  public static Object[][] provideClassesToTest() {
+    Set<Class<?>> classesToTest = provideClassesFor(CyclomaticComplexityTest.class);
+    return getProvider(classesToTest);
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void testCyclomaticComplexity(Class<?> clazz) {
-		File sourceFile = findSourceFileFor(clazz);
-		if (sourceFile != null) {
-			MethodVisitor methodVisitor = new MethodVisitor();
-			parseWithVoidVisitor(clazz, methodVisitor);
-			for (String methodName : methodVisitor.getMethodNames()) {
-				int currentCcn = 1;
-				List<Statement> statements = methodVisitor.getStatementsInMethod(methodName);
-				if (statements != null && !statements.isEmpty()) {
-					for (Statement statement : statements) {
-						for (String keyword : keywords) {
-							if (statement.toString().contains(keyword)) {
-								currentCcn++;
-							}
-						}
-					}
-				}
-				assertTrue("Cyclomatic complexity threshold violated in " +
-						methodName + " of " + clazz.getName(), currentCcn <= MAXIMUM_CCN);
-			}
-		}
-	}
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void testCyclomaticComplexity(Class<?> clazz) {
+    File sourceFile = findSourceFileFor(clazz);
+    if (sourceFile != null) {
+      MethodVisitor methodVisitor = new MethodVisitor();
+      parseWithVoidVisitor(clazz, methodVisitor);
+      for (String methodName : methodVisitor.getMethodNames()) {
+        int currentCcn = 1;
+        List<Statement> statements = methodVisitor.getStatementsInMethod(methodName);
+        if (statements != null && !statements.isEmpty()) {
+          for (Statement statement : statements) {
+            for (String keyword : keywords) {
+              if (statement.toString().contains(keyword)) {
+                currentCcn++;
+              }
+            }
+          }
+        }
+        assertTrue("Cyclomatic complexity threshold violated in " +
+            methodName + " of " + clazz.getName(), currentCcn <= MAXIMUM_CCN);
+      }
+    }
+  }
 }

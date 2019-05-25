@@ -16,17 +16,6 @@
 
 package jatf.common.parser;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newHashMap;
-
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.github.javaparser.Position;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.body.MethodDeclaration;
@@ -35,56 +24,66 @@ import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Maps.newHashMap;
+
 public class MethodVisitor extends VoidVisitorAdapter<Object> {
 
-	private Map<String, List<Statement>> statementsByMethodName = newHashMap();
-	private Map<String, List<Parameter>> parametersByMethodName = newHashMap();
-	private Map<String, BlockStmt> methodBodyByName = newHashMap();
-	private List<String> methodNames = newArrayList();
-	private Map<String, EnumSet<Modifier>> modifiersByName = newHashMap();
-	private Map<String, Position> positionsByName = newHashMap();
+  private Map<String, List<Statement>> statementsByMethodName = newHashMap();
+  private Map<String, List<Parameter>> parametersByMethodName = newHashMap();
+  private Map<String, BlockStmt> methodBodyByName = newHashMap();
+  private List<String> methodNames = newArrayList();
+  private Map<String, EnumSet<Modifier>> modifiersByName = newHashMap();
+  private Map<String, Position> positionsByName = newHashMap();
 
-	private boolean sorted = false;
+  private boolean sorted = false;
 
-	@Override
-	public void visit(MethodDeclaration methodDeclaration, Object arguments) {
-		methodNames.add(methodDeclaration.getName().asString());
-		if (methodDeclaration.getBegin().isPresent()) {
-			positionsByName.put(methodDeclaration.getName().asString(), methodDeclaration.getBegin().get());
-		}
-		modifiersByName.put(methodDeclaration.getName().asString(), methodDeclaration.getModifiers());
-		if (methodDeclaration.getBody() != null && methodDeclaration.getBody().isPresent()) {
-			statementsByMethodName.put(methodDeclaration.getName().asString(), methodDeclaration.getBody().get().getStatements());
-		}
-		parametersByMethodName.put(methodDeclaration.getName().asString(), methodDeclaration.getParameters());
-		methodBodyByName.put(methodDeclaration.getName().asString(), methodDeclaration.getBody().get());
-	}
+  @Override
+  public void visit(MethodDeclaration methodDeclaration, Object arguments) {
+    methodNames.add(methodDeclaration.getName().asString());
+    if (methodDeclaration.getBegin().isPresent()) {
+      positionsByName.put(methodDeclaration.getName().asString(), methodDeclaration.getBegin().get());
+    }
+    modifiersByName.put(methodDeclaration.getName().asString(), methodDeclaration.getModifiers());
+    if (methodDeclaration.getBody() != null && methodDeclaration.getBody().isPresent()) {
+      statementsByMethodName.put(methodDeclaration.getName().asString(), methodDeclaration.getBody().get().getStatements());
+    }
+    parametersByMethodName.put(methodDeclaration.getName().asString(), methodDeclaration.getParameters());
+    methodBodyByName.put(methodDeclaration.getName().asString(), methodDeclaration.getBody().get());
+  }
 
-	@Nullable
-	public List<Statement> getStatementsInMethod(@Nonnull String methodName) {
-		return statementsByMethodName.get(methodName);
-	}
+  @Nullable
+  public List<Statement> getStatementsInMethod(@Nonnull String methodName) {
+    return statementsByMethodName.get(methodName);
+  }
 
-	@Nullable
-	public List<Parameter> getParametersOfMethod(@Nonnull String methodName) {
-		return parametersByMethodName.get(methodName);
-	}
+  @Nullable
+  public List<Parameter> getParametersOfMethod(@Nonnull String methodName) {
+    return parametersByMethodName.get(methodName);
+  }
 
-	@Nullable
-	public BlockStmt getMethodBody(@Nonnull String methodName) {
-		return methodBodyByName.get(methodName);
-	}
+  @Nullable
+  public BlockStmt getMethodBody(@Nonnull String methodName) {
+    return methodBodyByName.get(methodName);
+  }
 
-	@Nonnull
-	public List<String> getMethodNames() {
-		if (!sorted) {
-			methodNames.sort(Comparator.comparing(methodName -> positionsByName.get(methodName)));
-			sorted = true;
-		}
-		return methodNames;
-	}
+  @Nonnull
+  public List<String> getMethodNames() {
+    if (!sorted) {
+      methodNames.sort(Comparator.comparing(methodName -> positionsByName.get(methodName)));
+      sorted = true;
+    }
+    return methodNames;
+  }
 
-	public EnumSet<Modifier> getModifierFor(@Nonnull String name) {
-		return modifiersByName.get(name);
-	}
+  public EnumSet<Modifier> getModifierFor(@Nonnull String name) {
+    return modifiersByName.get(name);
+  }
 }

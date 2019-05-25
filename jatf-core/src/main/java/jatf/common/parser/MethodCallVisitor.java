@@ -16,28 +16,27 @@
 
 package jatf.common.parser;
 
-import static com.google.common.collect.Maps.newHashMap;
-
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Map;
+
+import static com.google.common.collect.Maps.newHashMap;
+
 public class MethodCallVisitor extends VoidVisitorAdapter<Object> {
 
-	private Map<String, List<Expression>> methodCalls = newHashMap();
+  private Map<String, List<Expression>> methodCalls = newHashMap();
 
-	@Override
-	public void visit(MethodCallExpr methodCallExpr, Object arguments) {
-		methodCalls.put(methodCallExpr.getName().asString(), methodCallExpr.getArguments());
-	}
+  @Override
+  public void visit(MethodCallExpr methodCallExpr, Object arguments) {
+    methodCalls.put(methodCallExpr.getName().asString(), methodCallExpr.getArguments());
+  }
 
-	@Nonnull
-	public Map<String, List<Expression>> getMethodCalls() {
-		return methodCalls;
-	}
+  @Nonnull
+  public Map<String, List<Expression>> getMethodCalls() {
+    return methodCalls;
+  }
 }

@@ -20,15 +20,15 @@ import jatf.api.rules.Condition;
 
 public final class Not extends Condition<Class<?>> {
 
-	private Condition<Class<?>> condition;
+  private Condition<Class<?>> condition;
 
-	public Not(Condition<Class<?>> condition) {
-		super(condition.getType());
-		this.condition = condition;
-	}
+  public Not(Condition<Class<?>> condition) {
+    super(condition.getType());
+    this.condition = condition;
+  }
 
-	@Override
-	public boolean firesFor(Class<?> type) {
-		return !condition.firesFor(type);
-	}
+  @Override
+  public boolean firesFor(Class<?> type) {
+    return !condition.firesFor(type);
+  }
 }

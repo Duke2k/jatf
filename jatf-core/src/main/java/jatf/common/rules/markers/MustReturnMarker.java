@@ -16,36 +16,36 @@
 
 package jatf.common.rules.markers;
 
-import java.lang.annotation.Annotation;
-
 import jatf.annotations.MustReturn;
+
+import java.lang.annotation.Annotation;
 
 public class MustReturnMarker extends RuleBasedMarker<MustReturn> {
 
-	public Class<?>[] types = new Class<?>[0];
+  public Class<?>[] types = new Class<?>[0];
 
-	@Override
-	public Class<MustReturn> annotationType() {
-		return MustReturn.class;
-	}
+  @Override
+  public Class<MustReturn> annotationType() {
+    return MustReturn.class;
+  }
 
-	@Override
-	public MustReturn createAnnotation() {
-		return new MustReturn() {
-			@Override
-			public String toString() {
-				return annotationType().getSimpleName();
-			}
+  @Override
+  public MustReturn createAnnotation() {
+    return new MustReturn() {
+      @Override
+      public String toString() {
+        return annotationType().getSimpleName();
+      }
 
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return MustReturn.class;
-			}
+      @Override
+      public Class<? extends Annotation> annotationType() {
+        return MustReturn.class;
+      }
 
-			@Override
-			public Class<?>[] types() {
-				return types;
-			}
-		};
-	}
+      @Override
+      public Class<?>[] types() {
+        return types;
+      }
+    };
+  }
 }

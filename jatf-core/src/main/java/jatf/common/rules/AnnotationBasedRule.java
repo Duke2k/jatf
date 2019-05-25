@@ -16,30 +16,30 @@
 
 package jatf.common.rules;
 
-import static com.google.common.collect.Sets.newHashSet;
-
-import java.util.Set;
-
 import jatf.api.rules.Condition;
 import jatf.common.rules.markers.RuleBasedMarker;
 
+import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
+
 public abstract class AnnotationBasedRule<M extends RuleBasedMarker, C extends Condition<Class<?>>> {
 
-	protected Set<Class<?>> classes;
-	protected C condition;
-	protected M marker;
+  protected Set<Class<?>> classes;
+  protected C condition;
+  protected M marker;
 
-	public AnnotationBasedRule(C condition, M marker) {
-		this.condition = condition;
-		this.marker = marker;
-		classes = newHashSet();
-	}
+  public AnnotationBasedRule(C condition, M marker) {
+    this.condition = condition;
+    this.marker = marker;
+    classes = newHashSet();
+  }
 
-	public M getMarker() {
-		return marker;
-	}
+  public M getMarker() {
+    return marker;
+  }
 
-	public Class<?>[] getClasses() {
-		return classes.toArray(new Class<?>[classes.size()]);
-	}
+  public Class<?>[] getClasses() {
+    return classes.toArray(new Class<?>[classes.size()]);
+  }
 }

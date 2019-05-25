@@ -20,18 +20,18 @@ import jatf.api.rules.Condition;
 
 public final class Implements extends Condition<Class<?>> {
 
-	public Implements(Class<?> type) {
-		super(type);
-	}
+  public Implements(Class<?> type) {
+    super(type);
+  }
 
-	@Override
-	public boolean firesFor(Class<?> clazz) {
-		Class<?>[] interfaces = clazz.getInterfaces();
-		for (Class<?> in : interfaces) {
-			if (in.equals(type)) {
-				return true;
-			}
-		}
-		return false;
-	}
+  @Override
+  public boolean firesFor(Class<?> clazz) {
+    Class<?>[] interfaces = clazz.getInterfaces();
+    for (Class<?> in : interfaces) {
+      if (in.equals(type)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

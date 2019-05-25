@@ -16,16 +16,6 @@
 
 package jatf.common.parser;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newHashMap;
-
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
@@ -33,44 +23,53 @@ import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Maps.newHashMap;
+
 public class DeclarationVisitor extends VoidVisitorAdapter<Object> {
 
-	private Map<String, Type> typeMap = newHashMap();
-	private List<String> typeNames = newArrayList();
-	private Map<String, EnumSet<Modifier>> modifiersByName = newHashMap();
-	private List<String> typeDeclarations = newArrayList();
+  private Map<String, Type> typeMap = newHashMap();
+  private List<String> typeNames = newArrayList();
+  private Map<String, EnumSet<Modifier>> modifiersByName = newHashMap();
+  private List<String> typeDeclarations = newArrayList();
 
-	@Override
-	public void visit(VariableDeclarationExpr variableDeclarationExpr, Object arguments) {
-		for (VariableDeclarator variableDeclarator : variableDeclarationExpr.getVariables()) {
-			String varName = variableDeclarator.getNameAsString();
-			typeMap.put(varName, variableDeclarationExpr.getElementType());
-			typeNames.add(varName);
-			modifiersByName.put(varName, variableDeclarationExpr.getModifiers());
-		}
-	}
+  @Override
+  public void visit(VariableDeclarationExpr variableDeclarationExpr, Object arguments) {
+    for (VariableDeclarator variableDeclarator : variableDeclarationExpr.getVariables()) {
+      String varName = variableDeclarator.getNameAsString();
+      typeMap.put(varName, variableDeclarationExpr.getElementType());
+      typeNames.add(varName);
+      modifiersByName.put(varName, variableDeclarationExpr.getModifiers());
+    }
+  }
 
-	@Override
-	public void visit(ClassOrInterfaceDeclaration classOrInterfaceDeclaration, Object arguments) {
-		typeDeclarations.add(classOrInterfaceDeclaration.getNameAsString());
-	}
+  @Override
+  public void visit(ClassOrInterfaceDeclaration classOrInterfaceDeclaration, Object arguments) {
+    typeDeclarations.add(classOrInterfaceDeclaration.getNameAsString());
+  }
 
-	@Nullable
-	public Type getTypeBy(@Nonnull String name) {
-		return typeMap.get(name);
-	}
+  @Nullable
+  public Type getTypeBy(@Nonnull String name) {
+    return typeMap.get(name);
+  }
 
-	@Nonnull
-	public List<String> getTypeNames() {
-		return typeNames;
-	}
+  @Nonnull
+  public List<String> getTypeNames() {
+    return typeNames;
+  }
 
-	public EnumSet<Modifier> getModifierFor(@Nonnull String name) {
-		return modifiersByName.get(name);
-	}
+  public EnumSet<Modifier> getModifierFor(@Nonnull String name) {
+    return modifiersByName.get(name);
+  }
 
-	@Nonnull
-	public List<String> getTypeDeclarations() {
-		return typeDeclarations;
-	}
+  @Nonnull
+  public List<String> getTypeDeclarations() {
+    return typeDeclarations;
+  }
 }

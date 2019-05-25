@@ -16,24 +16,24 @@
 
 package jatf.annotations;
 
-import static jatf.annotations.Dependency.none;
-import static jatf.annotations.Pattern.undefined;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import static jatf.annotations.Dependency.none;
+import static jatf.annotations.Pattern.undefined;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ArchitectureTest {
 
-	boolean omitMetrics() default false;
+  boolean omitMetrics() default false;
 
-	boolean omitConventions() default false;
+  boolean omitConventions() default false;
 
-	Pattern[] patterns() default {undefined};
+  Pattern[] patterns() default {undefined};
 
-	Dependency[] dependencies() default {none};
+  Dependency[] dependencies() default {none};
 
-	boolean enforceSecurityTests() default true;
+  boolean enforceSecurityTests() default true;
 
-	String[] testNames() default {};
+  String[] testNames() default {};
 }

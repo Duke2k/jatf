@@ -16,17 +16,16 @@
 
 package jatf.pattern;
 
-import static org.junit.Assert.assertTrue;
+import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Generally, the Adapter pattern knows two types of adapter (or wrapper) types: class adapters and object adapters.
@@ -36,26 +35,26 @@ import com.tngtech.java.junit.dataprovider.UseDataProvider;
 @RunWith(DataProviderRunner.class)
 public class AdapterTest extends PatternTestBase {
 
-	@DataProvider
-	public static Object[][] provideClassesToTest() {
-		Set<Class<?>> classesToTest = provideClassesFor(AdapterTest.class);
-		return getProvider(classesToTest);
-	}
+  @DataProvider
+  public static Object[][] provideClassesToTest() {
+    Set<Class<?>> classesToTest = provideClassesFor(AdapterTest.class);
+    return getProvider(classesToTest);
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void testForAdapterPattern(Class<?> clazz) {
-		Class<?>[] interfaces = clazz.getInterfaces();
-		Method[] methods = clazz.getMethods();
-		for (Class<?> in : interfaces) {
-			Method[] methodsInInterface = in.getMethods();
-			for (Method methodInInterface : methodsInInterface) {
-				Class<?> returnType = methodInInterface.getReturnType();
-				Method methodInClass = findMemberBy(methodInInterface.getName(), methods);
-				assertTrue("Method not present in " + clazz.getName(), methodInClass != null);
-				assertTrue("Method does not have correct return type: " + clazz.getName() + "." + methodInClass.getName(),
-						returnType.equals(methodInClass.getReturnType()));
-			}
-		}
-	}
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void testForAdapterPattern(Class<?> clazz) {
+    Class<?>[] interfaces = clazz.getInterfaces();
+    Method[] methods = clazz.getMethods();
+    for (Class<?> in : interfaces) {
+      Method[] methodsInInterface = in.getMethods();
+      for (Method methodInInterface : methodsInInterface) {
+        Class<?> returnType = methodInInterface.getReturnType();
+        Method methodInClass = findMemberBy(methodInInterface.getName(), methods);
+        assertTrue("Method not present in " + clazz.getName(), methodInClass != null);
+        assertTrue("Method does not have correct return type: " + clazz.getName() + "." + methodInClass.getName(),
+            returnType.equals(methodInClass.getReturnType()));
+      }
+    }
+  }
 }

@@ -24,23 +24,23 @@ import jatf.common.rules.markers.ArchitectureTestMarker;
 
 public final class ArchitectureTestRule extends ClassAnnotationBasedRule<ArchitectureTestMarker, AlwaysTrue> {
 
-	public ArchitectureTestRule(Class<?>[] classes, ArchitectureTestMarker marker) {
-		super(classes, new AlwaysTrue(), marker);
-	}
+  public ArchitectureTestRule(Class<?>[] classes, ArchitectureTestMarker marker) {
+    super(classes, new AlwaysTrue(), marker);
+  }
 
-	public boolean omitConventions() {
-		return marker.omitConventions;
-	}
+  public boolean omitConventions() {
+    return marker.omitConventions;
+  }
 
-	public boolean omitMetrics() {
-		return marker.omitMetrics;
-	}
+  public boolean omitMetrics() {
+    return marker.omitMetrics;
+  }
 
-	public Dependency[] dependencies() {
-		return marker.dependencies;
-	}
+  public Dependency[] dependencies() {
+    return marker.dependencies;
+  }
 
-	public Pattern[] patterns() {
-		return marker.patterns;
-	}
+  public Pattern[] patterns() {
+    return marker.patterns;
+  }
 }

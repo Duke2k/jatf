@@ -16,54 +16,52 @@
 
 package jatf.dependency;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import jatf.annotations.MustHaveAnnotation;
+import jatf.annotations.MustNotHaveAnnotation;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
-
-import jatf.annotations.MustHaveAnnotation;
-import jatf.annotations.MustNotHaveAnnotation;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(DataProviderRunner.class)
 public class AnnotationTypeTest extends DependencyTestBase {
 
-	@DataProvider
-	public static Object[][] provideClassesToTest() {
-		Set<Class<?>> classesToTest = provideClassesFor(AnnotationTypeTest.class);
-		return getProvider(classesToTest);
-	}
+  @DataProvider
+  public static Object[][] provideClassesToTest() {
+    Set<Class<?>> classesToTest = provideClassesFor(AnnotationTypeTest.class);
+    return getProvider(classesToTest);
+  }
 
-	@Test
-	@UseDataProvider(DATA_PROVIDER_NAME)
-	public void isAnnotated(Class<?> clazz) {
-		Annotation[] annotations = clazz.getAnnotations();
-		for (Annotation annotation : annotations) {
-			if (annotation.annotationType().equals(MustHaveAnnotation.class)) {
-				assertTrue("Required annotation " + annotation + " not present in " + clazz.getName(),
-						checkIfAnnotationIsPresentIn(clazz, ((MustHaveAnnotation) annotation).annotation()));
-			}
-			if (annotation.annotationType().equals(MustNotHaveAnnotation.class)) {
-				assertFalse("Forbidden annotation " + annotation + " present in " + clazz.getName(),
-						checkIfAnnotationIsPresentIn(clazz, ((MustNotHaveAnnotation) annotation).annotation()));
-			}
-		}
-	}
+  @Test
+  @UseDataProvider(DATA_PROVIDER_NAME)
+  public void isAnnotated(Class<?> clazz) {
+    Annotation[] annotations = clazz.getAnnotations();
+    for (Annotation annotation : annotations) {
+      if (annotation.annotationType().equals(MustHaveAnnotation.class)) {
+        assertTrue("Required annotation " + annotation + " not present in " + clazz.getName(),
+            checkIfAnnotationIsPresentIn(clazz, ((MustHaveAnnotation) annotation).annotation()));
+      }
+      if (annotation.annotationType().equals(MustNotHaveAnnotation.class)) {
+        assertFalse("Forbidden annotation " + annotation + " present in " + clazz.getName(),
+            checkIfAnnotationIsPresentIn(clazz, ((MustNotHaveAnnotation) annotation).annotation()));
+      }
+    }
+  }
 
-	private boolean checkIfAnnotationIsPresentIn(Class<?> clazz, Class<? extends Annotation> annotation) {
-		Annotation[] annotations = clazz.getAnnotations();
-		for (Annotation a : annotations) {
-			if (a.annotationType().equals(annotation)) {
-				return true;
-			}
-		}
-		return false;
-	}
+  private boolean checkIfAnnotationIsPresentIn(Class<?> clazz, Class<? extends Annotation> annotation) {
+    Annotation[] annotations = clazz.getAnnotations();
+    for (Annotation a : annotations) {
+      if (a.annotationType().equals(annotation)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
