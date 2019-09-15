@@ -5,11 +5,11 @@ import org.junit.Before;
 
 public class ConstraintRepositoryTest {
 
-	@Before
-	public void setUp() {
-	}
+  @Before
+  public void setUp() {
+  }
 
-	@After
-	public void tearDown() {
-	}
+  @After
+  public void tearDown() {
+  }
 }
