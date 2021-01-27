@@ -40,6 +40,6 @@ public abstract class AnnotationBasedRule<M extends RuleBasedMarker, C extends C
   }
 
   public Class<?>[] getClasses() {
-    return classes.toArray(new Class<?>[classes.size()]);
+    return classes.toArray(new Class<?>[0]);
   }
 }

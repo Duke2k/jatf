@@ -20,7 +20,7 @@ public class ConstraintsService {
     this.constraintRepository = constraintRepository;
   }
 
-  public Constraint getConstraint(@Nonnull String name) {
+  private Constraint getConstraint(@Nonnull String name) {
     return mapToApiConstraint(constraintRepository.findByName(name));
   }
 

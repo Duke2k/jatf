@@ -67,18 +67,15 @@ import com.github.javaparser.ast.expr.UnaryExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.AssertStmt;
 import com.github.javaparser.ast.stmt.BlockStmt;
-import com.github.javaparser.ast.stmt.BreakStmt;
 import com.github.javaparser.ast.stmt.CatchClause;
 import com.github.javaparser.ast.stmt.ContinueStmt;
 import com.github.javaparser.ast.stmt.DoStmt;
 import com.github.javaparser.ast.stmt.ExplicitConstructorInvocationStmt;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.ForStmt;
-import com.github.javaparser.ast.stmt.ForeachStmt;
 import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.LabeledStmt;
 import com.github.javaparser.ast.stmt.ReturnStmt;
-import com.github.javaparser.ast.stmt.SwitchEntryStmt;
 import com.github.javaparser.ast.stmt.SwitchStmt;
 import com.github.javaparser.ast.stmt.SynchronizedStmt;
 import com.github.javaparser.ast.stmt.ThrowStmt;
@@ -94,7 +91,6 @@ import com.github.javaparser.ast.type.WildcardType;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.google.common.collect.Lists;
 
-import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -381,16 +377,16 @@ public class TokenVisitor extends VoidVisitorAdapter<Object> {
   }
 
   public void visit(ThisExpr n, Object arg) {
-    if (n.getClassExpr().isPresent()) {
-      n.getClassExpr().get().accept(this, arg);
+    if (n.getTypeName().isPresent()) {
+      n.getTypeName().get().accept(this, arg);
       tokens.add(".");
     }
     tokens.add("this");
   }
 
   public void visit(SuperExpr n, Object arg) {
-    if (n.getClassExpr().isPresent()) {
-      n.getClassExpr().get().accept(this, arg);
+    if (n.getTypeName().isPresent()) {
+      n.getTypeName().get().accept(this, arg);
       tokens.add(".");
     }
     tokens.add("super");
@@ -573,27 +569,6 @@ public class TokenVisitor extends VoidVisitorAdapter<Object> {
     n.getEntries().forEach(e -> e.accept(this, arg));
   }
 
-  public void visit(SwitchEntryStmt n, Object arg) {
-    if (n.getLabel() != null) {
-      tokens.add("case");
-      if (n.getLabel().isPresent()) {
-        n.getLabel().get().accept(this, arg);
-        tokens.add(":");
-      }
-    } else {
-      tokens.add("default:");
-    }
-    n.getStatements().forEach(s -> s.accept(this, arg));
-  }
-
-  public void visit(BreakStmt n, Object arg) {
-    tokens.add("break");
-    if (n.getLabel().isPresent()) {
-      tokens.add(" ");
-      tokens.add(n.getLabel().get().asString());
-    }
-  }
-
   public void visit(ReturnStmt n, Object arg) {
     tokens.add("return");
     if (n.getExpression().isPresent()) {
@@ -681,14 +656,6 @@ public class TokenVisitor extends VoidVisitorAdapter<Object> {
     n.getBody().accept(this, arg);
     tokens.add(" while (");
     n.getCondition().accept(this, arg);
-  }
-
-  public void visit(ForeachStmt n, Object arg) {
-    tokens.add("for (");
-    n.getVariable().accept(this, arg);
-    tokens.add(" : ");
-    n.getIterable().accept(this, arg);
-    n.getBody().accept(this, arg);
   }
 
   public void visit(ForStmt n, Object arg) {
@@ -866,11 +833,11 @@ public class TokenVisitor extends VoidVisitorAdapter<Object> {
     }
   }
 
-  private void printModifiers(EnumSet<Modifier> modifiers) {
-    modifiers.forEach(m -> {
-      if (!m.equals(Modifier.DEFAULT)) {
-        tokens.add(m.name().toLowerCase());
-      }
-    });
+  private void printModifiers(NodeList<Modifier> modifiers) {
+    modifiers.forEach(this::accept);
+  }
+
+  private void accept(Modifier m) {
+    tokens.add(m.toString().toLowerCase());
   }
 }

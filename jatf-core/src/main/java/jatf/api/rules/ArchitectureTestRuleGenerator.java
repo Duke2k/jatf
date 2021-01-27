@@ -53,7 +53,7 @@ public abstract class ArchitectureTestRuleGenerator<M extends RuleBasedMarker, R
 
   @Nonnull
   public ArchitectureTestRule generateArchitectureTestRule() {
-    return generateArchitectureTestRuleFor(classes.toArray(new Class<?>[classes.size()]));
+    return generateArchitectureTestRuleFor(classes.toArray(new Class<?>[0]));
   }
 
   @SuppressWarnings("unused")
@@ -67,7 +67,7 @@ public abstract class ArchitectureTestRuleGenerator<M extends RuleBasedMarker, R
   }
 
   public Class<?>[] getClasses() {
-    return classes.toArray(new Class<?>[classes.size()]);
+    return classes.toArray(new Class<?>[0]);
   }
 
   public void setClasses(Set<Class<?>> classes) {

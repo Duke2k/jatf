@@ -103,9 +103,9 @@ public class ArchitectureTestMarker extends RuleBasedMarker<ArchitectureTest> {
     mergedDependencySet.addAll(Arrays.asList(this.dependencies));
     mergedTestNames.addAll(Arrays.asList(other.testNames));
     mergedTestNames.addAll(Arrays.asList(this.testNames));
-    patterns = mergedPatternSet.toArray(new Pattern[mergedPatternSet.size()]);
-    dependencies = mergedDependencySet.toArray(new Dependency[mergedDependencySet.size()]);
-    testNames = mergedTestNames.toArray(new String[mergedTestNames.size()]);
+    patterns = mergedPatternSet.toArray(new Pattern[0]);
+    dependencies = mergedDependencySet.toArray(new Dependency[0]);
+    testNames = mergedTestNames.toArray(new String[0]);
     if (!this.enforceSecurityTests && !other.enforceSecurityTests) {
       this.enforceSecurityTests = false;
     }

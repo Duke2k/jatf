@@ -18,6 +18,7 @@ package jatf.common.parser;
 
 import com.github.javaparser.Position;
 import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.stmt.BlockStmt;
@@ -27,7 +28,6 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Comparator;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +40,7 @@ public class MethodVisitor extends VoidVisitorAdapter<Object> {
   private Map<String, List<Parameter>> parametersByMethodName = newHashMap();
   private Map<String, BlockStmt> methodBodyByName = newHashMap();
   private List<String> methodNames = newArrayList();
-  private Map<String, EnumSet<Modifier>> modifiersByName = newHashMap();
+  private Map<String, NodeList<Modifier>> modifiersByName = newHashMap();
   private Map<String, Position> positionsByName = newHashMap();
 
   private boolean sorted = false;
@@ -83,7 +83,7 @@ public class MethodVisitor extends VoidVisitorAdapter<Object> {
     return methodNames;
   }
 
-  public EnumSet<Modifier> getModifierFor(@Nonnull String name) {
+  public NodeList<Modifier> getModifierFor(@Nonnull String name) {
     return modifiersByName.get(name);
   }
 }

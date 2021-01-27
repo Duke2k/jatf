@@ -17,6 +17,7 @@
 package jatf.common.parser;
 
 import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
@@ -25,7 +26,6 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +36,7 @@ public class DeclarationVisitor extends VoidVisitorAdapter<Object> {
 
   private Map<String, Type> typeMap = newHashMap();
   private List<String> typeNames = newArrayList();
-  private Map<String, EnumSet<Modifier>> modifiersByName = newHashMap();
+  private Map<String, NodeList<Modifier>> modifiersByName = newHashMap();
   private List<String> typeDeclarations = newArrayList();
 
   @Override
@@ -64,7 +64,7 @@ public class DeclarationVisitor extends VoidVisitorAdapter<Object> {
     return typeNames;
   }
 
-  public EnumSet<Modifier> getModifierFor(@Nonnull String name) {
+  public NodeList<Modifier> getModifierFor(@Nonnull String name) {
     return modifiersByName.get(name);
   }
 

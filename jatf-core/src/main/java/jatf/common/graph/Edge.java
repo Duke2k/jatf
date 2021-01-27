@@ -39,15 +39,15 @@ public class Edge<T> {
     return to;
   }
 
-  public Vertex<T> getFrom() {
+  Vertex<T> getFrom() {
     return from;
   }
 
-  public int getCost() {
+  int getCost() {
     return cost;
   }
 
-  public void mark() {
+  void mark() {
     mark = true;
   }
 

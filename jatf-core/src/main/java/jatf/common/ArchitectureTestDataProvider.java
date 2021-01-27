@@ -66,7 +66,7 @@ public class ArchitectureTestDataProvider {
     return ruleEvaluator.getAnnotationFor(clazz, annotationType);
   }
 
-  public void addClassToTest(@Nonnull String testName, @Nonnull Class<?> clazz) {
+  void addClassToTest(@Nonnull String testName, @Nonnull Class<?> clazz) {
     if (testClassesMap.get(testName) == null) {
       testClassesMap.put(testName, Collections.singleton(clazz));
     } else {

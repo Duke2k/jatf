@@ -17,7 +17,7 @@
 package jatf.common.util;
 
 import com.github.javaparser.JavaParser;
-import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -84,7 +84,7 @@ public class ArchitectureTestUtil {
       }
       targetFolderUrls.addAll(new Reflections("jatf").getConfiguration().getUrls());
       URLClassLoader urlClassLoader =
-          URLClassLoader.newInstance(targetFolderUrls.toArray(new URL[targetFolderUrls.size()]));
+          URLClassLoader.newInstance(targetFolderUrls.toArray(new URL[0]));
       reflections = new Reflections(new ConfigurationBuilder()
           .setUrls(targetFolderUrls)
           .addClassLoader(urlClassLoader)
@@ -239,13 +239,13 @@ public class ArchitectureTestUtil {
         int indexOfPackage = sourceLine.indexOf(packageKeyword);
         int indexOfSemicolon = sourceLine.indexOf(";", indexOfPackage);
         if (indexOfPackage >= 0 && indexOfSemicolon >= packageKeyword.length()) {
-          result.append(sourceLine.substring(indexOfPackage + packageKeyword.length(), indexOfSemicolon));
+          result.append(sourceLine, indexOfPackage + packageKeyword.length(), indexOfSemicolon);
           result.append(".");
           break;
         }
       }
       String fileName = file.getName();
-      result.append(fileName.substring(0, fileName.indexOf('.')));
+      result.append(fileName, 0, fileName.indexOf('.'));
     }
     return result.toString();
   }
@@ -254,7 +254,7 @@ public class ArchitectureTestUtil {
   public static <M extends RuleBasedMarker> M createAnnotation(@Nonnull Class<M> markerType, final Map<String, List<?>> fields) {
     M marker = null;
     try {
-      marker = markerType.newInstance();
+      marker = markerType.getDeclaredConstructor().newInstance();
       if (marker instanceof ArchitectureTestMarker) {
         ((ArchitectureTestMarker) marker).omitConventions =
             Boolean.parseBoolean(fields.get("omitConventions").get(0).toString());
@@ -340,9 +340,9 @@ public class ArchitectureTestUtil {
   }
 
   private static <V extends VoidVisitorAdapter<?>> void parseWithVoidVisitor(String className, V visitor, File sourceFile) {
+    JavaParser parser = new JavaParser();
     try {
-      CompilationUnit compilationUnit = JavaParser.parse(sourceFile);
-      //noinspection unchecked
+      ParseResult compilationUnit = parser.parse(sourceFile);
       visitor.visit(compilationUnit, null);
     } catch (IOException e) {
       report("Could not open source file for class " + className, e);

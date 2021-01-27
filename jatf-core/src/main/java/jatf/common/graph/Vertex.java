@@ -19,7 +19,6 @@ package jatf.common.graph;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("unchecked")
 public class Vertex<T> {
 
   private List<Edge<T>> incomingEdges;
@@ -53,7 +52,7 @@ public class Vertex<T> {
     return this.data;
   }
 
-  public void addEdge(Edge<T> e) {
+  void addEdge(Edge<T> e) {
     if (e.getFrom() == this)
       outgoingEdges.add(e);
     else if (e.getTo() == this)
@@ -74,15 +73,15 @@ public class Vertex<T> {
     return incomingEdges.get(i);
   }
 
-  public int getOutgoingEdgeCount() {
+  int getOutgoingEdgeCount() {
     return outgoingEdges.size();
   }
 
-  public Edge<T> getOutgoingEdge(int i) {
+  Edge<T> getOutgoingEdge(int i) {
     return outgoingEdges.get(i);
   }
 
-  public Edge<T> findEdge(Vertex<T> dest) {
+  Edge<T> findEdge(Vertex<T> dest) {
     for (Edge<T> e : outgoingEdges) {
       if (e.getTo() == dest)
         return e;
@@ -101,7 +100,7 @@ public class Vertex<T> {
     return cost;
   }
 
-  public boolean notVisited() {
+  boolean notVisited() {
     return !mark;
   }
 
@@ -109,11 +108,11 @@ public class Vertex<T> {
     mark = true;
   }
 
-  public int getMarkState() {
+  int getMarkState() {
     return markState;
   }
 
-  public void setMarkState(int state) {
+  void setMarkState(int state) {
     markState = state;
   }
 

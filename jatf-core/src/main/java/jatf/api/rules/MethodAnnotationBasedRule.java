@@ -46,6 +46,6 @@ public abstract class MethodAnnotationBasedRule<M extends RuleBasedMarker, C ext
   }
 
   public Method[] getMethods() {
-    return methods.toArray(new Method[methods.size()]);
+    return methods.toArray(new Method[0]);
   }
 }
