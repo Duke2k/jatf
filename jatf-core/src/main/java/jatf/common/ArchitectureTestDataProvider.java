@@ -42,7 +42,7 @@ public class ArchitectureTestDataProvider {
 
   private static final String TESTMAP_SNAPSHOT_JSON_FILENAME = "testMapping-%s.json";
 
-  private Constraints constraints;
+  private final Constraints constraints;
   private ArchitectureTestRuleEvaluator ruleEvaluator;
   private Map<String, Set<Class<?>>> testClassesMap;
 

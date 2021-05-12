@@ -14,7 +14,7 @@ import java.util.Set;
 @Service
 public class ArchitectureTestService {
 
-  private ArchitectureTestDataProvider dataProvider;
+  private final ArchitectureTestDataProvider dataProvider;
 
   @Autowired
   public ArchitectureTestService(ConstraintsService constraintsService) {

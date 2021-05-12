@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 public final class ClassNamePatternMatches extends Condition<Class<?>> {
 
-  private Pattern pattern;
+  private final Pattern pattern;
 
   @SuppressWarnings("unused")
   public ClassNamePatternMatches(Class<?> type, String pattern) {

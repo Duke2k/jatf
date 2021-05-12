@@ -19,7 +19,7 @@ package jatf.annotations;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import static jatf.annotations.Dependency.none;
+import static jatf.annotations.Dependency.NONE;
 import static jatf.annotations.Pattern.undefined;
 
 @Retention(RetentionPolicy.RUNTIME)
@@ -31,7 +31,7 @@ public @interface ArchitectureTest {
 
   Pattern[] patterns() default {undefined};
 
-  Dependency[] dependencies() default {none};
+  Dependency[] dependencies() default {NONE};
 
   boolean enforceSecurityTests() default true;
 

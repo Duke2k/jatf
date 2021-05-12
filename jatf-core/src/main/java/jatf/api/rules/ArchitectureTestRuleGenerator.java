@@ -24,12 +24,13 @@ import jatf.common.rules.markers.ArchitectureTestMarker;
 import jatf.common.rules.markers.RuleBasedMarker;
 
 import javax.annotation.Nonnull;
+import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
 import static jatf.common.util.ArchitectureTestUtil.createArchitectureTestAnnotation;
 
-public abstract class ArchitectureTestRuleGenerator<M extends RuleBasedMarker, R extends AnnotationBasedRule<M, ? extends Condition<Class<?>>>> implements RuleGenerator<M, R> {
+public abstract class ArchitectureTestRuleGenerator<M extends RuleBasedMarker<? extends Annotation>, R extends AnnotationBasedRule<M, ? extends Condition<Class<?>>>> implements RuleGenerator<M, R> {
 
   private ArchitectureTestAttributes attributes;
   private Set<Class<?>> classes;

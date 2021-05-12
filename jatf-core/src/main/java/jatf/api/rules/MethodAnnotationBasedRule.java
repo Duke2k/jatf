@@ -20,12 +20,13 @@ import jatf.common.rules.AnnotationBasedRule;
 import jatf.common.rules.markers.RuleBasedMarker;
 
 import javax.annotation.Nonnull;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
 
-public abstract class MethodAnnotationBasedRule<M extends RuleBasedMarker, C extends Condition<Class<?>>> extends AnnotationBasedRule<M, C> {
+public abstract class MethodAnnotationBasedRule<M extends RuleBasedMarker<? extends Annotation>, C extends Condition<Class<?>>> extends AnnotationBasedRule<M, C> {
 
   protected Set<Method> methods;
 

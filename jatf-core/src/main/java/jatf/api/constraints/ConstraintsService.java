@@ -13,7 +13,7 @@ import java.util.Map;
 @Service
 public class ConstraintsService {
 
-  private ConstraintRepository constraintRepository;
+  private final ConstraintRepository constraintRepository;
 
   @Autowired
   public ConstraintsService(ConstraintRepository constraintRepository) {

@@ -17,7 +17,7 @@
 package jatf.common.util;
 
 import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParseResult;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -60,6 +60,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -342,8 +343,8 @@ public class ArchitectureTestUtil {
   private static <V extends VoidVisitorAdapter<?>> void parseWithVoidVisitor(String className, V visitor, File sourceFile) {
     JavaParser parser = new JavaParser();
     try {
-      ParseResult compilationUnit = parser.parse(sourceFile);
-      visitor.visit(compilationUnit, null);
+      Optional<CompilationUnit> compilationUnit = parser.parse(sourceFile).getResult();
+      compilationUnit.ifPresent(unit -> visitor.visit(unit, null));
     } catch (IOException e) {
       report("Could not open source file for class " + className, e);
     }

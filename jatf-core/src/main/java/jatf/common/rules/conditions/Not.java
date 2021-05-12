@@ -20,7 +20,7 @@ import jatf.api.rules.Condition;
 
 public final class Not extends Condition<Class<?>> {
 
-  private Condition<Class<?>> condition;
+  private final Condition<Class<?>> condition;
 
   public Not(Condition<Class<?>> condition) {
     super(condition.getType());

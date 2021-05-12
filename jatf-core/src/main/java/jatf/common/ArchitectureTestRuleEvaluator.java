@@ -37,7 +37,7 @@ import static jatf.common.ArchitectureTestRunListener.report;
 @SuppressWarnings("WeakerAccess")
 public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvaluator {
 
-  private Map<Class<?>, Set<RuleBasedMarker>> markerMap;
+  private final Map<Class<?>, Set<RuleBasedMarker<? extends Annotation>>> markerMap;
 
   public ArchitectureTestRuleEvaluator(@Nonnull Reflections reflections) {
     super(reflections);
@@ -45,9 +45,9 @@ public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvalu
   }
 
   @Nullable
-  private static <T> T findFirst(@Nonnull Class<T> type, @Nonnull Set<?> set) {
+  private static <T> T findFirst(@Nonnull Set<?> set) {
     for (Object item : set) {
-      if (item.getClass().equals(type)) {
+      if (item.getClass().equals(ArchitectureTestMarker.class)) {
         //noinspection unchecked
         return (T) item;
       }
@@ -74,11 +74,11 @@ public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvalu
     for (Class<? extends ArchitectureTestRuleGenerator> ruleGeneratorType : ruleGeneratorTypes) {
       ArchitectureTestRuleGenerator ruleGenerator = null;
       try {
-        ruleGenerator = ruleGeneratorType.newInstance();
+        ruleGenerator = ruleGeneratorType.getDeclaredConstructor().newInstance();
         AnnotationBasedRule rule1 = ruleGenerator.generateRule();
         RuleBasedMarker marker1 = rule1.getMarker();
         for (Class<?> clazz : rule1.getClasses()) {
-          Set<RuleBasedMarker> markerSet = markerMap.get(clazz);
+          Set<RuleBasedMarker<? extends Annotation>> markerSet = markerMap.get(clazz);
           if (markerSet == null) {
             markerSet = newHashSet();
           }
@@ -87,11 +87,11 @@ public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvalu
         ArchitectureTestRule rule2 = ruleGenerator.generateArchitectureTestRule();
         ArchitectureTestMarker marker2 = rule2.getMarker();
         for (Class<?> clazz : rule2.getClasses()) {
-          Set<RuleBasedMarker> markerSet = markerMap.get(clazz);
+          Set<RuleBasedMarker<? extends Annotation>> markerSet = markerMap.get(clazz);
           if (markerSet == null) {
             markerSet = newHashSet();
           }
-          ArchitectureTestMarker old = findFirst(ArchitectureTestMarker.class, markerSet);
+          ArchitectureTestMarker old = findFirst(markerSet);
           if (old != null) {
             marker2 = marker2.merge(old);
             markerSet.remove(old);
@@ -105,7 +105,7 @@ public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvalu
       }
     }
     for (Class<?> clazz : markerMap.keySet()) {
-      ArchitectureTestMarker marker = findFirst(ArchitectureTestMarker.class, markerMap.get(clazz));
+      ArchitectureTestMarker marker = findFirst(markerMap.get(clazz));
       if (marker != null) {
         ArchitectureTest annotation = marker.createAnnotation();
         addAnnotatedClass(clazz, annotation);
@@ -115,7 +115,7 @@ public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvalu
 
   @Nonnull
   private Set<Annotation> getAnnotationsFor(@Nonnull Class<?> clazz) {
-    Set<RuleBasedMarker> markerSet = markerMap.get(clazz);
+    Set<RuleBasedMarker<? extends Annotation>> markerSet = markerMap.get(clazz);
     Set<Annotation> annotationSet = newHashSet();
     if (markerSet != null) {
       for (RuleBasedMarker marker : markerSet) {

@@ -113,43 +113,43 @@ public abstract class ArchitectureTestAbstractEvaluator {
 
   protected void addClassForDependencies(Class<?> annotatedClass, Dependency[] dependencies) {
     for (Dependency dependency : dependencies) {
-      if (dependency.equals(Dependency.acyclicDependenciesPrinciple)) {
+      if (dependency.equals(Dependency.ADP)) {
         addToSourceMap("AcyclicDependenciesPrincipleTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.usesDependency)) {
+      if (dependency.equals(Dependency.USES)) {
         addToSourceMap("UsesTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.extendsDependency)) {
+      if (dependency.equals(Dependency.EXTENDS)) {
         addToSourceMap("ExtendsTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.implementsDependency)) {
+      if (dependency.equals(Dependency.IMPLEMENTS)) {
         addToSourceMap("ImplementsTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.throwsDependency)) {
+      if (dependency.equals(Dependency.THROWS)) {
         addToSourceMap("ThrowsTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.overridesDependency)) {
+      if (dependency.equals(Dependency.OVERRIDES)) {
         addToSourceMap("OverridesTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.returnsDependency)) {
+      if (dependency.equals(Dependency.RETURNS)) {
         addToSourceMap("ReturnsTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.uncheckedCasts)) {
+      if (dependency.equals(Dependency.UNCHECKED_CASTS)) {
         addToSourceMap("UncheckedCastsTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.dangerousCasts)) {
+      if (dependency.equals(Dependency.DANGEROUS_CASTS)) {
         addToSourceMap("DangerousCastsTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.instabilityDependency)) {
+      if (dependency.equals(Dependency.INSTABILITY)) {
         addToSourceMap("InstabilityTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.methodPurity)) {
+      if (dependency.equals(Dependency.METHOD_PURITY)) {
         addToSourceMap("MethodPurityTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.annotationTypeDependency)) {
+      if (dependency.equals(Dependency.ANNOTATION_TYPE)) {
         addToSourceMap("AnnotationTypeTest", annotatedClass);
       }
-      if (dependency.equals(Dependency.all)) {
+      if (dependency.equals(Dependency.ALL)) {
         addToSourceMap("AcyclicDependenciesPrincipleTest", annotatedClass);
         addToSourceMap("UsesTest", annotatedClass);
         addToSourceMap("ExtendsTest", annotatedClass);

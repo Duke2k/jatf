@@ -23,20 +23,20 @@ import java.util.Set;
 import static com.google.common.collect.Sets.newHashSet;
 
 public enum Dependency {
-  none,
-  extendsDependency,
-  implementsDependency,
-  throwsDependency,
-  usesDependency,
-  overridesDependency,
-  returnsDependency,
-  acyclicDependenciesPrinciple,
-  dangerousCasts,
-  instabilityDependency,
-  uncheckedCasts,
-  methodPurity,
-  annotationTypeDependency,
-  all;
+  NONE,
+  EXTENDS,
+  IMPLEMENTS,
+  THROWS,
+  USES,
+  OVERRIDES,
+  RETURNS,
+  ADP,
+  DANGEROUS_CASTS,
+  INSTABILITY,
+  UNCHECKED_CASTS,
+  METHOD_PURITY,
+  ANNOTATION_TYPE,
+  ALL;
 
   /**
    * This method adds a dependency in a way that it checks if, by the addition, the set would be complete. If that
@@ -48,17 +48,17 @@ public enum Dependency {
    */
   @SuppressWarnings("unused")
   @Nonnull
-  public static Dependency[] addDependency(Dependency[] orig, Dependency toAdd) {
+  public static Dependency[] add(Dependency[] orig, Dependency toAdd) {
     Set<Dependency> origSet = newHashSet();
-    if (origSet.contains(all) && origSet.size() == 1) {
+    if (origSet.contains(ALL) && origSet.size() == 1) {
       return orig;
     }
-    if (origSet.contains(none) && origSet.size() == 1) {
+    if (origSet.contains(NONE) && origSet.size() == 1) {
       return new Dependency[]{toAdd};
     }
     origSet.add(toAdd);
     if (origSet.size() == Dependency.values().length - 2) {
-      return new Dependency[]{all};
+      return new Dependency[]{ALL};
     }
     return (Dependency[]) origSet.toArray();
   }
@@ -74,18 +74,18 @@ public enum Dependency {
    */
   @SuppressWarnings("unused")
   @Nonnull
-  public static Dependency[] removeDependency(Dependency[] orig, Dependency toRemove) {
+  public static Dependency[] remove(Dependency[] orig, Dependency toRemove) {
     Set<Dependency> origSet = newHashSet();
-    if (origSet.contains(none) && origSet.size() == 1) {
+    if (origSet.contains(NONE) && origSet.size() == 1) {
       return orig;
     }
     if (origSet.contains(toRemove) && origSet.size() == 1) {
-      return new Dependency[]{none};
+      return new Dependency[]{NONE};
     }
-    if (origSet.contains(all) && origSet.size() == 1) {
+    if (origSet.contains(ALL) && origSet.size() == 1) {
       origSet.addAll(Arrays.asList(Dependency.values()));
-      origSet.remove(all);
-      origSet.remove(none);
+      origSet.remove(ALL);
+      origSet.remove(NONE);
     }
     origSet.remove(toRemove);
     return (Dependency[]) origSet.toArray();

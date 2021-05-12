@@ -26,7 +26,7 @@ public class ArchitectureTestRunListener extends RunListener {
   @SuppressWarnings("WeakerAccess")
   public static final String PREFIX = "";
 
-  private static Logger log = LogUtil.getLogger(ArchitectureTestRunListener.class);
+  private static final Logger log = LogUtil.getLogger(ArchitectureTestRunListener.class);
 
   public static void report(String message, Object... items) {
     StringBuilder stringBuilder = new StringBuilder(PREFIX);

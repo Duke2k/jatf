@@ -18,15 +18,15 @@ package jatf.common.rules.markers;
 
 import java.lang.annotation.Annotation;
 
-public class NullMarker extends RuleBasedMarker {
+public class NullMarker<NULL extends Annotation> extends RuleBasedMarker<NULL> {
 
   @Override
-  public Class annotationType() {
+  public Class<NULL> annotationType() {
     return null;
   }
 
   @Override
-  public Annotation createAnnotation() {
+  public NULL createAnnotation() {
     return null;
   }
 }
