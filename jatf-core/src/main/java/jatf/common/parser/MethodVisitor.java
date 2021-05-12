@@ -36,12 +36,12 @@ import static com.google.common.collect.Maps.newHashMap;
 
 public class MethodVisitor extends VoidVisitorAdapter<Object> {
 
-  private Map<String, List<Statement>> statementsByMethodName = newHashMap();
-  private Map<String, List<Parameter>> parametersByMethodName = newHashMap();
-  private Map<String, BlockStmt> methodBodyByName = newHashMap();
-  private List<String> methodNames = newArrayList();
-  private Map<String, NodeList<Modifier>> modifiersByName = newHashMap();
-  private Map<String, Position> positionsByName = newHashMap();
+  private final Map<String, List<Statement>> statementsByMethodName = newHashMap();
+  private final Map<String, List<Parameter>> parametersByMethodName = newHashMap();
+  private final Map<String, BlockStmt> methodBodyByName = newHashMap();
+  private final List<String> methodNames = newArrayList();
+  private final Map<String, NodeList<Modifier>> modifiersByName = newHashMap();
+  private final Map<String, Position> positionsByName = newHashMap();
 
   private boolean sorted = false;
 

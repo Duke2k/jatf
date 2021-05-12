@@ -46,8 +46,9 @@
   <properties>
     <db.user>${project.artifactId}-db</db.user>
     <db.password>${project.artifactId}-db!</db.password>
+    <spring.version>5.3.6</spring.version>
     <reflections.version>0.9.11</reflections.version>
-    <javaparser.version>3.14.4</javaparser.version>
+    <javaparser.version>3.22.0</javaparser.version>
   </properties>
 
   <dependencies>

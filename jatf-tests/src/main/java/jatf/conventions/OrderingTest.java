@@ -27,7 +27,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,12 +42,9 @@ public class OrderingTest extends ConventionsTestBase {
   @Test
   @UseDataProvider(DATA_PROVIDER_NAME)
   public void privateMethodsAfterProtectedMethodsAfterPublicMethods(Class<?> clazz) {
-    List<EnumSet<Modifier>> methodModifierOrder = Arrays.asList(
-        EnumSet.of(Modifier.PUBLIC),
-        EnumSet.of(Modifier.DEFAULT),
-        EnumSet.of(Modifier.PROTECTED),
-        EnumSet.of(Modifier.PRIVATE)
-    );
+    List<Modifier> methodModifierOrder = Arrays.asList(Modifier.publicModifier(),
+        Modifier.protectedModifier(),
+        Modifier.privateModifier());
     MethodVisitor methodVisitor = new MethodVisitor();
     ArchitectureTestUtil.parseWithVoidVisitor(clazz, methodVisitor);
     checkMemberOrder(methodVisitor, methodModifierOrder);
@@ -57,10 +53,7 @@ public class OrderingTest extends ConventionsTestBase {
   @Test
   @UseDataProvider(DATA_PROVIDER_NAME)
   public void staticFieldsBeforePrivateFields(Class<?> clazz) {
-    List<EnumSet<Modifier>> fieldModifierOrder = Arrays.asList(
-        EnumSet.of(Modifier.STATIC),
-        EnumSet.of(Modifier.PRIVATE)
-    );
+    List<Modifier> fieldModifierOrder = Arrays.asList(Modifier.staticModifier(), Modifier.privateModifier());
     DeclarationVisitor declarationVisitor = new DeclarationVisitor();
     ArchitectureTestUtil.parseWithVoidVisitor(clazz, declarationVisitor);
     checkMemberOrder(declarationVisitor, fieldModifierOrder);
@@ -69,10 +62,8 @@ public class OrderingTest extends ConventionsTestBase {
   @Test
   @UseDataProvider(DATA_PROVIDER_NAME)
   public void constantsBeforeAnythingElse(Class<?> clazz) {
-    List<EnumSet<Modifier>> fieldModifierOrder = Arrays.asList(
-        EnumSet.of(Modifier.FINAL),
-        EnumSet.of(Modifier.PUBLIC, Modifier.DEFAULT, Modifier.PROTECTED, Modifier.PRIVATE)
-    );
+    List<Modifier> fieldModifierOrder = Arrays.asList(Modifier.finalModifier(), Modifier.publicModifier(),
+        Modifier.protectedModifier(), Modifier.privateModifier());
     DeclarationVisitor declarationVisitor = new DeclarationVisitor();
     ArchitectureTestUtil.parseWithVoidVisitor(clazz, declarationVisitor);
     checkMemberOrder(declarationVisitor, fieldModifierOrder);

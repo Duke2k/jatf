@@ -56,7 +56,7 @@ public class NoFinalModifierInLocalVariablesTest extends ConventionsTestBase {
         parseWithVoidVisitor(body, declarationVisitor);
         for (String variableName : declarationVisitor.getTypeNames()) {
           assertFalse("Local variable " + variableName + " in method " + methodName + " should not be final",
-              declarationVisitor.getModifierFor(variableName).contains(Modifier.FINAL));
+              declarationVisitor.getModifierFor(variableName).contains(Modifier.finalModifier()));
         }
       }
       List<Parameter> parameterList = methodVisitor.getParametersOfMethod(methodName);
@@ -64,7 +64,7 @@ public class NoFinalModifierInLocalVariablesTest extends ConventionsTestBase {
         for (Parameter parameter : parameterList) {
           if (!isUsedInAnonymousClass(parameter, body)) {
             assertFalse("Method parameter " + parameter.getNameAsString() + " in method " + methodName + " should not be final",
-                parameter.getModifiers().contains(Modifier.FINAL));
+                parameter.getModifiers().contains(Modifier.finalModifier()));
           }
         }
       }

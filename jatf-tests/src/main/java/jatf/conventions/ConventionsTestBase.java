@@ -1,4 +1,4 @@
-/**
+/*
  * This file is part of JATF.
  * <p>
  * JATF is free software: you can redistribute it and/or modify
@@ -22,7 +22,6 @@ import jatf.ArchitectureTestBase;
 import jatf.common.parser.DeclarationVisitor;
 import jatf.common.parser.MethodVisitor;
 
-import java.util.EnumSet;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -37,42 +36,32 @@ public abstract class ConventionsTestBase extends ArchitectureTestBase {
    * @param visitor       - the visitor that should be queried
    * @param modifierOrder - the array of modifiers that should be checked for
    */
-  protected void checkMemberOrder(VoidVisitorAdapter visitor, List<EnumSet<Modifier>> modifierOrder) {
-    List<EnumSet<Modifier>> modifiers = newArrayList();
+  protected <A> void checkMemberOrder(VoidVisitorAdapter<A> visitor, List<Modifier> modifierOrder) {
+    List<Modifier> modifiers = newArrayList();
     if (visitor instanceof MethodVisitor) {
       List<String> names = ((MethodVisitor) visitor).getMethodNames();
       for (String name : names) {
-        modifiers.add(((MethodVisitor) visitor).getModifierFor(name));
+        modifiers.addAll(((MethodVisitor) visitor).getModifierFor(name));
       }
     } else if (visitor instanceof DeclarationVisitor) {
       List<String> names = ((DeclarationVisitor) visitor).getTypeNames();
       for (String name : names) {
-        modifiers.add(((DeclarationVisitor) visitor).getModifierFor(name));
+        modifiers.addAll(((DeclarationVisitor) visitor).getModifierFor(name));
       }
     }
     assertSameOrder(modifiers, modifierOrder);
   }
 
-  private void assertSameOrder(List<EnumSet<Modifier>> modifier, List<EnumSet<Modifier>> modifierOrder) {
+  private void assertSameOrder(List<Modifier> modifiers, List<Modifier> modifierOrder) {
     int modifierOrderPointer = 0;
-    for (EnumSet<Modifier> m : modifier) {
+    for (Modifier m : modifiers) {
       int currentOrderIndex = 0;
-      for (EnumSet<Modifier> mo : modifierOrder) {
-        if (!containsAll(mo, m) && currentOrderIndex++ > modifierOrderPointer) {
+      for (Modifier mo : modifierOrder) {
+        if (!mo.getKeyword().equals(m.getKeyword()) && currentOrderIndex++ > modifierOrderPointer) {
           modifierOrderPointer++;
         }
       }
     }
     assertTrue(modifierOrderPointer <= modifierOrder.size());
-  }
-
-  private boolean containsAll(EnumSet<?> containing, EnumSet<?> contained) {
-    final boolean[] contains = {true};
-    contained.forEach(item -> {
-      if (!containing.contains(item)) {
-        contains[0] = false;
-      }
-    });
-    return contains[0];
   }
 }
