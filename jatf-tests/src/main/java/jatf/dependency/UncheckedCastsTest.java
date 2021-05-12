@@ -1,4 +1,4 @@
-/**
+/*
  * This file is part of JATF.
  * <p>
  * JATF is free software: you can redistribute it and/or modify
@@ -16,11 +16,11 @@
 
 package jatf.dependency;
 
-import com.google.common.io.Files;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import jatf.common.io.SourceFile;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -58,7 +58,7 @@ public class UncheckedCastsTest extends DependencyTestBase {
     File sourceFile = findSourceFileFor(clazz);
     if (sourceFile != null) {
       try {
-        String classSource = Files.toString(sourceFile, Charset.defaultCharset());
+        String classSource = IOUtils.toString(sourceFile.toURI(), Charset.defaultCharset().name());
         assertFalse(clazz.getName() + " has unchecked casts that are suppressed in the code.",
             classSource.contains("@SuppressWarnings(\"unchecked\")"));
       } catch (IOException e) {

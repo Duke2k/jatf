@@ -1,4 +1,4 @@
-/**
+/*
  * This file is part of JATF.
  * <p/>
  * JATF is free software: you can redistribute it and/or modify

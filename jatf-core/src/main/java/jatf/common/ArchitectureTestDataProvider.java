@@ -86,7 +86,7 @@ public class ArchitectureTestDataProvider {
   }
 
   private void writeTestMappingSnapshot() {
-    if (Boolean.valueOf(constraints.valueOf(Constraint.WRITE_TESTMAP_SNAPSHOT_JSON_TO_ROOT_FOLDER))) {
+    if (Boolean.parseBoolean(constraints.valueOf(Constraint.WRITE_TESTMAP_SNAPSHOT_JSON_TO_ROOT_FOLDER))) {
       File jsonFile = new File(
           constraints.valueOf(Constraint.ROOT_FOLDER),
           String.format(TESTMAP_SNAPSHOT_JSON_FILENAME, System.currentTimeMillis())
