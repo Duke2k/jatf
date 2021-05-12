@@ -13,6 +13,8 @@
 # along with JATF.  If not, see <http://www.gnu.org/licenses/>.
 
 *.iml
-/.idea
+.idea/
 target/
 dist/
+.settings/
+.vscode/
