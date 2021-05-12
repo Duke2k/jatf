@@ -46,7 +46,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <runSuites>**/All*Tests.class</runSuites>
-    <commons-io.version>2.6</commons-io.version>
+    <commons-io.version>2.7</commons-io.version>
   </properties>
 
   <dependencies>
