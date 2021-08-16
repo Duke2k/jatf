@@ -25,9 +25,10 @@ import java.net.URI;
 
 public class ClassFile {
 
-  private URI uri;
-  private JavaFileObject.Kind kind;
+  private final URI uri;
+  private final JavaFileObject.Kind kind;
 
+  @SuppressWarnings("unused")
   public ClassFile(File classFile) {
     this(classFile.toURI(), JavaFileObject.Kind.CLASS);
   }
@@ -37,6 +38,7 @@ public class ClassFile {
     this.kind = kind;
   }
 
+  @SuppressWarnings("unused")
   @Nullable
   public byte[] getByteContent() throws IOException {
     if (kind.equals(JavaFileObject.Kind.CLASS)) {

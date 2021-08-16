@@ -23,6 +23,7 @@ import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
 
+@SuppressWarnings("rawtypes")
 public abstract class AnnotationBasedRule<M extends RuleBasedMarker, C extends Condition<Class<?>>> {
 
   protected Set<Class<?>> classes;

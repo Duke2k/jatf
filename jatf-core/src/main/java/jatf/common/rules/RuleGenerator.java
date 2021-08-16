@@ -21,6 +21,7 @@ import jatf.common.rules.markers.RuleBasedMarker;
 
 import javax.annotation.Nonnull;
 
+@SuppressWarnings("rawtypes")
 public interface RuleGenerator<M extends RuleBasedMarker, R extends AnnotationBasedRule<M, ? extends Condition<Class<?>>>> {
 
   @Nonnull

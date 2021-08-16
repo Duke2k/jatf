@@ -26,8 +26,8 @@ import static com.google.common.collect.Sets.newHashSet;
 
 public class AssignmentVisitor extends VoidVisitorAdapter<Object> {
 
-  private Set<Assignment> assignments = newHashSet();
-  private Set<AssignExpr> assignExprs = newHashSet();
+  private final Set<Assignment> assignments = newHashSet();
+  private final Set<AssignExpr> assignExprs = newHashSet();
 
   @Override
   public void visit(AssignExpr assignExpr, Object arguments) {
@@ -47,11 +47,11 @@ public class AssignmentVisitor extends VoidVisitorAdapter<Object> {
     return assignExprs;
   }
 
-  public class Assignment {
+  public static class Assignment {
 
-    private Expression target;
-    private AssignExpr.Operator operator;
-    private Expression value;
+    private final Expression target;
+    private final AssignExpr.Operator operator;
+    private final Expression value;
 
     Assignment(Expression target, AssignExpr.Operator operator, Expression value) {
       this.target = target;

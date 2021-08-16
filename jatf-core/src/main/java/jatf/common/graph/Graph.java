@@ -27,9 +27,9 @@ public class Graph<T> {
   private static final int VISIT_COLOR_GREY = 2;
   private static final int VISIT_COLOR_BLACK = 3;
 
-  private List<Vertex<T>> verticies;
+  private final List<Vertex<T>> verticies;
   @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-  private List<Edge<T>> edges;
+  private final List<Edge<T>> edges;
 
   public Graph() {
     verticies = new ArrayList<>();
@@ -70,6 +70,7 @@ public class Graph<T> {
     }
   }
 
+  @SuppressWarnings("unused")
   public void depthFirstSearch(Vertex<T> v, final Visitor<T> visitor) {
     VisitorEX<T, RuntimeException> wrapper = (g, v1) -> {
       if (visitor != null)
@@ -90,6 +91,7 @@ public class Graph<T> {
     }
   }
 
+  @SuppressWarnings("unused")
   public void breadthFirstSearch(Vertex<T> v, final Visitor<T> visitor) {
     VisitorEX<T, RuntimeException> wrapper = (g, v1) -> {
       if (visitor != null)
@@ -121,6 +123,7 @@ public class Graph<T> {
     }
   }
 
+  @SuppressWarnings("unused")
   void dfsSpanningTree(Vertex<T> v, DFSVisitor<T> visitor) {
     v.visit();
     if (visitor != null)

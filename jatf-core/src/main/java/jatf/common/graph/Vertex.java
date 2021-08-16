@@ -21,12 +21,12 @@ import java.util.List;
 
 public class Vertex<T> {
 
-  private List<Edge<T>> incomingEdges;
-  private List<Edge<T>> outgoingEdges;
-  private String name;
+  private final List<Edge<T>> incomingEdges;
+  private final List<Edge<T>> outgoingEdges;
+  private final String name;
   private boolean mark;
   private int markState;
-  private T data;
+  private final T data;
 
   public Vertex() {
     this(null, null);

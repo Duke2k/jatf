@@ -29,6 +29,7 @@ import javax.annotation.Nullable;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
@@ -67,6 +68,7 @@ public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvalu
     return null;
   }
 
+  @SuppressWarnings("rawtypes")
   @Override
   protected void process() {
     Set<Class<? extends ArchitectureTestRuleGenerator>> ruleGeneratorTypes =
@@ -82,6 +84,7 @@ public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvalu
           if (markerSet == null) {
             markerSet = newHashSet();
           }
+          //noinspection unchecked
           markerSet.add(marker1);
         }
         ArchitectureTestRule rule2 = ruleGenerator.generateArchitectureTestRule();
@@ -118,9 +121,9 @@ public class ArchitectureTestRuleEvaluator extends ArchitectureTestAbstractEvalu
     Set<RuleBasedMarker<? extends Annotation>> markerSet = markerMap.get(clazz);
     Set<Annotation> annotationSet = newHashSet();
     if (markerSet != null) {
-      for (RuleBasedMarker marker : markerSet) {
-        annotationSet.add(marker.createAnnotation());
-      }
+      annotationSet = markerSet.stream()
+          .map(RuleBasedMarker::createAnnotation)
+          .collect(Collectors.toSet());
     }
     return annotationSet;
   }

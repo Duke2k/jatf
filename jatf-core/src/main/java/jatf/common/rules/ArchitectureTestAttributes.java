@@ -31,14 +31,13 @@ public class ArchitectureTestAttributes {
   private boolean enforceSecurityTests;
 
   private Set<Dependency> dependencies;
-  private Set<Pattern> patterns;
-  private Set<String> testNames;
+  private final Set<Pattern> patterns;
+  private final Set<String> testNames;
 
   public ArchitectureTestAttributes() {
     this(false, false, true);
   }
 
-  @Nonnull
   private ArchitectureTestAttributes(boolean omitMetrics, boolean omitConventions, boolean enforceSecurityTests) {
     this.omitMetrics = omitMetrics;
     this.omitConventions = omitConventions;
@@ -142,7 +141,7 @@ public class ArchitectureTestAttributes {
   }
 
   public Dependency[] getDependencies() {
-    return dependencies.toArray(new Dependency[dependencies.size()]);
+    return dependencies.toArray(new Dependency[0]);
   }
 
   public void setDependencies(Set<Dependency> dependencies) {
@@ -155,7 +154,7 @@ public class ArchitectureTestAttributes {
   }
 
   public Pattern[] getPatterns() {
-    return patterns.toArray(new Pattern[patterns.size()]);
+    return patterns.toArray(new Pattern[0]);
   }
 
   @SuppressWarnings("WeakerAccess")
@@ -165,7 +164,7 @@ public class ArchitectureTestAttributes {
 
   @SuppressWarnings("unused")
   public String[] getTestNames() {
-    return testNames.toArray(new String[testNames.size()]);
+    return testNames.toArray(new String[0]);
   }
 
   private void mergeExceptConventionsAndMetrics(@Nonnull ArchitectureTestAttributes other) {
