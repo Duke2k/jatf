@@ -18,3 +18,4 @@ target/
 dist/
 .settings/
 .vscode/
+.classpath
